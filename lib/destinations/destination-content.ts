@@ -51,7 +51,7 @@ export const staticDestinations: DestinationCountryData[] = [
     shippingOverview: 'Scheduled air cargo flights and direct ocean freight routes connect Pakistan hubs with Saudi Arabian ports and logistics centers.',
     customsGuidance: 'Saudi customs regulations require standard commercial invoices, certificates of origin, and SASO compliance where applicable. Personal effects require passenger identification.',
     supportedServices: ['air-freight', 'sea-cargo', 'door-to-door', 'excess-baggage'],
-    supportedOrigins: ['lahore', 'karachi', 'islamabad', 'rawalpindi', 'multan', 'faisalabad', 'peshawar', 'sialkot'],
+    supportedOrigins: ['lahore', 'karachi', 'islamabad', 'rawalpindi', 'multan', 'faisalabad', 'peshawar', 'sialkot', 'gujranwala'],
     cities: [
       {
         id: 'city-riyadh',
@@ -106,7 +106,7 @@ export const staticDestinations: DestinationCountryData[] = [
     shippingOverview: 'Rapid transit via direct airline schedules to Dubai (DXB) and Sharjah (SHJ), plus ocean consolidation via Jebel Ali Port.',
     customsGuidance: 'UAE customs clearance requires commercial invoices and packing lists. Personal baggage requires consignee Emirates ID or passport.',
     supportedServices: ['air-freight', 'sea-cargo', 'door-to-door', 'commercial-cargo'],
-    supportedOrigins: ['lahore', 'karachi', 'islamabad', 'rawalpindi', 'multan', 'faisalabad', 'peshawar', 'sialkot'],
+    supportedOrigins: ['lahore', 'karachi', 'islamabad', 'rawalpindi', 'multan', 'faisalabad', 'peshawar', 'sialkot', 'gujranwala'],
     cities: [
       {
         id: 'city-dubai',
@@ -144,7 +144,7 @@ export const staticDestinations: DestinationCountryData[] = [
     shippingOverview: 'Scheduled airline services to London Heathrow, Manchester, and Birmingham airports, plus maritime shipping to Felixstowe and Southampton.',
     customsGuidance: 'HMRC customs filings, ToR (Transfer of Residence) declarations for personal goods, and standard EORI procedures for commercial trade.',
     supportedServices: ['air-freight', 'sea-cargo', 'excess-baggage', 'commercial-cargo'],
-    supportedOrigins: ['lahore', 'karachi', 'islamabad', 'rawalpindi', 'multan', 'faisalabad', 'peshawar', 'sialkot'],
+    supportedOrigins: ['lahore', 'karachi', 'islamabad', 'rawalpindi', 'multan', 'faisalabad', 'peshawar', 'sialkot', 'gujranwala'],
     cities: [],
     faqs: [
       {
@@ -168,7 +168,7 @@ export const staticDestinations: DestinationCountryData[] = [
     shippingOverview: 'Intermodal air and sea freight routes with customs clearance and interstate distribution across all 50 states.',
     customsGuidance: 'US Customs and Border Protection (CBP) filings, ISF (10+2) ocean security filings, and FDA clearance where applicable.',
     supportedServices: ['air-freight', 'sea-cargo', 'commercial-cargo'],
-    supportedOrigins: ['lahore', 'karachi', 'islamabad', 'rawalpindi', 'multan', 'faisalabad', 'peshawar', 'sialkot'],
+    supportedOrigins: ['lahore', 'karachi', 'islamabad', 'rawalpindi', 'multan', 'faisalabad', 'peshawar', 'sialkot', 'gujranwala'],
     cities: [],
     faqs: [
       {
@@ -192,7 +192,7 @@ export const staticDestinations: DestinationCountryData[] = [
     shippingOverview: 'Direct air links to Toronto Pearson (YYZ) and Vancouver (YVR) with bonded warehousing and nationwide intermodal forwarding.',
     customsGuidance: 'CBSA clearance procedures with BSF186 accounting documents for personal effects and commercial B3 accounting for trade goods.',
     supportedServices: ['air-freight', 'sea-cargo', 'excess-baggage'],
-    supportedOrigins: ['lahore', 'karachi', 'islamabad', 'rawalpindi', 'multan', 'faisalabad', 'peshawar', 'sialkot'],
+    supportedOrigins: ['lahore', 'karachi', 'islamabad', 'rawalpindi', 'multan', 'faisalabad', 'peshawar', 'sialkot', 'gujranwala'],
     cities: [],
     faqs: [
       {

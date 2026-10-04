@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { QuoteFormController } from '@/components/quote/QuoteFormController';
-import { getPublishedStaticLocations } from '@/lib/locations/location-content';
+import { getPublishedLocations } from '@/lib/locations/location-content';
 import { getPublishedStaticDestinations } from '@/lib/destinations/destination-content';
 import { getPublishedBusinessSettings } from '@/lib/cms/business-settings.service';
 import { cargoTypes } from '@/types/content';
@@ -34,7 +34,7 @@ export default async function PublicQuotePage({ searchParams }: QuotePageProps) 
   const { origin: rawOrigin, destination: rawDestination, cargo: rawCargo } = await searchParams;
 
   const [publishedLocations, publishedDestinations, business] = await Promise.all([
-    getPublishedStaticLocations(),
+    getPublishedLocations(),
     getPublishedStaticDestinations(),
     getPublishedBusinessSettings(),
   ]);

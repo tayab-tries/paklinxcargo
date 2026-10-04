@@ -8,6 +8,7 @@ import { trackWhatsAppClick } from '@/lib/analytics/gtag';
 
 export interface QuoteStep1Data {
   origin_city: string;
+  origin_city_other?: string;
   destination_country: string;
   destination_city?: string;
   cargo_type: string;
@@ -76,6 +77,22 @@ export const QuoteStep1Basics: React.FC<QuoteStep1BasicsProps> = ({
           <p className="text-[11px] font-mono text-slate-500">
             Doorstep pickup can be arranged from your home, office, or warehouse.
           </p>
+
+          {formData.origin_city === 'other' && (
+            <div className="pt-2">
+              <Input
+                label="City Name"
+                id="origin_city_other"
+                name="origin_city_other"
+                placeholder="Enter your city"
+                value={formData.origin_city_other || ''}
+                onChange={(e) => onChange('origin_city_other', e.target.value)}
+                error={errors.origin_city_other}
+                required
+                variantSurface="light"
+              />
+            </div>
+          )}
         </div>
 
         <div className="space-y-1">
@@ -124,9 +141,9 @@ export const QuoteStep1Basics: React.FC<QuoteStep1BasicsProps> = ({
           required
           variantSurface="light"
         >
-          <option value="personal_belongings">Personal Cargo (Clothes, Gifts, Household Items)</option>
+          <option value="door_to_door">Personal Cargo (Clothes, Gifts, Household Items)</option>
           <option value="excess_baggage">Excess Baggage & Travel Luggage</option>
-          <option value="commercial_cargo">Commercial Goods & Export Cargo</option>
+          <option value="commercial_freight">Commercial Goods & Export Cargo</option>
           <option value="air_freight">Air Freight Service</option>
           <option value="sea_cargo">Sea Cargo Service</option>
         </Select>

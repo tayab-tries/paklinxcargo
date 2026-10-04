@@ -4,6 +4,7 @@ import { cargoTypes } from '@/types/content'; // Single Source of Truth
 export const quoteSubmissionSchema = z
   .object({
     origin_city: z.string().min(2, 'Origin city is required.'),
+    origin_city_other: z.string().max(100).optional(),
     destination_country: z.string().min(2, 'Destination country is required.'),
     destination_city: z.string().optional(),
     cargo_type: z.enum(cargoTypes), // Derived directly from single source of truth
@@ -28,6 +29,18 @@ export const quoteSubmissionSchema = z
     utm_campaign: z.string().max(100).optional(),
     website_hp: z.string().max(0, 'Bot submission detected.').optional(),
   })
+  .refine(
+    (data) => {
+      if (data.origin_city === 'other') {
+        return !!data.origin_city_other && data.origin_city_other.trim().length >= 2;
+      }
+      return true;
+    },
+    {
+      message: 'Please specify your pickup city name (at least 2 characters).',
+      path: ['origin_city_other'],
+    }
+  )
   .refine(
     (data) => {
       if (data.contact_preference === 'whatsapp' || data.contact_preference === 'phone') {
@@ -61,11 +74,18 @@ export type QuoteSubmissionInput = z.infer<typeof quoteSubmissionSchema>;
  */
 export function validateQuoteEntitiesServerSide(data: {
   origin_city: string;
+  origin_city_other?: string;
   destination_country: string;
   cargo_type: string;
 }): { isValid: boolean; error?: string } {
   if (!data.origin_city || data.origin_city.trim().length < 2) {
     return { isValid: false, error: 'Invalid origin city.' };
+  }
+
+  if (data.origin_city === 'other') {
+    if (!data.origin_city_other || data.origin_city_other.trim().length < 2) {
+      return { isValid: false, error: 'Please specify your pickup city name (at least 2 characters).' };
+    }
   }
 
   if (!data.destination_country || data.destination_country.trim().length < 2) {

@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
     // 3. Server-Side Published Entity Verification
     const entityCheck = validateQuoteEntitiesServerSide({
       origin_city: input.origin_city,
+      origin_city_other: input.origin_city_other,
       destination_country: input.destination_country,
       cargo_type: input.cargo_type,
     });
@@ -65,6 +66,19 @@ export async function POST(req: NextRequest) {
 
     const supabase = createClient(supabaseUrl, serviceRoleKey);
 
+    // Compute formatted origin city and notes to preserve custom city name without DB migration
+    const finalOriginCity =
+      input.origin_city === 'other' && input.origin_city_other
+        ? `Other (${input.origin_city_other.trim()})`
+        : input.origin_city;
+
+    const formattedNotes =
+      input.origin_city === 'other' && input.origin_city_other
+        ? input.additional_notes
+          ? `[Pickup City: ${input.origin_city_other.trim()}] ${input.additional_notes}`
+          : `[Pickup City: ${input.origin_city_other.trim()}]`
+        : input.additional_notes || null;
+
     // 5. Generate Cryptographic Reference & Retry on Unique Violation
     let quoteRef = generateSecureQuoteReference();
     let insertSuccess = false;
@@ -81,7 +95,7 @@ export async function POST(req: NextRequest) {
           sender_phone: input.sender_phone || null,
           sender_email: input.sender_email || null,
           contact_preference: input.contact_preference,
-          origin_city: input.origin_city,
+          origin_city: finalOriginCity,
           destination_country: input.destination_country,
           destination_city: input.destination_city || null,
           cargo_type: input.cargo_type,
@@ -91,7 +105,7 @@ export async function POST(req: NextRequest) {
           width_cm: input.width_cm || null,
           height_cm: input.height_cm || null,
           cargo_description: input.cargo_description,
-          additional_notes: input.additional_notes || null,
+          additional_notes: formattedNotes,
           source_page: input.source_page || null,
           utm_source: input.utm_source || null,
           utm_medium: input.utm_medium || null,
@@ -133,7 +147,7 @@ export async function POST(req: NextRequest) {
       senderPhone: input.sender_phone,
       senderEmail: input.sender_email,
       contactPreference: input.contact_preference,
-      originCity: input.origin_city,
+      originCity: finalOriginCity,
       destinationCountry: input.destination_country,
       destinationCity: input.destination_city,
       cargoType: input.cargo_type,
@@ -143,7 +157,7 @@ export async function POST(req: NextRequest) {
       widthCm: input.width_cm,
       heightCm: input.height_cm,
       cargoDescription: input.cargo_description,
-      additionalNotes: input.additional_notes,
+      additionalNotes: formattedNotes || undefined,
     };
 
     const adminResult = await sendAdminQuoteNotification(emailPayload);

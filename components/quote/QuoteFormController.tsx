@@ -37,6 +37,7 @@ export const QuoteFormController: React.FC<QuoteFormControllerProps> = ({
 
   const [formData, setFormData] = useState({
     origin_city: initialOrigin || (locations[0]?.slug || 'lahore'),
+    origin_city_other: '',
     destination_country: initialDestination || (destinations[0]?.slug || 'uk'),
     destination_city: '',
     cargo_type: initialCargo || 'air_freight',
@@ -55,11 +56,20 @@ export const QuoteFormController: React.FC<QuoteFormControllerProps> = ({
   });
 
   const handleFieldChange = (field: string, value: string) => {
-    setFormData((prev: typeof formData) => ({ ...prev, [field]: value }));
-    if (fieldErrors[field]) {
+    setFormData((prev: typeof formData) => {
+      const updated = { ...prev, [field]: value };
+      if (field === 'origin_city' && value !== 'other') {
+        updated.origin_city_other = '';
+      }
+      return updated;
+    });
+    if (fieldErrors[field] || (field === 'origin_city' && fieldErrors.origin_city_other)) {
       setFieldErrors((prev: Record<string, string>) => {
         const updated = { ...prev };
         delete updated[field];
+        if (field === 'origin_city') {
+          delete updated.origin_city_other;
+        }
         return updated;
       });
     }
@@ -75,6 +85,12 @@ export const QuoteFormController: React.FC<QuoteFormControllerProps> = ({
   const handleStep1Next = () => {
     const errors: Record<string, string> = {};
     if (!formData.origin_city) errors.origin_city = 'Origin city in Pakistan is required.';
+    if (
+      formData.origin_city === 'other' &&
+      (!formData.origin_city_other || formData.origin_city_other.trim().length < 2)
+    ) {
+      errors.origin_city_other = 'Please specify your pickup city name (at least 2 characters).';
+    }
     if (!formData.destination_country) errors.destination_country = 'Destination country is required.';
     if (!formData.cargo_type) errors.cargo_type = 'Cargo type is required.';
 
@@ -119,6 +135,10 @@ export const QuoteFormController: React.FC<QuoteFormControllerProps> = ({
     // Prepare numeric payload for Zod validation
     const payload = {
       origin_city: formData.origin_city,
+      origin_city_other:
+        formData.origin_city === 'other' && formData.origin_city_other
+          ? formData.origin_city_other.trim()
+          : undefined,
       destination_country: formData.destination_country,
       destination_city: formData.destination_city || undefined,
       cargo_type: formData.cargo_type as 'air_freight' | 'sea_cargo' | 'door_to_door' | 'commercial_freight' | 'excess_baggage',
@@ -266,6 +286,7 @@ export const QuoteFormController: React.FC<QuoteFormControllerProps> = ({
             <QuoteStep1Basics
               formData={{
                 origin_city: formData.origin_city,
+                origin_city_other: formData.origin_city_other,
                 destination_country: formData.destination_country,
                 destination_city: formData.destination_city,
                 cargo_type: formData.cargo_type,
