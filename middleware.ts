@@ -6,21 +6,27 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const method = request.method;
 
-  // 1. Static 301 Redirect Manifest (Fast path)
+  // 1. Canonical hostname enforcement (www -> non-www)
+  const rawHost = request.headers.get('x-forwarded-host') || request.headers.get('host') || request.nextUrl.host;
+  const hostname = rawHost ? rawHost.split(':')[0] : '';
+  if (hostname === 'www.paklinxcargo.com') {
+    const search = request.nextUrl.search || '';
+    return NextResponse.redirect(new URL(`https://paklinxcargo.com${pathname}${search}`), 301);
+  }
+
+  // 2. Static 301 Redirect Manifest (Fast path)
   const redirects = getStaticRedirectManifest();
   const matchedRedirect = redirects.find((r) => r.source_path === pathname);
   if (matchedRedirect) {
     return NextResponse.redirect(new URL(matchedRedirect.target_path, request.url), matchedRedirect.status_code);
   }
 
-  // 2. EXEMPT /admin/login GET requests explicitly - return plain NextResponse.next() immediately
+  // 3. EXEMPT /admin/login GET requests explicitly - return plain NextResponse.next() immediately
   if (pathname.startsWith('/admin/login') && method === 'GET') {
     return NextResponse.next();
   }
 
-  // NOTE: Rate limiting previously relied on Cloudflare Worker bindings (env.RATE_LIMITER).
-  // For Hostinger Node.js standalone runtime, Cloudflare bindings are removed.
-  // Rate limiting is deferred to be implemented via a Hostinger-compatible strategy (e.g. reverse proxy / Redis).
+  // Note: Cloudflare rate limiting can be configured via Cloudflare WAF or Worker bindings if required.
 
   const response = NextResponse.next();
 
