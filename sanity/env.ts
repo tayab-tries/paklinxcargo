@@ -5,7 +5,7 @@ export const dataset =
   process.env.NEXT_PUBLIC_SANITY_DATASET || 'production';
 
 export const projectId =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'vst9vvau';
+  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '';
 
 // SANITY_API_READ_TOKEN is strictly private / server-side
 export const readToken = process.env.SANITY_API_READ_TOKEN || '';

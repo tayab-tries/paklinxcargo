@@ -1,53 +1,72 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand Core Tokens - Electric Cyan / Teal System */
-  --brand-black: #070A0F;
-  --brand-black-deep: #04070B;
+  /* Brand Core Tokens - Premium Forest Green & Warm Cream System */
+  --brand-forest: #12372A;
+  --brand-forest-deep: #0D281E;
+  --brand-forest-light: #1A4D3B;
 
-  --brand-navy: #0B1220;
-  --brand-navy-light: #12233A;
-  --brand-navy-subtle: #1C2D43;
+  --brand-emerald: #1F8A5B;
+  --brand-emerald-hover: #176B46;
+  --brand-emerald-soft: #EBF7F1;
 
-  --brand-cyan: #22D3EE;
-  --brand-cyan-hover: #06B6D4;
-  --brand-cyan-soft: #ECFEFF;
+  --brand-cream: #F6F2E9;
+  --brand-cream-soft: #FAF8F3;
+  --brand-cream-muted: #EAE4D8;
+
+  --brand-dark: #17201B;
+  --brand-dark-deep: #0F1612;
+  --brand-dark-subtle: #24312A;
+
+  --brand-gold: #C6A15B;
+  --brand-gold-hover: #B5904B;
+  --brand-gold-soft: #F7F3EB;
+
+  /* Backward-compatible token aliases */
+  --brand-black: #17201B;
+  --brand-black-deep: #0F1612;
+  --brand-navy: #12372A;
+  --brand-navy-light: #1A4D3B;
+  --brand-navy-subtle: #24312A;
+  --brand-cyan: #C6A15B;
+  --brand-cyan-hover: #B5904B;
+  --brand-cyan-soft: #F7F3EB;
 
   /* Semantic UI Maps */
-  --background: #F8FAFC;
-  --foreground: #070A0F;
+  --background: #F6F2E9;
+  --foreground: #17201B;
 
   --surface: #FFFFFF;
-  --surface-subtle: #F8FAFC;
-  --surface-muted: #F1F5F9;
-  --surface-dark: #070A0F;
-  --surface-navy: #0B1220;
+  --surface-subtle: #FAF8F3;
+  --surface-muted: #EAE4D8;
+  --surface-dark: #12372A;
+  --surface-navy: #17201B;
 
-  --border: #E2E8F0;
-  --border-subtle: #F1F5F9;
-  --border-strong: #94A3B8;
-  --border-dark: #1E293B;
+  --border: #E2DDD5;
+  --border-subtle: #EAE4D8;
+  --border-strong: #C6A15B;
+  --border-dark: #24312A;
 
-  --primary: #070A0F;
-  --primary-foreground: #F8FAFC;
-  --primary-hover: #12233A;
+  --primary: #12372A;
+  --primary-foreground: #F6F2E9;
+  --primary-hover: #0D281E;
 
-  --secondary: #0B1220;
-  --secondary-foreground: #F8FAFC;
-  --secondary-hover: #12233A;
+  --secondary: #17201B;
+  --secondary-foreground: #F6F2E9;
+  --secondary-hover: #24312A;
 
-  --accent: #22D3EE;
-  --accent-hover: #06B6D4;
-  --accent-soft: #ECFEFF;
-  --accent-muted: #ECFEFF;
-  --accent-foreground: #070A0F; /* High contrast Black-on-Cyan (11.8:1 AAA) */
+  --accent: #C6A15B;
+  --accent-hover: #B5904B;
+  --accent-soft: #F7F3EB;
+  --accent-muted: #F7F3EB;
+  --accent-foreground: #17201B;
 
-  --muted: #64748B;
-  --muted-foreground: #94A3B8;
+  --muted: #5C6861;
+  --muted-foreground: #8A968F;
 
-  --success: #059669;
-  --success-bg: #ECFDF5;
-  --success-border: #A7F3D0;
+  --success: #1F8A5B;
+  --success-bg: #EBF7F1;
+  --success-border: #A8E0C5;
 
   --warning: #D97706;
   --warning-bg: #FFFBEB;
@@ -57,7 +76,7 @@
   --danger-bg: #FEF2F2;
   --danger-border: #FECACA;
 
-  --ring: #22D3EE;
+  --ring: #1F8A5B;
 
   --radius-sm: 0.25rem;
   --radius-md: 0.375rem;
@@ -65,6 +84,22 @@
 }
 
 @theme {
+  --color-brand-forest: var(--brand-forest);
+  --color-brand-forest-deep: var(--brand-forest-deep);
+  --color-brand-forest-light: var(--brand-forest-light);
+  --color-brand-emerald: var(--brand-emerald);
+  --color-brand-emerald-hover: var(--brand-emerald-hover);
+  --color-brand-emerald-soft: var(--brand-emerald-soft);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-cream-soft: var(--brand-cream-soft);
+  --color-brand-cream-muted: var(--brand-cream-muted);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-dark-deep: var(--brand-dark-deep);
+  --color-brand-dark-subtle: var(--brand-dark-subtle);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-hover: var(--brand-gold-hover);
+  --color-brand-gold-soft: var(--brand-gold-soft);
+
   --color-brand-black: var(--brand-black);
   --color-brand-black-deep: var(--brand-black-deep);
   --color-brand-navy: var(--brand-navy);
@@ -117,6 +152,7 @@
 
   --font-sans: var(--font-sans), system-ui, sans-serif;
   --font-mono: var(--font-mono), monospace;
+  --font-serif: var(--font-serif), Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 /* Base Body Styles */
@@ -130,17 +166,19 @@ body {
 
 /* Semantic Typography Token Helper Classes */
 .text-display-xl {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4.25rem);
   line-height: 1.1;
-  font-weight: 800;
-  letter-spacing: -0.025em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .text-display-lg {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3.25rem);
   line-height: 1.15;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
 }
 
 .text-heading-xl {

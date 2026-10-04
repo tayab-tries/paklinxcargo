@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { HeroSection } from '@/components/sections/HeroSection';
+import { EditorialIntroSection } from '@/components/sections/EditorialIntroSection';
 import { QuickQuoteTeaser } from '@/components/sections/QuickQuoteTeaser';
 import { UseCasesSection } from '@/components/sections/UseCasesSection';
 import { ServicesOverview } from '@/components/sections/ServicesOverview';
@@ -16,6 +17,7 @@ import { FinalCtaSection } from '@/components/sections/FinalCtaSection';
 import { getPublishedHomepageBlocks } from '@/lib/cms/homepage.service';
 import { getPublishedBusinessSettings } from '@/lib/cms/business-settings.service';
 import { getSanityHomepageData, getSanitySiteSettingsData } from '@/sanity/lib/fetch';
+import { siteConfig } from '@/config/site.config';
 
 export async function generateMetadata(): Promise<Metadata> {
   const [sanityHomepage, sanitySiteSettings] = await Promise.all([
@@ -26,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title =
     sanityHomepage?.seo?.metaTitle ||
     sanitySiteSettings?.defaultSeoTitle ||
-    'Raahi International — Cargo Shipping & Door-to-Door Delivery From Pakistan';
+    `${siteConfig.name} — Cargo Shipping & Door-to-Door Delivery From Pakistan`;
 
   const description =
     sanityHomepage?.seo?.metaDescription ||
@@ -64,9 +66,35 @@ export default async function HomePage() {
 
   const activeWhatsapp = sanitySiteSettings?.whatsappNumber || business.whatsappNumber;
 
+  const organizationJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: siteConfig.name,
+    legalName: siteConfig.legalName || siteConfig.name,
+    url: siteConfig.domain,
+    logo: `${siteConfig.domain}/images/brand/logo.png`,
+    ...(business.phonePrimary ? { telephone: business.phonePrimary } : {}),
+    ...(business.emailInfo ? { email: business.emailInfo } : {}),
+  };
+
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteConfig.name,
+    url: siteConfig.domain,
+  };
+
   return (
-    <div className="w-full pb-16 sm:pb-0">
-      {/* 01. HERO */}
+    <div className="w-full pb-16 sm:pb-0 bg-[#F6F2E9]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      {/* 01. IMMERSIVE HERO */}
       {blocks.hero?.enabled && (
         <HeroSection
           blockData={blocks.hero.contentData}
@@ -76,7 +104,10 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 02. QUICK QUOTE / ENTRY ACTION */}
+      {/* 02. EDITORIAL INTRO STATEMENT */}
+      <EditorialIntroSection brandName={business.brandName || sanitySiteSettings?.businessName} />
+
+      {/* 03. QUICK QUOTE / ENTRY ACTION */}
       {blocks.quick_quote?.enabled && (
         <QuickQuoteTeaser
           heading={sanityHomepage?.quickQuote?.heading}
@@ -86,7 +117,7 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 03. CUSTOMER USE CASES / WHAT CAN YOU SEND */}
+      {/* 04. CUSTOMER USE CASES / WHAT CAN YOU SEND */}
       {blocks.use_cases?.enabled !== false && (
         <UseCasesSection
           badge={sanityHomepage?.whatCanYouSend?.badge}
@@ -97,7 +128,7 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 04. CORE SERVICES (AIR + SEA CARGO ONLY) */}
+      {/* 05. CORE SERVICES (AIR + SEA CARGO ONLY) */}
       {blocks.services?.enabled && (
         <ServicesOverview
           badge={sanityHomepage?.servicesOverview?.badge}
@@ -109,7 +140,7 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 05. OFFICIAL REGISTRATIONS & ASSOCIATIONS */}
+      {/* 06. OFFICIAL REGISTRATIONS & ASSOCIATIONS */}
       {blocks.registrations_associations?.enabled !== false && (
         <RegistrationsSection
           heading={sanityHomepage?.registrations?.heading}
@@ -118,7 +149,7 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 06. TRUSTED BY THE MARKET (CLIENT CAROUSEL) */}
+      {/* 07. TRUSTED BY THE MARKET (CLIENT CAROUSEL) */}
       {blocks.trusted_market?.enabled !== false && (
         <TrustedMarketSection
           heading={sanityHomepage?.trustedMarket?.heading}
@@ -127,7 +158,7 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 07. PAKISTAN COVERAGE / PICKUP CITIES */}
+      {/* 08. PAKISTAN COVERAGE / PICKUP CITIES */}
       {blocks.locations?.enabled && (
         <PakistanReachSection
           badge={sanityHomepage?.pickupCities?.badge}
@@ -138,7 +169,7 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 08. POPULAR DESTINATIONS */}
+      {/* 09. POPULAR DESTINATIONS */}
       {blocks.destinations?.enabled && (
         <DestinationShowcase
           badge={sanityHomepage?.popularDestinations?.badge}
@@ -149,7 +180,7 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 09. PROCESS / HOW IT WORKS */}
+      {/* 10. PROCESS / HOW IT WORKS */}
       {blocks.process?.enabled && (
         <ProcessSection
           badge={sanityHomepage?.howItWorks?.badge}
@@ -160,7 +191,7 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 10. TRUST / RELIABILITY */}
+      {/* 11. TRUST / RELIABILITY */}
       {blocks.trust?.enabled && (
         <TrustSection
           badge={sanityHomepage?.trustMetrics ? 'Reliability' : undefined}
@@ -169,7 +200,7 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 11. TESTIMONIALS / DELIVERY PROOF */}
+      {/* 12. TESTIMONIALS / DELIVERY PROOF */}
       <TestimonialsSection
         badge={sanityHomepage?.testimonials?.badge}
         heading={sanityHomepage?.testimonials?.heading}
@@ -177,7 +208,7 @@ export default async function HomePage() {
         items={sanityHomepage?.testimonials?.items}
       />
 
-      {/* 12. FAQ */}
+      {/* 13. FAQ */}
       {blocks.faq?.enabled && (
         <FaqSection
           badge={sanityHomepage?.faq?.badge}
@@ -189,7 +220,7 @@ export default async function HomePage() {
         />
       )}
 
-      {/* 13. FINAL CTA */}
+      {/* 14. FINAL CTA */}
       {blocks.cta?.enabled && (
         <FinalCtaSection
           eyebrow={sanityHomepage?.finalCta?.eyebrow}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, BookOpen, Clock } from 'lucide-react';
+import { ArrowRight, Clock } from 'lucide-react';
 import { getPublishedStaticArticles } from '@/lib/guides/guide-content';
 
 export interface RelatedGuidesGridProps {
@@ -25,46 +25,42 @@ export const RelatedGuidesGrid: React.FC<RelatedGuidesGridProps> = ({
   if (displayArticles.length === 0) return null;
 
   return (
-    <section className="w-full bg-surface-subtle py-16 lg:py-20 border-t border-b border-border text-brand-black">
-      <div className="max-w-prose space-y-6">
-        <div className="text-xs font-mono font-bold uppercase text-slate-500 tracking-wider">
-          Further Reading & Related Guides
-        </div>
-
-        <div className="space-y-4">
-          {displayArticles.map((art) => (
-            <Link
-              key={art.slug}
-              href={`/guides/${art.slug}`}
-              className="p-6 bg-surface rounded-md border border-border flex flex-col justify-between space-y-4 hover:border-slate-400 transition-colors group block shadow-2xs"
-            >
-              <div className="space-y-2">
-                <div className="flex items-center justify-between text-xs font-mono text-slate-500">
-                  <span className="uppercase">{art.category.replace('-', ' ')}</span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-slate-400" />
-                    {art.readingTimeMinutes} min read
-                  </span>
-                </div>
-                <h3 className="text-heading-sm font-bold text-brand-black group-hover:text-accent transition-colors leading-snug">
-                  {art.title}
-                </h3>
-                <p className="text-body-sm text-slate-600 line-clamp-2 font-normal">
-                  {art.excerpt}
-                </p>
-              </div>
-
-              <div className="pt-3 border-t border-border flex items-center justify-between text-xs font-mono font-semibold text-brand-black group-hover:text-accent transition-colors">
-                <span className="flex items-center gap-1.5">
-                  <BookOpen className="w-3.5 h-3.5 text-slate-400 group-hover:text-accent" />
-                  Read Guide
-                </span>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-accent" />
-              </div>
-            </Link>
-          ))}
-        </div>
+    <div className="py-10 border-t border-[#17201B]/15 space-y-6">
+      <div className="text-xs font-mono font-bold uppercase text-[#1F8A5B] tracking-widest">
+        FURTHER READING & RELATED GUIDES
       </div>
-    </section>
+
+      <div className="divide-y divide-[#17201B]/15 border-t border-b border-[#17201B]/15">
+        {displayArticles.map((art) => (
+          <Link
+            key={art.slug}
+            href={`/guides/${art.slug}`}
+            className="py-6 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:pl-2 transition-all group block"
+          >
+            <div className="space-y-2 md:w-3/4">
+              <div className="flex items-center gap-3 text-xs font-mono text-[#17201B]/60">
+                <span className="uppercase font-bold text-[#1F8A5B]">{art.category.replace('-', ' ')}</span>
+                <span>•</span>
+                <span className="flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-[#1F8A5B]" />
+                  {art.readingTimeMinutes} MIN READ
+                </span>
+              </div>
+              <h3 className="text-base sm:text-lg font-serif font-bold text-[#17201B] group-hover:text-[#1F8A5B] transition-colors leading-snug">
+                {art.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-[#17201B]/75 line-clamp-2 font-normal">
+                {art.excerpt}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#17201B] group-hover:text-[#1F8A5B] shrink-0">
+              <span>READ GUIDE</span>
+              <ArrowRight className="w-4 h-4 text-[#17201B]/40 group-hover:text-[#1F8A5B] group-hover:translate-x-1 transition-transform" />
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 };

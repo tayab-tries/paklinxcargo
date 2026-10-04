@@ -14,10 +14,10 @@ export const Section: React.FC<SectionProps> = ({
   ...props
 }) => {
   const surfaceStyles = {
-    dark: 'bg-brand-black text-white border-b border-border-dark',
-    navy: 'bg-brand-navy text-white border-b border-border-dark',
-    light: 'bg-surface text-brand-black border-b border-border',
-    subtle: 'bg-surface-subtle text-brand-black border-b border-border',
+    dark: 'bg-brand-dark text-brand-cream border-b border-border-dark',
+    navy: 'bg-brand-forest text-brand-cream border-b border-brand-forest-light',
+    light: 'bg-background text-brand-dark border-b border-border',
+    subtle: 'bg-surface-subtle text-brand-dark border-b border-border',
   }[variantSurface];
 
   const paddingStyles = {

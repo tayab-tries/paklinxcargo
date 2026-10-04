@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="533" viewBox="0 0 800 533" fill="none">
+  <rect width="800" height="533" fill="#F8FAFC"/>
+  <rect width="800" height="533" fill="url(#grid-guide)" opacity="0.05"/>
+  <defs>
+    <pattern id="grid-guide" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0F172A" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect x="250" y="160" width="300" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+  <rect x="290" y="200" width="220" height="12" fill="#F97316"/>
+  <rect x="290" y="230" width="180" height="8" fill="#94A3B8"/>
+  <rect x="290" y="250" width="160" height="8" fill="#94A3B8"/>
+  <text x="400" y="420" fill="#64748B" font-family="monospace" font-size="14" text-anchor="middle" letter-spacing="2">GUIDE COVER ASSET SLOT</text>
+</svg>

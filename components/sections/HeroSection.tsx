@@ -1,8 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, MessageSquare } from 'lucide-react';
-import { Container } from '@/components/ui/Container';
+import { ArrowRight, MessageSquare, Plane, Ship, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { IMAGE_SLOTS } from '@/lib/constants/images';
 import { buildWhatsappUrl } from '@/lib/utils/whatsapp';
@@ -18,7 +17,6 @@ export interface HeroSectionProps {
 export const HeroSection: React.FC<HeroSectionProps> = ({
   blockData,
   sanityHeroData,
-  heroFeatureChips,
   whatsappNumber: propWhatsapp,
 }) => {
   const activeWhatsapp = (blockData?.whatsapp_number as string) || propWhatsapp;
@@ -30,7 +28,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const eyebrow =
     sanityHeroData?.eyebrow ||
     (blockData?.eyebrow as string) ||
-    'DOOR-TO-DOOR CARGO SHIPPING FROM PAKISTAN';
+    'PAKISTAN TO WORLDWIDE LOGISTICS';
 
   let headline = (blockData?.headline as string) || '';
   if (sanityHeroData?.heading) {
@@ -40,18 +38,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       headline = sanityHeroData.heading;
     }
   } else if (!headline) {
-    headline = "SEND CARGO FROM PAKISTAN.\nWE'LL HANDLE THE REST.";
+    headline = "International cargo from Pakistan to the world.";
   }
 
   const supportingCopy =
     sanityHeroData?.description ||
     (blockData?.supporting_copy as string) ||
-    'Door-to-door cargo delivery by air and sea. We pick up from Pakistan and deliver to destinations worldwide.';
+    'Door-to-door air freight and ocean cargo shipping originating from Pakistan export hubs to over 50 international destinations.';
 
   const primaryCtaLabel =
     sanityHeroData?.primaryCta?.label ||
     (blockData?.primary_cta_label as string) ||
-    'GET A QUOTE';
+    'Request a Cargo Quote';
 
   const primaryCtaHref =
     sanityHeroData?.primaryCta?.href ||
@@ -61,7 +59,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const secondaryCtaLabel =
     sanityHeroData?.secondaryCta?.label ||
     (blockData?.secondary_cta_label as string) ||
-    'WHATSAPP US';
+    'Direct WhatsApp';
 
   let rawSecondaryHref =
     sanityHeroData?.secondaryCta?.href ||
@@ -73,17 +71,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     const customMsg = messageMatch ? decodeURIComponent(messageMatch[1]) : undefined;
     rawSecondaryHref = buildWhatsappUrl(activeWhatsapp, customMsg);
   }
-
-  const defaultCapabilityLine =
-    (blockData?.capability_line as string) || 'HOME PICKUP • AIR CARGO • SEA CARGO • DOOR-TO-DOOR';
-
-  const capabilities: string[] =
-    heroFeatureChips && heroFeatureChips.length > 0
-      ? heroFeatureChips.map((c) => c.label)
-      : defaultCapabilityLine
-          .split(/•|\|/)
-          .map((s) => s.trim())
-          .filter(Boolean);
 
   const bgImage =
     sanityHeroData?.heroImage ||
@@ -98,110 +85,53 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const isWhatsapp = rawSecondaryHref.includes('wa.me') || rawSecondaryHref.includes('whatsapp');
 
   return (
-    <section className="relative min-h-[640px] sm:min-h-[72vh] lg:min-h-[76vh] max-h-[90vh] w-full overflow-hidden bg-brand-black flex flex-col justify-center border-b border-border-dark">
-      {/* 1. Full-Bleed Background Image */}
-      <div className="absolute inset-0 z-0 bg-brand-black-deep">
+    <section className="relative w-full px-2 sm:px-4 md:px-6 pt-2 pb-16 lg:pb-24">
+      {/* Wide Expansive Hero Container */}
+      <div className="relative w-full max-w-[1760px] mx-auto rounded-2xl sm:rounded-3xl lg:rounded-[32px] overflow-hidden min-h-[580px] sm:min-h-[640px] lg:min-h-[700px] flex flex-col justify-end p-6 sm:p-10 lg:p-16 xl:p-20 shadow-xl border border-slate-200/60 bg-[#0E281F]">
+        
+        {/* Background Photography with Natural Scrim */}
         <Image
           src={bgImage}
           alt={imageAlt}
           fill
           priority
-          sizes="(max-width: 768px) 100vw, 100vw"
-          className="object-cover object-[65%_center] lg:object-[center_right] opacity-80"
+          sizes="(max-width: 1920px) 100vw, 1920px"
+          className="object-cover object-center opacity-90 transition-transform duration-700"
         />
 
-        <div
-          className="absolute inset-0 z-10 pointer-events-none hidden md:block"
-          style={{
-            background: `linear-gradient(
-              90deg,
-              rgba(7,10,15,0.96) 0%,
-              rgba(7,10,15,0.88) 26%,
-              rgba(7,10,15,0.64) 52%,
-              rgba(7,10,15,0.28) 78%,
-              rgba(7,10,15,0.18) 100%
-            )`,
-          }}
-        />
+        {/* Soft Asymmetrical Gradient Overlay for Pristine Readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/50 to-black/20 lg:from-black/80 lg:via-black/40 lg:to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 z-10 pointer-events-none" />
 
-        <div
-          className="absolute inset-0 z-10 pointer-events-none md:hidden"
-          style={{
-            background: `linear-gradient(
-              180deg,
-              rgba(7,10,15,0.82) 0%,
-              rgba(7,10,15,0.56) 45%,
-              rgba(7,10,15,0.76) 100%
-            )`,
-          }}
-        />
-
-        <svg
-          className="absolute inset-0 w-full h-full text-accent pointer-events-none z-10 overflow-hidden"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 1440 900"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <path
-            id="freight-hero-route"
-            d="M -100 650 C 300 600 600 250 1100 300 C 1300 320 1500 150 1600 100"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeDasharray="6 6"
-            className="opacity-15"
-          />
-
-          <g className="motion-reduce:hidden opacity-85">
-            <g transform="translate(-12, -12) rotate(91) scale(1.35)">
-              <path
-                d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
-                fill="currentColor"
-              />
-            </g>
-            <animateMotion dur="20s" repeatCount="indefinite" rotate="auto" calcMode="linear">
-              <mpath href="#freight-hero-route" />
-            </animateMotion>
-          </g>
-        </svg>
-      </div>
-
-      <Container className="relative z-20 py-16 lg:py-24">
-        <div className="w-full lg:w-[60%] max-w-[720px] space-y-6">
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-[0.08em] px-3 py-1 bg-brand-navy/80 text-slate-200 border border-border-dark rounded-xs">
+        {/* Hero Content (Left Aligned Asymmetrical) */}
+        <div className="relative z-20 max-w-3xl space-y-6 sm:space-y-7 pt-24 sm:pt-28 pb-4 lg:pb-6">
+          
+          {/* Eyebrow Label */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/15 backdrop-blur-md border border-white/25 rounded-full">
+            <span className="w-2 h-2 rounded-full bg-[#C6A15B] animate-pulse" />
+            <span className="text-[11px] font-mono font-bold uppercase tracking-[0.16em] text-white">
               {eyebrow}
             </span>
           </div>
 
-          <h1 className="text-[36px] sm:text-[52px] lg:text-[64px] font-extrabold tracking-tight text-white leading-[1.05] max-w-[720px]">
-            {headline.includes('\n') ? (
-              <>
-                <span>{headline.split('\n')[0]}</span> <br />
-                <span className="text-accent">{headline.split('\n')[1]}</span>
-              </>
-            ) : headline.includes('.') ? (
-              <>
-                <span>{headline.split('.')[0]}.</span> <br />
-                <span className="text-accent">{headline.split('.').slice(1).join('.').trim()}</span>
-              </>
-            ) : (
-              <span>{headline}</span>
-            )}
+          {/* Headline (Playfair Display) */}
+          <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-normal text-white leading-[1.06] tracking-tight">
+            International cargo from <span className="italic text-[#C6A15B]">Pakistan</span> to the world.
           </h1>
 
-          <p className="text-[16px] sm:text-[18px] text-slate-300 leading-[1.6] font-normal max-w-[640px]">
+          {/* Supporting Copy */}
+          <p className="text-base sm:text-xl text-white/90 font-sans max-w-2xl font-normal leading-relaxed">
             {supportingCopy}
           </p>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-[12px]">
+          {/* Action Pill CTAs */}
+          <div className="pt-2 flex flex-wrap items-center gap-4">
             <Link href={primaryCtaHref}>
               <Button
                 variant="accent"
                 size="lg"
-                className="w-full sm:w-auto h-[48px] min-w-[200px] text-base font-bold"
-                rightIcon={<ArrowRight className="w-4 h-4 text-brand-black shrink-0" />}
+                className="h-13 px-8 rounded-full bg-[#1F8A5B] hover:bg-[#12372A] text-white font-medium text-sm sm:text-base border-none shadow-lg transition-all"
+                rightIcon={<ArrowRight className="w-4 h-4 text-white shrink-0" />}
               >
                 {primaryCtaLabel}
               </Button>
@@ -215,24 +145,77 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <Button
                 variant="outline-dark"
                 size="lg"
-                className="w-full sm:w-auto h-[48px] min-w-[180px] border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 hover:text-emerald-300 font-bold"
-                leftIcon={<MessageSquare className="w-4 h-4 text-emerald-400 shrink-0" />}
+                className="h-13 px-7 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md text-white font-medium text-sm sm:text-base border border-white/35 transition-all"
+                leftIcon={<MessageSquare className="w-4 h-4 text-[#C6A15B] shrink-0" />}
               >
                 {secondaryCtaLabel}
               </Button>
             </a>
           </div>
+        </div>
 
-          <div className="pt-6 mt-5 border-t border-border-dark/80 flex flex-wrap items-center gap-2 sm:gap-4 text-[12px] font-mono uppercase tracking-[0.08em] text-slate-300">
-            {capabilities.map((item, idx) => (
-              <React.Fragment key={idx}>
-                {idx > 0 && <span className="text-accent">•</span>}
-                <span className="font-semibold">{item}</span>
-              </React.Fragment>
-            ))}
+        {/* Information Card (Positioned Inside Hero Container Above Bottom Border) */}
+        <div className="lg:absolute lg:bottom-6 xl:bottom-8 lg:right-10 xl:right-14 lg:z-30 w-full lg:max-w-md bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-2xl border border-slate-200/80 text-[#17201B] space-y-3.5 mt-6 lg:mt-0">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+            <div>
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#1F8A5B] font-bold block">
+                Transport Modes & Timelines
+              </span>
+              <h3 className="font-serif text-lg font-bold text-[#17201B]">
+                Pakistan Departure Corridors
+              </h3>
+            </div>
+            <span className="w-2.5 h-2.5 rounded-full bg-[#1F8A5B] animate-pulse" />
+          </div>
+
+          <div className="space-y-3 text-xs sm:text-sm">
+            <div className="p-3.5 bg-[#FAF8F3] rounded-xl border border-slate-200/60 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-[#12372A] text-[#C6A15B] rounded-lg">
+                  <Plane className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div>
+                  <div className="font-bold text-[#17201B]">Air Freight Express</div>
+                  <div className="text-[11px] text-slate-500">Door-to-door air cargo</div>
+                </div>
+              </div>
+              <span className="font-mono text-xs font-bold text-[#1F8A5B] bg-emerald-50 px-2.5 py-1 rounded-md">
+                10–15 Days
+              </span>
+            </div>
+
+            <div className="p-3.5 bg-[#FAF8F3] rounded-xl border border-slate-200/60 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="p-2.5 bg-[#12372A] text-[#C6A15B] rounded-lg">
+                  <Ship className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div>
+                  <div className="font-bold text-[#17201B]">Sea Cargo Freight</div>
+                  <div className="text-[11px] text-slate-500">FCL & LCL Ocean Freight</div>
+                </div>
+              </div>
+              <span className="font-mono text-xs font-bold text-[#1F8A5B] bg-emerald-50 px-2.5 py-1 rounded-md">
+                1.5–2.5 Months
+              </span>
+            </div>
+          </div>
+
+          <div className="pt-2 flex items-center justify-between text-xs sm:text-sm font-mono border-t border-slate-100">
+            <div className="flex items-center gap-1.5 text-slate-600">
+              <MapPin className="w-4 h-4 text-[#1F8A5B]" />
+              <span>8 Origin Pickup Hubs</span>
+            </div>
+            <Link
+              href="/quote"
+              className="inline-flex items-center gap-1.5 font-bold text-[#12372A] hover:text-[#1F8A5B] transition-colors"
+            >
+              <span>Calculate Rate</span>
+              <ArrowRight className="w-4 h-4 text-[#1F8A5B]" />
+            </Link>
           </div>
         </div>
-      </Container>
+
+      </div>
     </section>
   );
 };

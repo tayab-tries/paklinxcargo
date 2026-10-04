@@ -20,12 +20,15 @@ export const PageShell = async ({ children }: PageShellProps) => {
   const activePhone = sanitySiteSettings?.phone || business.phonePrimary;
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-brand-black selection:bg-accent selection:text-brand-black pb-14 sm:pb-0">
-      <Header sanitySiteSettings={sanitySiteSettings} />
-      <main className="flex-1 w-full">{children}</main>
-      <Footer sanitySiteSettings={sanitySiteSettings} />
-      <FloatingWhatsApp whatsappNumber={activeWhatsapp} />
-      <MobileBottomCta phone={activePhone} whatsappNumber={activeWhatsapp} />
+    <div className="min-h-screen bg-[#DFD9CC] font-sans antialiased text-[#17201B] selection:bg-[#1F8A5B] selection:text-white py-0 sm:py-2 md:py-3 lg:py-4 px-0 sm:px-2 md:px-3 lg:px-4">
+      {/* Expansive Website Canvas Frame */}
+      <div className="w-full max-w-[1920px] mx-auto min-h-screen flex flex-col bg-[#F6F2E9] rounded-none sm:rounded-[20px] lg:rounded-[28px] shadow-xl border border-[#12372A]/10 overflow-hidden relative">
+        <Header sanitySiteSettings={sanitySiteSettings} />
+        <main className="flex-1 w-full relative">{children}</main>
+        <Footer sanitySiteSettings={sanitySiteSettings} />
+        <FloatingWhatsApp whatsappNumber={activeWhatsapp} />
+        <MobileBottomCta phone={activePhone} whatsappNumber={activeWhatsapp} />
+      </div>
     </div>
   );
 };

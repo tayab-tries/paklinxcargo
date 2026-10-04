@@ -79,9 +79,14 @@ export const UseCasesSection: React.FC<UseCasesSectionProps> = ({
   };
 
   return (
-    <section className="w-full bg-surface-subtle py-16 lg:py-24 border-b border-border text-brand-black">
+    <section className="w-full bg-brand-cream py-16 lg:py-24 border-b border-border-strong/60 text-brand-dark">
       <Container>
-        <SectionHeading badge={badge} title={title} subtitle={subtitle} className="mb-12" />
+        <SectionHeading
+          badge={badge}
+          title={title}
+          subtitle={subtitle}
+          className="mb-12 lg:mb-16 [&_h2]:text-brand-dark [&_h2]:font-serif [&_p]:text-brand-dark/75"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {items.map((item, idx) => {
@@ -90,31 +95,35 @@ export const UseCasesSection: React.FC<UseCasesSectionProps> = ({
             return (
               <div
                 key={idx}
-                className="bg-surface rounded-md border border-border p-6 lg:p-8 flex flex-col justify-between space-y-6 shadow-xs hover:border-slate-400 transition-colors"
+                className="bg-[#FAF8F3] rounded-lg border border-[#E2DDD5] p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-sm hover:border-brand-gold/60 hover:shadow-md transition-all duration-300 group"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <div className="p-3 bg-brand-navy/10 rounded border border-brand-navy/20 text-brand-navy">
-                      <IconComponent className="w-6 h-6" />
+                    <div className="p-3 bg-[#12372A] rounded-md border border-brand-gold/30 text-brand-gold shrink-0 shadow-xs">
+                      <IconComponent className="w-5 h-5" />
                     </div>
                     {item.badgeText && (
-                      <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-500 bg-surface-subtle px-2.5 py-1 rounded border border-border">
+                      <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#12372A] bg-brand-gold/15 px-2.5 py-1 rounded border border-brand-gold/30">
                         {item.badgeText}
                       </span>
                     )}
                   </div>
 
-                  <h3 className="text-heading-md font-bold text-brand-black">{item.title}</h3>
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-dark group-hover:text-brand-emerald transition-colors tracking-tight">
+                    {item.title}
+                  </h3>
                   {item.description && (
-                    <p className="text-body-md text-slate-600 leading-relaxed font-normal">{item.description}</p>
+                    <p className="font-sans text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
+                      {item.description}
+                    </p>
                   )}
                 </div>
 
-                <div className="pt-4 border-t border-border flex items-center justify-between">
-                  <span className="text-xs font-mono text-slate-500">Supported Service</span>
+                <div className="pt-4 border-t border-[#E2DDD5] flex items-center justify-between">
+                  <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">Supported Service</span>
                   <Link
                     href="/quote"
-                    className="text-xs font-mono font-semibold text-brand-black hover:text-accent flex items-center gap-1 transition-colors"
+                    className="text-xs font-mono font-semibold text-brand-dark hover:text-brand-emerald flex items-center gap-1 transition-colors"
                   >
                     <span>Get Quote</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -128,3 +137,4 @@ export const UseCasesSection: React.FC<UseCasesSectionProps> = ({
     </section>
   );
 };
+

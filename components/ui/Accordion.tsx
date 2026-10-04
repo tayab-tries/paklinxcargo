@@ -33,15 +33,16 @@ export const Accordion: React.FC<AccordionProps> = ({
             <button
               onClick={() => setOpenId(isOpen ? null : item.id)}
               className={cn(
-                'w-full flex items-center justify-between text-left py-2 text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-xs',
-                variantSurface === 'dark' ? 'text-white hover:text-accent' : 'text-brand-black hover:text-accent'
+                'w-full flex items-center justify-between text-left py-2.5 text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-emerald rounded-xs',
+                variantSurface === 'dark' ? 'text-brand-cream hover:text-brand-gold' : 'text-brand-dark hover:text-brand-emerald'
               )}
               aria-expanded={isOpen}
             >
               <span>{item.title}</span>
               <ChevronDown
                 className={cn(
-                  'w-4 h-4 text-accent shrink-0 transition-transform duration-200',
+                  'w-4 h-4 shrink-0 transition-transform duration-200',
+                  variantSurface === 'dark' ? 'text-brand-gold' : 'text-brand-emerald',
                   isOpen && 'rotate-180'
                 )}
               />

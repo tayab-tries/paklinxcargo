@@ -44,18 +44,18 @@ export const QuoteStep3Contact: React.FC<QuoteStep3ContactProps> = ({
         onChange={(e) => onChange('website_hp', e.target.value)}
       />
 
-      <div className="space-y-1 border-b border-border pb-4">
-        <h2 className="text-heading-lg font-bold text-brand-black flex items-center gap-2">
+      <div className="space-y-1.5 border-b border-border pb-4">
+        <h2 className="text-xl sm:text-2xl font-serif font-bold text-brand-black flex items-center gap-2.5">
           <UserCheck className="w-5 h-5 text-accent shrink-0" />
-          <span>Step 3: Contact & Submission</span>
+          <span>Step 3: How Should We Contact You?</span>
         </h2>
-        <p className="text-body-sm text-slate-600">
-          Enter your contact details so our operations team can deliver your custom quotation.
+        <p className="text-sm text-slate-600">
+          We will use these details only to review your cargo specifications and deliver your custom quote.
         </p>
       </div>
 
       <Input
-        label="Full Name"
+        label="Your Full Name"
         id="sender_name"
         name="sender_name"
         placeholder="e.g. Muhammad Ali"
@@ -83,32 +83,42 @@ export const QuoteStep3Contact: React.FC<QuoteStep3ContactProps> = ({
         </Select>
 
         {(formData.contact_preference === 'whatsapp' || formData.contact_preference === 'phone') && (
-          <Input
-            label="Phone / WhatsApp Number"
-            id="sender_phone"
-            name="sender_phone"
-            placeholder="e.g. 0300 1234567"
-            value={formData.sender_phone || ''}
-            onChange={(e) => onChange('sender_phone', e.target.value)}
-            error={errors.sender_phone}
-            required
-            variantSurface="light"
-          />
+          <div className="space-y-1">
+            <Input
+              label="Phone / WhatsApp Number"
+              id="sender_phone"
+              name="sender_phone"
+              placeholder="e.g. 0300 1234567"
+              value={formData.sender_phone || ''}
+              onChange={(e) => onChange('sender_phone', e.target.value)}
+              error={errors.sender_phone}
+              required
+              variantSurface="light"
+            />
+            <p className="text-[11px] font-mono text-slate-500">
+              Pakistani mobile or landline numbers accepted (e.g. 0300 1234567 or +92 300 1234567).
+            </p>
+          </div>
         )}
 
         {formData.contact_preference === 'email' && (
-          <Input
-            label="Email Address"
-            id="sender_email"
-            name="sender_email"
-            type="email"
-            placeholder="name@example.com"
-            value={formData.sender_email || ''}
-            onChange={(e) => onChange('sender_email', e.target.value)}
-            error={errors.sender_email}
-            required
-            variantSurface="light"
-          />
+          <div className="space-y-1">
+            <Input
+              label="Email Address"
+              id="sender_email"
+              name="sender_email"
+              type="email"
+              placeholder="name@example.com"
+              value={formData.sender_email || ''}
+              onChange={(e) => onChange('sender_email', e.target.value)}
+              error={errors.sender_email}
+              required
+              variantSurface="light"
+            />
+            <p className="text-[11px] font-mono text-slate-500">
+              Your quote will be emailed directly to this address.
+            </p>
+          </div>
         )}
       </div>
 
@@ -127,38 +137,49 @@ export const QuoteStep3Contact: React.FC<QuoteStep3ContactProps> = ({
         />
       )}
 
-      <Textarea
-        label="Additional Instructions or Special Notes (Optional)"
-        id="additional_notes"
-        name="additional_notes"
-        placeholder="Any specific delivery instructions, commercial invoice notes, or special handling requirements..."
-        value={formData.additional_notes || ''}
-        onChange={(e) => onChange('additional_notes', e.target.value)}
-        error={errors.additional_notes}
-        variantSurface="light"
-      />
+      <div className="space-y-1">
+        <Textarea
+          label="Anything else we should know? (Optional)"
+          id="additional_notes"
+          name="additional_notes"
+          placeholder="Need pickup from a home, office, or warehouse in Pakistan? Fragile items, special handling, or specific delivery instructions..."
+          value={formData.additional_notes || ''}
+          onChange={(e) => onChange('additional_notes', e.target.value)}
+          error={errors.additional_notes}
+          variantSurface="light"
+        />
+        <p className="text-[11px] font-mono text-slate-500">
+          Mention home/office pickup requests, fragile packing, or target delivery dates.
+        </p>
+      </div>
 
-      <div className="pt-4 flex items-center justify-between gap-4">
+      <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         <Button
           type="button"
           variant="outline"
           size="lg"
           onClick={onBack}
           leftIcon={<ArrowLeft className="w-4 h-4 shrink-0" />}
+          className="w-full sm:w-auto"
         >
           Back
         </Button>
 
-        <Button
-          type="submit"
-          variant="accent"
-          size="lg"
-          isLoading={isSubmitting}
-          className="w-full sm:w-auto h-[46px]"
-          rightIcon={<Send className="w-4 h-4 text-brand-black shrink-0" />}
-        >
-          Submit Quote Request
-        </Button>
+        <div className="w-full sm:w-auto flex flex-col items-center sm:items-end gap-1.5">
+          <Button
+            type="submit"
+            variant="accent"
+            size="lg"
+            isLoading={isSubmitting}
+            className="w-full sm:w-auto h-[46px] font-bold text-base px-8"
+            rightIcon={<Send className="w-4 h-4 text-brand-black shrink-0" />}
+          >
+            {isSubmitting ? 'Submitting Request...' : 'Request My Quote'}
+          </Button>
+          <span className="text-[11px] font-mono text-slate-500">
+            Your shipment details will be reviewed by our operations team.
+          </span>
+        </div>
       </div>
     </form>
   );

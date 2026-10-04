@@ -9,7 +9,7 @@ export const aboutPageType = defineType({
       name: 'title',
       title: 'Hero Main Title (H1)',
       type: 'string',
-      initialValue: 'About Raahi International',
+      initialValue: 'About Paklinx Cargo',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -107,7 +107,7 @@ export const aboutPageType = defineType({
           type: 'text',
           rows: 2,
           initialValue:
-            "Whether you're sending personal belongings, household goods or commercial cargo, Raahi International is ready to help you explore your international shipping options.",
+            "Whether you're sending personal belongings, household goods or commercial cargo, Paklinx Cargo is ready to help you explore your international shipping options.",
         }),
         defineField({
           name: 'quoteLabel',

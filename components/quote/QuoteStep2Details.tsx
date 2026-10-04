@@ -35,53 +35,68 @@ export const QuoteStep2Details: React.FC<QuoteStep2DetailsProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6" id="quote-step-2-form">
-      <div className="space-y-1 border-b border-border pb-4">
-        <h2 className="text-heading-lg font-bold text-brand-black flex items-center gap-2">
+      <div className="space-y-1.5 border-b border-border pb-4">
+        <h2 className="text-xl sm:text-2xl font-serif font-bold text-brand-black flex items-center gap-2.5">
           <PackageCheck className="w-5 h-5 text-accent shrink-0" />
-          <span>Step 2: Cargo Specifications</span>
+          <span>Step 2: Tell Us About the Shipment</span>
         </h2>
-        <p className="text-body-sm text-slate-600">
-          Provide estimated gross weight, box count, approximate dimensions, and a brief description of your items.
+        <p className="text-sm text-slate-600">
+          Approximate weight, package count, and dimensions are completely acceptable for your initial quote request.
         </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <Input
-          label="Estimated Weight (kg)"
-          id="estimated_weight_kg"
-          name="estimated_weight_kg"
-          type="number"
-          step="0.1"
-          min="0.5"
-          placeholder="e.g. 50"
-          value={formData.estimated_weight_kg}
-          onChange={(e) => onChange('estimated_weight_kg', e.target.value)}
-          error={errors.estimated_weight_kg}
-          required
-          variantSurface="light"
-        />
+        <div className="space-y-1">
+          <Input
+            label="Estimated Weight (kg)"
+            id="estimated_weight_kg"
+            name="estimated_weight_kg"
+            type="number"
+            step="0.1"
+            min="0.5"
+            placeholder="e.g. 50"
+            value={formData.estimated_weight_kg}
+            onChange={(e) => onChange('estimated_weight_kg', e.target.value)}
+            error={errors.estimated_weight_kg}
+            required
+            variantSurface="light"
+          />
+          <p className="text-[11px] font-mono text-slate-500">
+            Total gross weight of your boxes or pallets.
+          </p>
+        </div>
 
-        <Input
-          label="Package / Box Count"
-          id="package_count"
-          name="package_count"
-          type="number"
-          min="1"
-          placeholder="e.g. 2"
-          value={formData.package_count}
-          onChange={(e) => onChange('package_count', e.target.value)}
-          error={errors.package_count}
-          required
-          variantSurface="light"
-        />
+        <div className="space-y-1">
+          <Input
+            label="Number of Packages / Boxes"
+            id="package_count"
+            name="package_count"
+            type="number"
+            min="1"
+            placeholder="e.g. 2"
+            value={formData.package_count}
+            onChange={(e) => onChange('package_count', e.target.value)}
+            error={errors.package_count}
+            required
+            variantSurface="light"
+          />
+          <p className="text-[11px] font-mono text-slate-500">
+            Total piece count included in this shipment.
+          </p>
+        </div>
       </div>
 
-      {/* Grouped Dimensions (Length | Width | Height) - 3-column row on desktop */}
+      {/* Grouped Dimensions */}
       <div className="space-y-2">
-        <label className="text-xs font-mono font-semibold text-brand-black uppercase tracking-wider block">
-          Approximate Box Dimensions (cm) — Optional
-        </label>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="flex items-center justify-between">
+          <label className="text-xs font-mono font-semibold text-brand-black uppercase tracking-wider block">
+            Approximate Box Dimensions (cm) — Optional
+          </label>
+        </div>
+        <p className="text-xs text-slate-600">
+          Approximate dimensions help us assess how the shipment may be charged (volumetric vs actual weight).
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
           <Input
             label="Length (cm)"
             id="length_cm"
@@ -124,10 +139,10 @@ export const QuoteStep2Details: React.FC<QuoteStep2DetailsProps> = ({
       </div>
 
       <Textarea
-        label="Cargo Description"
+        label="What are you shipping?"
         id="cargo_description"
         name="cargo_description"
-        placeholder="Briefly describe your items (e.g., personal clothing & books, commercial garments, spare parts, excess baggage)..."
+        placeholder="Briefly describe your items (e.g., personal clothing & books, household goods, commercial garments, spare parts, excess baggage)..."
         value={formData.cargo_description}
         onChange={(e) => onChange('cargo_description', e.target.value)}
         error={errors.cargo_description}
@@ -149,7 +164,7 @@ export const QuoteStep2Details: React.FC<QuoteStep2DetailsProps> = ({
           type="submit"
           variant="accent"
           size="lg"
-          className="w-full sm:w-auto h-[46px]"
+          className="w-full sm:w-auto h-[46px] font-bold"
           rightIcon={<ArrowRight className="w-4 h-4 text-brand-black shrink-0" />}
         >
           Continue to Contact Info

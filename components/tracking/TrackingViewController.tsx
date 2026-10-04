@@ -112,7 +112,7 @@ export const TrackingViewController: React.FC<TrackingViewControllerProps> = ({ 
   return (
     <div className="w-full space-y-10 max-w-3xl mx-auto">
       {/* LOOKUP FORM PANEL */}
-      <div className="bg-brand-black-deep rounded-md border border-border-dark p-6 lg:p-8 shadow-2xl">
+      <div className="bg-surface rounded-md border border-border p-6 lg:p-8 shadow-xs text-brand-black">
         <TrackingLookupForm
           value={trackingNumber}
           isLoading={status === 'loading'}
@@ -130,9 +130,9 @@ export const TrackingViewController: React.FC<TrackingViewControllerProps> = ({ 
         
         {/* LOADING STATE */}
         {status === 'loading' && (
-          <div className="bg-brand-black-deep rounded-md border border-border-dark p-12 text-center space-y-4 shadow-xl">
-            <Loader2 className="w-8 h-8 text-accent animate-spin mx-auto" />
-            <div className="text-xs font-mono text-slate-300 uppercase tracking-wider">
+          <div className="bg-surface rounded-md border border-border p-12 text-center space-y-4 shadow-xs text-brand-black">
+            <Loader2 className="w-8 h-8 text-emerald-700 animate-spin mx-auto" />
+            <div className="text-xs font-mono text-slate-600 uppercase tracking-wider font-semibold">
               Querying Shipment Tracking Desk...
             </div>
           </div>
@@ -140,14 +140,14 @@ export const TrackingViewController: React.FC<TrackingViewControllerProps> = ({ 
 
         {/* NOT FOUND STATE */}
         {status === 'not_found' && (
-          <div className="bg-brand-black-deep rounded-md border border-border-dark p-8 text-center space-y-4 shadow-xl">
-            <div className="w-12 h-12 bg-amber-500/10 rounded-full flex items-center justify-center mx-auto border border-amber-500/30">
-              <AlertCircle className="w-6 h-6 text-amber-400" />
+          <div className="bg-surface rounded-md border border-border p-8 text-center space-y-4 shadow-xs text-brand-black">
+            <div className="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mx-auto border border-amber-200">
+              <AlertCircle className="w-6 h-6 text-amber-700" />
             </div>
-            <div className="space-y-1">
-              <h3 className="text-heading-md font-bold text-white">Shipment Not Found</h3>
-              <p className="text-body-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-                No tracking record matched the reference <span className="font-mono text-white font-bold">{trackingNumber}</span>. Please verify the number on your booking receipt and try again.
+            <div className="space-y-1.5">
+              <h3 className="text-xl font-serif font-bold text-brand-black">Shipment Not Found</h3>
+              <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                No active shipment record matched the tracking number <span className="font-mono text-brand-black font-bold select-all bg-surface-subtle px-1.5 py-0.5 rounded border border-border">{trackingNumber}</span>. Please verify the tracking number on your booking receipt and try again.
               </p>
             </div>
           </div>
@@ -155,14 +155,14 @@ export const TrackingViewController: React.FC<TrackingViewControllerProps> = ({ 
 
         {/* ERROR STATE */}
         {status === 'error' && (
-          <div className="bg-brand-black-deep rounded-md border border-border-dark p-8 text-center space-y-4 shadow-xl">
-            <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center mx-auto border border-red-500/30">
-              <AlertCircle className="w-6 h-6 text-red-400" />
+          <div className="bg-surface rounded-md border border-border p-8 text-center space-y-4 shadow-xs text-brand-black">
+            <div className="w-12 h-12 bg-rose-50 rounded-full flex items-center justify-center mx-auto border border-rose-200">
+              <AlertCircle className="w-6 h-6 text-rose-700" />
             </div>
-            <div className="space-y-1">
-              <h3 className="text-heading-md font-bold text-white">Query Unable to Complete</h3>
-              <p className="text-body-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-                {errorMessage || 'Unable to process tracking query at this moment. Please try again later.'}
+            <div className="space-y-1.5">
+              <h3 className="text-xl font-serif font-bold text-brand-black">Query Unable to Complete</h3>
+              <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                {errorMessage || 'Unable to process tracking query at this moment. Please check your connection and try again.'}
               </p>
             </div>
           </div>

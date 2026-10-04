@@ -54,26 +54,36 @@ export const TrustSection: React.FC<TrustSectionProps> = ({
   }
 
   return (
-    <section className="w-full bg-surface-subtle py-16 lg:py-24 border-b border-border text-brand-black">
-      <Container>
-        <SectionHeading badge={badge} title={title} subtitle={subtitle} className="mb-12" />
+    <section className="w-full bg-[#17201B] py-16 lg:py-24 border-b border-brand-gold/20 text-brand-cream relative overflow-hidden">
+      {/* Background Ambient Glow */}
+      <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,rgba(198,161,91,0.08),transparent_70%)]" />
 
-        <div className="bg-surface rounded-md border border-border divide-y divide-border shadow-xs overflow-hidden">
+      <Container className="relative z-10">
+        <SectionHeading
+          badge={badge}
+          title={title}
+          subtitle={subtitle}
+          badgeVariant="outline-dark"
+          className="mb-12 lg:mb-16 [&_h2]:text-brand-cream [&_h2]:font-serif [&_p]:text-brand-cream/80"
+        />
+
+        <div className="bg-[#12372A] rounded-lg border border-brand-gold/30 divide-y divide-brand-gold/20 shadow-2xl overflow-hidden">
           {credentials.map((item, idx) => (
-            <div key={idx} className="p-6 lg:p-8 flex flex-col md:flex-row md:items-start justify-between gap-6">
-              <div className="md:w-1/4 space-y-1">
+            <div key={idx} className="p-6 sm:p-8 flex flex-col md:flex-row md:items-start justify-between gap-6 hover:bg-[#0E281F] transition-all duration-300">
+              <div className="md:w-1/4 space-y-1.5 shrink-0">
                 {item.value && (
-                  <span className="text-[10px] font-mono font-semibold uppercase text-slate-400 tracking-wider block">
+                  <span className="text-xs font-mono font-bold uppercase text-brand-gold tracking-widest block">
                     {item.value}
                   </span>
                 )}
-                <div className="text-xs font-mono text-emerald-600 font-semibold flex items-center gap-1.5">
-                  <span>✓ Verified Capability</span>
+                <div className="text-xs font-mono text-emerald-400 font-semibold flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Verified Capability</span>
                 </div>
               </div>
 
               <div className="md:w-3/4 space-y-2">
-                <p className="text-body-md text-slate-700 leading-relaxed max-w-2xl font-medium">
+                <p className="font-sans text-sm sm:text-base text-brand-cream/85 leading-relaxed font-normal max-w-2xl">
                   {item.label}
                 </p>
               </div>
@@ -84,3 +94,4 @@ export const TrustSection: React.FC<TrustSectionProps> = ({
     </section>
   );
 };
+

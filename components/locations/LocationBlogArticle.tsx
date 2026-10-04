@@ -14,8 +14,6 @@ import {
 } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
-import ReactMarkdown from 'react-markdown';
-import rehypeSanitize from 'rehype-sanitize';
 import { buildWhatsappUrl } from '@/lib/utils/whatsapp';
 
 export interface LocationBlogArticleProps {
@@ -50,47 +48,47 @@ export const LocationBlogArticle: React.FC<LocationBlogArticleProps> = ({
   );
 
   return (
-    <div className="w-full bg-background text-foreground py-12 lg:py-20 border-b border-border">
+    <div className="w-full bg-[#F6F2E9] text-[#17201B] py-16 lg:py-24 border-b border-[#17201B]/15">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Main Editorial Article Column (8 Cols) */}
           <article className="lg:col-span-8 space-y-10">
             {/* Article Intro Block */}
-            <div className="prose prose-slate max-w-none space-y-6">
-              <div className="bg-surface border-l-4 border-accent p-6 rounded-r-md shadow-xs">
-                <p className="text-body-md text-slate-800 leading-relaxed font-normal whitespace-pre-line">
+            <div className="space-y-6">
+              <div className="bg-white border-l-4 border-[#1F8A5B] p-6 rounded-r-md shadow-xs">
+                <p className="text-sm sm:text-base text-slate-800 leading-relaxed font-normal whitespace-pre-line">
                   {introduction}
                 </p>
               </div>
 
               {localCoverageText && (
-                <div className="bg-surface-subtle p-6 rounded-md border border-border space-y-2">
-                  <div className="flex items-center gap-2 text-xs font-mono font-bold text-accent-dark uppercase tracking-wider">
-                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                <div className="bg-white p-6 rounded-md border border-[#17201B]/15 space-y-2">
+                  <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#1F8A5B] uppercase tracking-wider">
+                    <ShieldCheck className="w-4 h-4 text-[#1F8A5B]" />
                     <span>Doorstep Pickup & Local Coverage in {cityName}</span>
                   </div>
-                  <p className="text-body-sm text-slate-700 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
                     {localCoverageText}
                   </p>
                 </div>
               )}
             </div>
 
-            {/* Table of Contents Box (like ez-toc on Mahir Packers) */}
+            {/* Table of Contents Box */}
             {sections && sections.length > 0 && (
-              <nav aria-label="Table of contents" className="bg-slate-50 border border-slate-200 rounded-lg p-6 space-y-3 shadow-xs">
-                <div className="flex items-center gap-2.5 text-sm font-bold text-slate-900 border-b border-slate-200 pb-2.5">
-                  <ListOrdered className="w-4 h-4 text-accent-dark" />
+              <nav aria-label="Table of contents" className="bg-white border border-[#17201B]/15 rounded-md p-6 space-y-3 shadow-xs">
+                <div className="flex items-center gap-2.5 text-sm font-serif font-bold text-[#17201B] border-b border-slate-200 pb-2.5">
+                  <ListOrdered className="w-4 h-4 text-[#1F8A5B]" />
                   <span>Table of Contents: International Cargo in {cityName}</span>
                 </div>
-                <ol className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium text-slate-700 pt-1">
+                <ol className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono text-slate-700 pt-1">
                   {sections.map((sec, idx) => (
                     <li key={idx}>
                       <a
                         href={`#section-${idx}`}
-                        className="hover:text-accent-dark hover:underline flex items-center gap-1.5 transition-colors"
+                        className="hover:text-[#1F8A5B] hover:underline flex items-center gap-1.5 transition-colors"
                       >
-                        <span className="text-accent font-mono font-bold">{idx + 1}.</span>
+                        <span className="text-[#C6A15B] font-bold">{idx + 1}.</span>
                         <span>{sec.title}</span>
                       </a>
                     </li>
@@ -99,9 +97,9 @@ export const LocationBlogArticle: React.FC<LocationBlogArticleProps> = ({
                     <li>
                       <a
                         href="#section-faqs"
-                        className="hover:text-accent-dark hover:underline flex items-center gap-1.5 transition-colors"
+                        className="hover:text-[#1F8A5B] hover:underline flex items-center gap-1.5 transition-colors"
                       >
-                        <span className="text-accent font-mono font-bold">{sections.length + 1}.</span>
+                        <span className="text-[#C6A15B] font-bold">{sections.length + 1}.</span>
                         <span>Frequently Asked Questions ({faqs.length})</span>
                       </a>
                     </li>
@@ -113,90 +111,82 @@ export const LocationBlogArticle: React.FC<LocationBlogArticleProps> = ({
             {/* Editorial Content Sections */}
             {sections && sections.length > 0 && (
               <div className="space-y-10">
-                {sections.map((sec, idx) => {
-                  const cleanTitle = sec.title.replace(/^#+\s*/, '').trim();
-                  return (
-                    <div
-                      key={idx}
-                      id={`section-${idx}`}
-                      className="bg-surface rounded-md border border-border p-6 sm:p-8 space-y-6 shadow-xs scroll-mt-28"
-                    >
-                      <h2 className="text-heading-lg sm:text-2xl font-extrabold text-foreground tracking-tight border-b border-border pb-3 flex items-center gap-3">
-                        <span className="text-accent font-mono text-xl">{idx + 1}.</span>
-                        <span>{cleanTitle}</span>
-                      </h2>
+                {sections.map((sec, idx) => (
+                  <div
+                    key={idx}
+                    id={`section-${idx}`}
+                    className="bg-white rounded-md border border-[#17201B]/15 p-6 sm:p-8 space-y-6 shadow-xs scroll-mt-28"
+                  >
+                    <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#17201B] tracking-tight border-b border-slate-100 pb-3 flex items-center gap-3">
+                      <span className="text-[#C6A15B] font-mono text-xl">{idx + 1}.</span>
+                      <span>{sec.title}</span>
+                    </h2>
 
-                      <div className="text-body-md text-slate-800 leading-relaxed space-y-4 prose prose-slate max-w-none prose-h3:text-lg prose-h3:font-bold prose-h3:text-slate-900 prose-h3:mt-5 prose-h3:mb-2 prose-h3:border-b prose-h3:border-slate-200 prose-h3:pb-1 prose-h4:text-base prose-h4:font-semibold prose-h4:text-slate-900 prose-strong:font-semibold prose-strong:text-slate-900 prose-ul:list-disc prose-ul:pl-5 prose-ul:my-3 prose-ol:list-decimal prose-ol:pl-5 prose-ol:my-3 prose-li:my-1">
-                        <ReactMarkdown rehypePlugins={[rehypeSanitize]}>
-                          {sec.content}
-                        </ReactMarkdown>
-                      </div>
-
-                      {/* Bullet Points Checklist */}
-                      {sec.list && sec.list.length > 0 && (
-                        <div className="pt-2">
-                          <h4 className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider mb-3">
-                            Key Highlights & Service Includes:
-                          </h4>
-                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {sec.list.map((item, lIdx) => {
-                              const cleanItem = item.replace(/^(?:\d+\.|\*|-)\s*/, '').trim();
-                              return (
-                                <li
-                                  key={lIdx}
-                                  className="flex items-start gap-2.5 bg-surface-subtle p-3 rounded border border-border/80 text-xs font-medium text-slate-800"
-                                >
-                                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                                  <span>{cleanItem}</span>
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        </div>
-                      )}
-
-                      {/* Hyperlinks & Related Services */}
-                      {sec.links && sec.links.length > 0 && (
-                        <div className="pt-4 border-t border-border flex flex-wrap items-center gap-3">
-                          {sec.links.map((link, kIdx) => (
-                            <Link
-                              key={kIdx}
-                              href={link.href}
-                              className="inline-flex items-center gap-2 px-4 py-2 bg-brand-navy hover:bg-slate-800 text-white rounded text-xs font-mono font-bold transition-colors shadow-xs"
-                            >
-                              <span>{link.label}</span>
-                              <ArrowRight className="w-3.5 h-3.5 text-accent" />
-                            </Link>
-                          ))}
-                        </div>
-                      )}
+                    <div className="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line space-y-4 font-normal">
+                      {sec.content}
                     </div>
-                  );
-                })}
+
+                    {/* Bullet Points Checklist */}
+                    {sec.list && sec.list.length > 0 && (
+                      <div className="pt-2">
+                        <h4 className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider mb-3">
+                          Key Highlights & Service Details:
+                        </h4>
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {sec.list.map((item, lIdx) => (
+                            <li
+                              key={lIdx}
+                              className="flex items-start gap-2.5 bg-[#F6F2E9] p-3 rounded border border-[#17201B]/10 text-xs font-medium text-slate-800"
+                            >
+                              <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0 mt-0.5" />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Hyperlinks & Related Services */}
+                    {sec.links && sec.links.length > 0 && (
+                      <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-3">
+                        {sec.links.map((link, kIdx) => (
+                          <Link
+                            key={kIdx}
+                            href={link.href}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-[#12372A] hover:bg-[#17201B] text-white rounded text-xs font-mono font-bold transition-colors shadow-xs"
+                          >
+                            <span>{link.label}</span>
+                            <ArrowRight className="w-3.5 h-3.5 text-[#C6A15B]" />
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             )}
 
-            {/* All FAQs Displayed In-Depth (Blog Editorial Q&A List) */}
+            {/* In-Depth FAQs Display */}
             {faqs && faqs.length > 0 && (
-              <div id="section-faqs" className="bg-surface rounded-md border border-border p-6 sm:p-8 space-y-8 shadow-xs scroll-mt-28">
-                <div className="border-b border-border pb-4 space-y-1">
-                  <div className="flex items-center gap-2 text-xs font-mono text-accent-dark font-bold uppercase">
+              <div id="section-faqs" className="bg-white rounded-md border border-[#17201B]/15 p-6 sm:p-8 space-y-8 shadow-xs scroll-mt-28">
+                <div className="border-b border-slate-100 pb-4 space-y-1">
+                  <div className="flex items-center gap-2 text-xs font-mono text-[#1F8A5B] font-bold uppercase">
                     <HelpCircle className="w-4 h-4" />
                     <span>Frequently Asked Questions</span>
                   </div>
-                  <h2 className="text-heading-xl font-bold text-foreground">
+                  <h2 className="text-xl font-serif font-bold text-[#17201B]">
                     Everything You Need to Know About Shipping from {cityName}
                   </h2>
                 </div>
 
-                <div className="space-y-6 divide-y divide-border/60">
+                <div className="space-y-6 divide-y divide-slate-100">
                   {faqs.map((faq, fIdx) => (
                     <div key={fIdx} className={fIdx > 0 ? 'pt-6 space-y-2' : 'space-y-2'}>
-                      <h3 className="text-heading-md font-bold text-foreground flex items-start gap-2.5">
-                        <span className="text-accent-dark font-mono font-bold">Q{fIdx + 1}.</span>
+                      <h3 className="text-base font-serif font-bold text-[#17201B] flex items-start gap-2.5">
+                        <span className="text-[#1F8A5B] font-mono font-bold">Q{fIdx + 1}.</span>
                         <span>{faq.question}</span>
                       </h3>
-                      <p className="text-body-md text-slate-700 leading-relaxed pl-7 whitespace-pre-line">
+                      <p className="text-xs sm:text-sm text-slate-700 leading-relaxed pl-7 whitespace-pre-line font-normal">
                         {faq.answer}
                       </p>
                     </div>
@@ -208,17 +198,17 @@ export const LocationBlogArticle: React.FC<LocationBlogArticleProps> = ({
 
           {/* Sticky Editorial Sidebar (4 Cols) */}
           <aside className="lg:col-span-4 space-y-8 lg:sticky lg:top-24">
-            {/* Quick Quote Widget Box */}
-            <div className="bg-brand-black-deep text-white rounded-md border border-border-dark p-6 space-y-6 shadow-2xl">
+            {/* Quick Quote Box */}
+            <div className="bg-[#12372A] text-white rounded-md border border-[#1F8A5B]/30 p-6 space-y-6 shadow-xl">
               <div className="space-y-2">
-                <span className="text-xs font-mono text-accent uppercase tracking-wider font-semibold">
-                  Instant Rate Calculator
+                <span className="text-xs font-mono text-[#C6A15B] uppercase tracking-wider font-bold">
+                  Instant Shipping Estimate
                 </span>
-                <h3 className="text-heading-lg font-bold text-white">
+                <h3 className="text-xl font-serif font-bold text-white">
                   Send Cargo from {cityName}
                 </h3>
-                <p className="text-body-xs text-slate-300 leading-relaxed">
-                  Get door-to-door shipping estimates for Air Cargo & Sea Freight originating in {cityName}.
+                <p className="text-xs text-slate-200 leading-relaxed font-normal">
+                  Calculate doorstep shipping rates for Air Cargo & Sea Freight originating in {cityName}.
                 </p>
               </div>
 
@@ -227,8 +217,8 @@ export const LocationBlogArticle: React.FC<LocationBlogArticleProps> = ({
                   <Button
                     variant="accent"
                     size="lg"
-                    className="w-full h-[46px]"
-                    rightIcon={<ArrowRight className="w-4 h-4 text-brand-black" />}
+                    className="w-full h-[46px] bg-[#C6A15B] hover:bg-[#b08e4d] text-[#17201B] font-bold"
+                    rightIcon={<ArrowRight className="w-4 h-4 text-[#17201B]" />}
                   >
                     Calculate Shipping Rate
                   </Button>
@@ -238,7 +228,7 @@ export const LocationBlogArticle: React.FC<LocationBlogArticleProps> = ({
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full h-[46px] bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-md transition-colors flex items-center justify-center gap-2 shadow-xs"
+                  className="w-full h-[46px] bg-[#1F8A5B] hover:bg-[#186e48] text-white font-bold text-xs rounded-md transition-colors flex items-center justify-center gap-2 shadow-xs"
                 >
                   <MessageSquare className="w-4 h-4 text-white fill-current" />
                   <span>Ask {cityName} Hub on WhatsApp</span>
@@ -247,28 +237,28 @@ export const LocationBlogArticle: React.FC<LocationBlogArticleProps> = ({
             </div>
 
             {/* Quick Navigation Cards */}
-            <div className="bg-surface rounded-md border border-border p-6 space-y-4 shadow-xs">
+            <div className="bg-white rounded-md border border-[#17201B]/15 p-6 space-y-4 shadow-xs">
               <h4 className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">
                 Shipping Modes from {cityName}
               </h4>
               <div className="space-y-2.5">
                 <Link
-                  href="/services/air-freight"
-                  className="flex items-center justify-between p-3 bg-surface-subtle hover:bg-slate-100 rounded border border-border text-xs font-bold text-brand-black transition-colors"
+                  href="/cargo-services#part-1-air-cargo"
+                  className="flex items-center justify-between p-3 bg-[#F6F2E9] hover:bg-slate-100 rounded border border-[#17201B]/10 text-xs font-bold text-[#17201B] transition-colors"
                 >
                   <div className="flex items-center gap-2">
-                    <Plane className="w-4 h-4 text-accent-dark" />
+                    <Plane className="w-4 h-4 text-[#1F8A5B]" />
                     <span>Air Freight Services</span>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
                 </Link>
 
                 <Link
-                  href="/services/sea-cargo"
-                  className="flex items-center justify-between p-3 bg-surface-subtle hover:bg-slate-100 rounded border border-border text-xs font-bold text-brand-black transition-colors"
+                  href="/cargo-services#part-2-sea-cargo"
+                  className="flex items-center justify-between p-3 bg-[#F6F2E9] hover:bg-slate-100 rounded border border-[#17201B]/10 text-xs font-bold text-[#17201B] transition-colors"
                 >
                   <div className="flex items-center gap-2">
-                    <Ship className="w-4 h-4 text-accent-dark" />
+                    <Ship className="w-4 h-4 text-[#1F8A5B]" />
                     <span>Sea Cargo Services</span>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
@@ -276,10 +266,10 @@ export const LocationBlogArticle: React.FC<LocationBlogArticleProps> = ({
 
                 <Link
                   href="/services/commercial-cargo"
-                  className="flex items-center justify-between p-3 bg-surface-subtle hover:bg-slate-100 rounded border border-border text-xs font-bold text-brand-black transition-colors"
+                  className="flex items-center justify-between p-3 bg-[#F6F2E9] hover:bg-slate-100 rounded border border-[#17201B]/10 text-xs font-bold text-[#17201B] transition-colors"
                 >
                   <div className="flex items-center gap-2">
-                    <Package className="w-4 h-4 text-accent-dark" />
+                    <Package className="w-4 h-4 text-[#1F8A5B]" />
                     <span>Commercial Export Cargo</span>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
@@ -288,21 +278,23 @@ export const LocationBlogArticle: React.FC<LocationBlogArticleProps> = ({
             </div>
 
             {/* Direct Contact Card */}
-            <div className="bg-surface-subtle rounded-md border border-border p-6 space-y-3">
-              <h4 className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">
-                Need Phone Support?
-              </h4>
-              <p className="text-body-xs text-slate-600 leading-relaxed">
-                Speak directly with our Pakistan logistics dispatch team.
-              </p>
-              <a
-                href={`tel:${activePhone.replace(/\s+/g, '')}`}
-                className="inline-flex items-center gap-2 text-sm font-bold text-brand-black hover:text-accent-dark transition-colors"
-              >
-                <Phone className="w-4 h-4 text-accent-dark" />
-                <span>{activePhone}</span>
-              </a>
-            </div>
+            {activePhone && (
+              <div className="bg-white rounded-md border border-[#17201B]/15 p-6 space-y-3 shadow-xs">
+                <h4 className="text-xs font-mono font-bold text-slate-500 uppercase tracking-wider">
+                  Phone Support
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                  Speak directly with our Pakistan logistics dispatch team.
+                </p>
+                <a
+                  href={`tel:${activePhone.replace(/\s+/g, '')}`}
+                  className="inline-flex items-center gap-2 text-sm font-bold text-[#17201B] hover:text-[#1F8A5B] transition-colors"
+                >
+                  <Phone className="w-4 h-4 text-[#1F8A5B]" />
+                  <span>{activePhone}</span>
+                </a>
+              </div>
+            )}
           </aside>
         </div>
       </Container>

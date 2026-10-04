@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 85" width="100%" height="100%">
+  <!-- FIDI Global Alliance Logo -->
+  <g transform="translate(12, 12)">
+    <path d="M 8 6 L 48 6 C 54 6 54 26 48 26 L 22 26 L 22 48 L 8 48 Z" fill="#DC2626" />
+    <circle cx="40" cy="36" r="16" fill="none" stroke="#1E3A8A" stroke-width="3.5" />
+    <path d="M 30 36 L 50 36 M 40 26 L 40 46" stroke="#1E3A8A" stroke-width="2.5" />
+  </g>
+  <text x="82" y="38" font-family="Arial, sans-serif" font-weight="900" font-size="34" fill="#DC2626" letter-spacing="2">FIDI</text>
+  <text x="82" y="56" font-family="Arial, sans-serif" font-weight="800" font-size="12.5" fill="#1E3A8A" letter-spacing="1">GLOBAL ALLIANCE</text>
+  <text x="82" y="70" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#475569" letter-spacing="0.5">FAIM QUALITY CERTIFIED</text>
+</svg>

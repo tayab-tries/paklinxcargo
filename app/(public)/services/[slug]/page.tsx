@@ -101,13 +101,13 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
       description:
         'Air cargo services from Pakistan worldwide. Compare air freight vs sea cargo, rates, delivery timelines, customs clearance, and door-to-door solutions.',
       alternates: {
-        canonical: `${siteConfig.domain}/services/air-freight`,
+        canonical: `${siteConfig.domain}/cargo-services`,
       },
       openGraph: {
         title: `Air Cargo from Pakistan | ${siteConfig.name}`,
         description:
           'Air cargo services from Pakistan worldwide. Compare air freight vs sea cargo, rates, delivery timelines, customs clearance, and door-to-door solutions.',
-        url: `${siteConfig.domain}/services/air-freight`,
+        url: `${siteConfig.domain}/cargo-services`,
         type: 'website',
       },
     };

@@ -44,35 +44,48 @@ export const QuickQuoteTeaser: React.FC<QuickQuoteTeaserProps> = ({
   };
 
   return (
-    <section className="w-full bg-brand-navy py-10 border-b border-border-dark text-white">
+    <section className="w-full bg-brand-cream py-10 lg:py-14 border-b border-border-strong/60 text-brand-dark">
       <Container>
-        <div className="bg-brand-black-deep rounded-md border border-border-dark p-6 lg:p-8 space-y-6 shadow-xl">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-border-dark pb-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-brand-navy rounded border border-border-dark text-slate-300">
+        <div className="bg-brand-black rounded-lg border border-brand-gold/30 p-6 sm:p-8 lg:p-10 space-y-6 shadow-2xl relative overflow-hidden text-brand-cream">
+          {/* Muted Gold Accent Line */}
+          <div className="h-1 bg-gradient-to-r from-brand-gold via-brand-emerald to-brand-gold absolute top-0 left-0 right-0" />
+
+          {/* Section Header */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-brand-gold/20 pb-5">
+            <div className="flex items-center gap-3.5">
+              <div className="p-2.5 bg-[#0E281F] rounded-md border border-brand-gold/35 text-brand-gold shrink-0">
                 <Calculator className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-heading-sm font-bold text-white">{title}</h2>
-                <p className="text-xs text-slate-400 font-mono">{subtitle}</p>
+                <h2 className="text-xl sm:text-2xl font-serif font-bold text-brand-cream tracking-tight">
+                  {title}
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-300/80 font-sans mt-0.5">
+                  {subtitle}
+                </p>
               </div>
             </div>
-            <span className="text-xs font-mono text-slate-400">Direct Route Entry</span>
+
+            <div className="hidden sm:flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-brand-gold bg-[#0E281F]/80 px-3 py-1.5 rounded border border-brand-gold/25">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Direct Route Entry</span>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+          {/* Rate Selection Form */}
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-end">
             <Select
               label="Origin (Pakistan)"
               value={origin}
               onChange={(e) => setOrigin(e.target.value)}
               variantSurface="dark"
             >
-              <option value="lahore">Lahore</option>
-              <option value="karachi">Karachi</option>
-              <option value="islamabad">Islamabad</option>
+              <option value="lahore">Lahore Hub</option>
+              <option value="karachi">Karachi Port/Air</option>
+              <option value="islamabad">Islamabad Hub</option>
               <option value="rawalpindi">Rawalpindi</option>
               <option value="faisalabad">Faisalabad</option>
-              <option value="sialkot">Sialkot</option>
+              <option value="sialkot">Sialkot Air/Export</option>
               <option value="multan">Multan</option>
               <option value="peshawar">Peshawar</option>
             </Select>
@@ -83,7 +96,7 @@ export const QuickQuoteTeaser: React.FC<QuickQuoteTeaserProps> = ({
               onChange={(e) => setDestination(e.target.value)}
               variantSurface="dark"
             >
-              <option value="uk">United Kingdom</option>
+              <option value="uk">United Kingdom (Door/Port)</option>
               <option value="uae">United Arab Emirates</option>
               <option value="usa">United States</option>
               <option value="canada">Canada</option>
@@ -96,8 +109,8 @@ export const QuickQuoteTeaser: React.FC<QuickQuoteTeaserProps> = ({
               onChange={(e) => setCargo(e.target.value)}
               variantSurface="dark"
             >
-              <option value="air_freight">Air Cargo Express</option>
-              <option value="sea_cargo">Sea Cargo (FCL/LCL)</option>
+              <option value="air_freight">Air Express Cargo</option>
+              <option value="sea_cargo">Sea Freight (FCL/LCL)</option>
               <option value="door_to_door">Door-to-Door Delivery</option>
             </Select>
 
@@ -105,8 +118,8 @@ export const QuickQuoteTeaser: React.FC<QuickQuoteTeaserProps> = ({
               variant="accent"
               size="md"
               type="submit"
-              className="w-full h-[44px]"
-              rightIcon={<ArrowRight className="w-4 h-4 text-brand-black" />}
+              className="w-full h-[44px] text-sm font-bold tracking-wide shadow-md shadow-brand-gold/10"
+              rightIcon={<ArrowRight className="w-4 h-4 text-brand-dark shrink-0" />}
             >
               {buttonText}
             </Button>
@@ -116,3 +129,4 @@ export const QuickQuoteTeaser: React.FC<QuickQuoteTeaserProps> = ({
     </section>
   );
 };
+

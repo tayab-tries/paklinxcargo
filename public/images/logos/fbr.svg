@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 85" width="100%" height="100%">
+  <!-- FBR Pakistan Logo -->
+  <g transform="translate(12, 10)">
+    <circle cx="32" cy="32" r="30" fill="#0A3B25" />
+    <circle cx="32" cy="32" r="26" fill="none" stroke="#EAB308" stroke-width="2" />
+    <path d="M 35 14 A 14 14 0 1 1 22 36 A 16 16 0 1 0 35 14 Z" fill="#EAB308" />
+    <polygon points="36,19 38,23 42,23 39,26 40,30 36,27 32,30 33,26 30,23 34,23" fill="#EAB308" />
+    <path d="M 23 40 L 41 40 M 32 34 L 32 46 M 21 46 L 43 46" stroke="#EAB308" stroke-width="2" stroke-linecap="round" />
+  </g>
+  <text x="86" y="36" font-family="Arial, sans-serif" font-weight="900" font-size="32" fill="#0A3B25" letter-spacing="1">FBR</text>
+  <text x="86" y="55" font-family="Arial, sans-serif" font-weight="800" font-size="12" fill="#1E293B" letter-spacing="0.5">FEDERAL BOARD OF REVENUE</text>
+  <text x="86" y="70" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#059669" letter-spacing="1">GOVERNMENT OF PAKISTAN</text>
+</svg>

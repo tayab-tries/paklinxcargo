@@ -1,9 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 import { IMAGE_SLOTS } from '@/lib/constants/images';
 
 export interface PickupCityData {
@@ -26,22 +25,22 @@ export const PakistanReachSection: React.FC<PakistanReachSectionProps> = ({
   cities: propCities,
   blockData,
 }) => {
-  const badge = propBadge || (blockData?.badge as string) || 'Home Pickup';
-  const title = propHeading || (blockData?.title as string) || 'WE PICK UP CARGO ACROSS PAKISTAN';
+  const badge = propBadge || (blockData?.badge as string) || 'ORIGIN DEPARTURE NETWORK';
+  const title = propHeading || (blockData?.title as string) || 'One Origin Network. Global Reach.';
   const subtitle =
     propDescription ||
     (blockData?.subtitle as string) ||
-    'Doorstep collection available across major commercial cities in Pakistan.';
+    'Scheduled doorstep cargo collection available across all major industrial and residential centers in Pakistan.';
 
   const defaultCities: PickupCityData[] = [
-    { name: 'Lahore', href: '/locations/international-cargo-services-in-lahore' },
-    { name: 'Karachi', href: '/locations/international-cargo-services-in-karachi' },
-    { name: 'Islamabad', href: '/locations/international-cargo-services-in-islamabad' },
-    { name: 'Rawalpindi', href: '/locations/international-cargo-services-in-rawalpindi' },
-    { name: 'Faisalabad', href: '/locations/international-cargo-services-in-faisalabad' },
-    { name: 'Sialkot', href: '/locations/international-cargo-services-in-sialkot' },
-    { name: 'Multan', href: '/locations/international-cargo-services-in-multan' },
-    { name: 'Peshawar', href: '/locations/international-cargo-services-in-peshawar' },
+    { name: 'Lahore', href: '/locations/lahore' },
+    { name: 'Karachi', href: '/locations/karachi' },
+    { name: 'Islamabad', href: '/locations/islamabad' },
+    { name: 'Rawalpindi', href: '/locations/rawalpindi' },
+    { name: 'Faisalabad', href: '/locations/faisalabad' },
+    { name: 'Sialkot', href: '/locations/sialkot' },
+    { name: 'Multan', href: '/locations/multan' },
+    { name: 'Peshawar', href: '/locations/peshawar' },
   ];
 
   const verifiedCities: PickupCityData[] =
@@ -49,81 +48,97 @@ export const PakistanReachSection: React.FC<PakistanReachSectionProps> = ({
       ? propCities
       : defaultCities;
 
-  if (!verifiedCities || verifiedCities.length === 0) {
-    return null;
-  }
-
   return (
-    <section className="w-full bg-brand-black py-16 lg:py-24 border-b border-border-dark text-white">
-      <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-6 space-y-5">
-            <SectionHeading
-              badge={badge}
-              badgeVariant="outline-dark"
-              title={title}
-              subtitle={subtitle}
-              className="[&_h2]:text-white [&_p]:text-slate-300"
-            />
-            <p className="text-body-md text-slate-300 leading-relaxed font-normal">
-              We arrange scheduled doorstep cargo pickup directly from your home or business address across Pakistan, handling customs declaration and international shipping to your destination.
-            </p>
+    <section className="w-full bg-[#F6F2E9] py-20 lg:py-28 text-[#17201B] relative overflow-hidden border-b border-[#12372A]/10">
+      <Container className="space-y-12 lg:space-y-16">
+        {/* Section Header */}
+        <div className="max-w-3xl space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#12372A]/5 border border-[#12372A]/15 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1F8A5B]" />
+            <span className="text-[11px] font-mono font-bold uppercase tracking-[0.16em] text-[#1F8A5B]">
+              {badge}
+            </span>
+          </div>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#17201B] tracking-tight">
+            {title}
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600 font-sans leading-relaxed">
+            {subtitle}
+          </p>
+        </div>
 
-            <div className="relative aspect-[16/9] rounded-md border border-border-dark overflow-hidden bg-brand-black-deep mt-4">
+        {/* Network Grid Composition */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Left Visual: Network Map Image (7 cols) */}
+          <div className="lg:col-span-7 bg-[#12372A] p-4 sm:p-6 rounded-2xl border border-[#12372A]/20 shadow-xl relative overflow-hidden group">
+            <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-[#0E281F]">
               <Image
-                src={IMAGE_SLOTS.pakistanHub.src}
-                alt="Pakistan Export Cargo Pickup Operations"
+                src={IMAGE_SLOTS.connectingPakistanMap.src}
+                alt="Connecting Pakistan Logistics Network Map"
                 fill
-                sizes="(max-width: 1024px) 100vw, 550px"
-                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 700px"
+                className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-3 text-xs font-mono text-slate-300 font-semibold">
-                Home Cargo Pickup Operations Across Pakistan
+              <div className="absolute inset-0 bg-gradient-to-t from-[#12372A] via-transparent to-transparent opacity-60" />
+            </div>
+
+            <div className="pt-4 flex items-center justify-between font-mono text-xs text-[#F6F2E9]">
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#C6A15B] animate-pulse" />
+                <span className="font-bold">Nationwide Doorstep Pickup Network</span>
               </div>
+              <span className="text-[#C6A15B] text-[10px] uppercase font-bold">100% Verified Pickup</span>
             </div>
           </div>
 
-          <div className="lg:col-span-6 bg-brand-navy/60 border border-border-dark rounded-md p-6 lg:p-8 space-y-5">
-            <div className="flex items-center justify-between border-b border-border-dark pb-3">
-              <span className="text-xs font-mono font-semibold uppercase text-slate-300 tracking-wider">
-                Available Pickup Cities
+          {/* Right Cities List (5 cols) */}
+          <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-2xl border border-[#12372A]/15 shadow-2xs space-y-6">
+            <div className="border-b border-[#12372A]/10 pb-4">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#1F8A5B] font-bold block mb-1">
+                Primary Collection Hubs
               </span>
-              <span className="text-xs font-mono text-accent font-semibold">Doorstep Pickup</span>
+              <h3 className="font-serif text-xl font-bold text-[#17201B]">
+                Supported Pickup Cities
+              </h3>
             </div>
 
-            <div className="divide-y divide-border-dark">
+            <div className="grid grid-cols-2 gap-3">
               {verifiedCities.map((city, idx) => {
                 const targetHref = city.href || `/locations/${city.name.toLowerCase()}`;
-
                 return (
                   <Link
                     key={idx}
                     href={targetHref}
-                    className="py-3 px-2 flex items-center justify-between hover:bg-brand-black-deep/60 rounded transition-colors group"
+                    className="p-3 bg-[#F6F2E9]/60 hover:bg-[#12372A] hover:text-white rounded-xl border border-[#12372A]/10 transition-all font-mono text-xs font-bold flex items-center justify-between group"
                   >
-                    <div className="flex items-center gap-3">
-                      <MapPin className="w-4 h-4 text-accent shrink-0" />
-                      <span className="text-sm font-semibold text-white group-hover:text-accent transition-colors">
-                        Cargo Pickup in {city.name}
-                      </span>
-                    </div>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono text-slate-400 hidden sm:inline">Doorstep Available</span>
-                      <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-accent transition-colors shrink-0" />
+                      <MapPin className="w-3.5 h-3.5 text-[#1F8A5B] group-hover:text-[#C6A15B]" />
+                      <span>{city.name}</span>
                     </div>
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#C6A15B] group-hover:translate-x-0.5 transition-transform" />
                   </Link>
                 );
               })}
             </div>
 
-            <div className="pt-3 border-t border-border-dark flex items-center justify-between text-xs font-mono text-slate-400">
-              <span>Coverage Active</span>
-              <Link href="/locations" className="text-accent hover:underline font-semibold flex items-center gap-1">
-                <span>View All Locations</span>
-                <ArrowRight className="w-3.5 h-3.5 text-accent" />
-              </Link>
+            <div className="pt-4 border-t border-[#12372A]/10 space-y-2 text-xs font-mono">
+              <div className="flex items-center gap-2 text-slate-600">
+                <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0" />
+                <span>Doorstep pickup scheduled at your convenience</span>
+              </div>
+              <div className="flex items-center gap-2 text-slate-600">
+                <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0" />
+                <span>Export customs documentation & packing support</span>
+              </div>
             </div>
+
+            <Link
+              href="/locations"
+              className="flex items-center justify-between w-full py-3 px-4 bg-[#12372A] text-white font-mono text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-[#1F8A5B] transition-colors"
+            >
+              <span>Explore All Origin Locations</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </Container>

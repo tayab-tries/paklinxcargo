@@ -1,6 +1,9 @@
 import React from 'react';
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Plane, Ship } from 'lucide-react';
+import { Container } from '@/components/ui/Container';
 import {
   getPublishedStaticDestinations,
   getStaticDestinationCity,
@@ -22,9 +25,6 @@ interface CityPageProps {
   params: Promise<{ country: string; city: string }>;
 }
 
-/**
- * Pre-render static params for published destination city routes.
- */
 export async function generateStaticParams() {
   const sanityDestinations = await getSanityDestinationsList();
   if (sanityDestinations && sanityDestinations.length > 0) {
@@ -59,9 +59,6 @@ export async function generateStaticParams() {
   return params;
 }
 
-/**
- * Dynamic metadata generator for destination city pages.
- */
 export async function generateMetadata({ params }: CityPageProps): Promise<Metadata> {
   const { country: countrySlug, city: citySlug } = await params;
   const sanityCity = await getSanityDestinationCityBySlugs(countrySlug, citySlug, { stega: false });
@@ -108,7 +105,6 @@ export default async function DestinationCityDetailPage({ params }: CityPageProp
   const sanityCity = await getSanityDestinationCityBySlugs(countrySlug, citySlug);
   const fallbackResult = getStaticDestinationCity(countrySlug, citySlug);
 
-  // Authoritative Publication Check
   if (!sanityCity && !fallbackResult) {
     notFound();
   }
@@ -126,11 +122,30 @@ export default async function DestinationCityDetailPage({ params }: CityPageProp
     '';
 
   const supportedServices = sanityCity?.country?.supportedServices || fallbackResult?.country.supportedServices || ['air-freight', 'sea-cargo'];
-  const supportedOrigins = sanityCity?.country?.supportedOrigins || fallbackResult?.country.supportedOrigins || ['lahore', 'karachi', 'islamabad'];
+  const supportedOrigins = sanityCity?.country?.supportedOrigins || fallbackResult?.country.supportedOrigins || ['lahore', 'karachi', 'islamabad', 'rawalpindi', 'faisalabad', 'sialkot', 'multan', 'peshawar'];
   const faqs = sanityCity?.country?.faqs || fallbackResult?.country.faqs || [];
 
-  const quoteUrl = `/quote?destination=${countrySlug}`;
+  const countryLower = countrySlug.toLowerCase();
+  let airTransit = '10–15 Days';
+  let seaTransit = '1.5–2.5 Months';
+  if (countryLower.includes('uk') || countryLower.includes('united-kingdom')) {
+    airTransit = '10–12 Days';
+    seaTransit = '1.5–2.5 Months';
+  } else if (countryLower.includes('uae') || countryLower.includes('dubai')) {
+    airTransit = '10–17 Days';
+    seaTransit = '1.5–2.5 Months';
+  } else if (countryLower.includes('usa') || countryLower.includes('united-states')) {
+    airTransit = '10–15 Days';
+    seaTransit = '2–2.5 Months';
+  } else if (countryLower.includes('canada')) {
+    airTransit = '10–15 Days';
+    seaTransit = '2–3 Months';
+  } else if (countryLower.includes('saudi') || countryLower.includes('ksa')) {
+    airTransit = '10–20 Days';
+    seaTransit = '1.5–2.5 Months';
+  }
 
+  const quoteUrl = `/quote?destination=${countrySlug}`;
   const breadcrumbs = [
     { label: 'Home', url: '/' },
     { label: 'Destinations', url: '/destinations' },
@@ -140,7 +155,6 @@ export default async function DestinationCityDetailPage({ params }: CityPageProp
 
   const breadcrumbJsonLd = getBreadcrumbJsonLd(breadcrumbs);
 
-  // Service Schema for destination city page
   const cityServiceJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -163,8 +177,7 @@ export default async function DestinationCityDetailPage({ params }: CityPageProp
   };
 
   return (
-    <article className="w-full bg-background">
-      {/* Schema.org Structured Data Injection */}
+    <article className="w-full bg-[#FAF8F3] text-[#17201B] font-sans antialiased selection:bg-[#C6A15B]/30">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(cityServiceJsonLd) }}
@@ -174,7 +187,7 @@ export default async function DestinationCityDetailPage({ params }: CityPageProp
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      {/* 01 HERO (Dark / Photo-led) */}
+      {/* 1. HERO (Dark / Editorial) */}
       <DestinationHero
         countryName={countryName}
         cityName={cityName}
@@ -185,42 +198,131 @@ export default async function DestinationCityDetailPage({ params }: CityPageProp
         breadcrumbs={breadcrumbs}
       />
 
-      {/* 02 OVERVIEW (LIGHT) */}
+      {/* 2. CITY INTRODUCTION & OVERVIEW */}
       <DestinationOverview
         countryName={`${cityName}, ${countryName}`}
         shippingOverview={overview}
       />
 
-      {/* 03 AVAILABLE SERVICES (LIGHT / WHITE - Inherited from parent country) */}
+      {/* 3. SHIPPING MODES FOR CITY */}
+      <section className="w-full bg-[#17201B] text-white py-20 lg:py-28 border-b border-[#12372A]">
+        <Container>
+          <div className="space-y-12">
+            <div className="text-center max-w-2xl mx-auto space-y-3">
+              <span className="px-3 py-1 bg-[#C6A15B]/20 text-[#C6A15B] border border-[#C6A15B]/30 font-mono text-xs font-bold uppercase rounded-full inline-block">
+                Shipping Modes
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#F6F2E9]">
+                Cargo Modes to {cityName}
+              </h2>
+              <p className="font-sans text-base text-[#F6F2E9]/75">
+                Indicative transit times and weight minimums for shipping to {cityName}, {countryName}.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <div className="p-8 rounded-2xl bg-[#12372A]/60 border-2 border-[#1F8A5B]/40 space-y-6 flex flex-col justify-between shadow-xl">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between border-b border-[#1F8A5B]/30 pb-3">
+                    <div className="flex items-center gap-3">
+                      <Plane className="w-6 h-6 text-[#1F8A5B]" />
+                      <h3 className="font-serif text-2xl font-bold text-white">AIR CARGO</h3>
+                    </div>
+                    <span className="px-3 py-1 bg-[#C6A15B] text-[#17201B] font-mono text-xs font-bold uppercase rounded-full">
+                      20 KG MIN
+                    </span>
+                  </div>
+                  <p className="font-sans text-sm text-[#F6F2E9]/80 leading-relaxed">
+                    Direct airport receiving and express delivery to {cityName}.
+                  </p>
+                  <div className="space-y-2 font-mono text-sm">
+                    <div className="flex justify-between border-b border-white/10 pb-2">
+                      <span className="opacity-70">Minimum Weight</span>
+                      <span className="font-bold text-[#C6A15B]">20 KG Minimum</span>
+                    </div>
+                    <div className="flex justify-between border-b border-white/10 pb-2">
+                      <span className="opacity-70">Indicative Air Transit</span>
+                      <span className="font-bold text-white">{airTransit}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="pt-2">
+                  <Link href="/cargo-services#part-1-air-cargo">
+                    <span className="font-mono text-xs font-bold text-[#C6A15B] hover:text-white underline">
+                      View Air Rates →
+                    </span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="p-8 rounded-2xl bg-[#12372A]/60 border-2 border-[#C6A15B]/40 space-y-6 flex flex-col justify-between shadow-xl">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between border-b border-[#C6A15B]/30 pb-3">
+                    <div className="flex items-center gap-3">
+                      <Ship className="w-6 h-6 text-[#C6A15B]" />
+                      <h3 className="font-serif text-2xl font-bold text-white">SEA FREIGHT</h3>
+                    </div>
+                    <span className="px-3 py-1 bg-[#17201B] border border-[#1F8A5B] text-white font-mono text-xs font-bold uppercase rounded-full">
+                      70–100 KG MIN
+                    </span>
+                  </div>
+                  <p className="font-sans text-sm text-[#F6F2E9]/80 leading-relaxed">
+                    Economical ocean sea cargo and destination port clearance for {cityName}.
+                  </p>
+                  <div className="space-y-2 font-mono text-sm">
+                    <div className="flex justify-between border-b border-white/10 pb-2">
+                      <span className="opacity-70">Minimum Weight</span>
+                      <span className="font-bold text-[#C6A15B]">70–100 KG Minimum</span>
+                    </div>
+                    <div className="flex justify-between border-b border-white/10 pb-2">
+                      <span className="opacity-70">Indicative Ocean Transit</span>
+                      <span className="font-bold text-white">{seaTransit}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="pt-2">
+                  <Link href="/cargo-services#part-2-sea-cargo">
+                    <span className="font-mono text-xs font-bold text-[#C6A15B] hover:text-white underline">
+                      View Sea Rates →
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 4. AVAILABLE SERVICES */}
       <DestinationServiceGrid
         countryName={`${cityName}, ${countryName}`}
         countrySlug={countrySlug}
         supportedServices={supportedServices}
       />
 
-      {/* 04 PAKISTAN ORIGIN CITIES (WHITE - Inherited from parent country) */}
+      {/* 5. PAKISTAN ORIGIN CITIES */}
       <DestinationOriginGrid
         countryName={`${cityName}, ${countryName}`}
         countrySlug={countrySlug}
         supportedOrigins={supportedOrigins}
       />
 
-      {/* 05 SHIPPING PROCESS (LIGHT) */}
+      {/* 6. SHIPPING PROCESS */}
       <DestinationProcess countryName={`${cityName}, ${countryName}`} />
 
-      {/* 06 PREPARATION / CUSTOMS / DELIVERY NOTES (WHITE) */}
+      {/* 7. PREPARATION & CUSTOMS CONSIDERATIONS */}
       <DestinationConsiderations
         countryName={`${cityName}, ${countryName}`}
         preparationConsiderations={preparationConsiderations}
       />
 
-      {/* 07 GUIDES (WHITE) */}
+      {/* 8. RELATED GUIDES */}
       <DestinationGuides countryName={cityName} />
 
-      {/* 08 FAQ (LIGHT) */}
+      {/* 9. FAQ */}
       <DestinationFaq countryName={cityName} faqs={faqs} />
 
-      {/* 09 CTA (BLACK) */}
+      {/* 10. FINAL CTA */}
       <DestinationCta countryName={`${cityName}, ${countryName}`} countrySlug={countrySlug} />
     </article>
   );

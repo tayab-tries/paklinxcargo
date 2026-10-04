@@ -16,11 +16,10 @@ export function constructMetadata({
   ogImage = siteConfig.defaultSeo.defaultOgImage,
   noindex = false,
 }: PageSeoOptions): Metadata {
-  const relativePath = path ? (path.startsWith('/') ? path : `/${path}`) : '/';
+  const canonicalUrl = `${siteConfig.domain}${path}`;
   const fullTitle = siteConfig.defaultSeo.titleTemplate.replace('%s', title);
 
   return {
-    metadataBase: new URL('https://raahiinternational.com'),
     title: fullTitle,
     description,
     verification: {
@@ -35,16 +34,16 @@ export function constructMetadata({
       apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
     },
     alternates: {
-      canonical: relativePath,
+      canonical: canonicalUrl,
     },
     openGraph: {
       title: fullTitle,
       description,
-      url: relativePath,
+      url: canonicalUrl,
       siteName: siteConfig.name,
       images: [
         {
-          url: ogImage.startsWith('http') ? ogImage : `https://raahiinternational.com${ogImage}`,
+          url: ogImage.startsWith('http') ? ogImage : `${siteConfig.domain}${ogImage}`,
         },
       ],
       type: 'website',
@@ -53,7 +52,7 @@ export function constructMetadata({
       card: 'summary_large_image',
       title: fullTitle,
       description,
-      images: [ogImage.startsWith('http') ? ogImage : `https://raahiinternational.com${ogImage}`],
+      images: [ogImage.startsWith('http') ? ogImage : `${siteConfig.domain}${ogImage}`],
     },
     robots: noindex ? { index: false, follow: false } : { index: true, follow: true },
   };

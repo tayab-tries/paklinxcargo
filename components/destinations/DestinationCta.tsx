@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, MessageSquare } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
-import { Button } from '@/components/ui/Button';
 import { buildWhatsappUrl } from '@/lib/utils/whatsapp';
 import { getPublishedBusinessSettings } from '@/lib/cms/business-settings.service';
 
@@ -19,41 +18,39 @@ export const DestinationCta = async ({ countryName, countrySlug }: DestinationCt
   );
 
   return (
-    <section className="w-full bg-brand-navy py-20 lg:py-28 border-b border-border-dark text-white text-center">
+    <section className="w-full bg-[#12372A] py-20 lg:py-28 text-white">
       <Container size="narrow">
-        <div className="bg-brand-black-deep rounded-md border border-border-dark p-8 lg:p-14 space-y-6 shadow-2xl">
-          <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">
-            Corridor Rates & Schedules
-          </div>
+        <div className="bg-[#17201B] rounded-2xl border border-[#C6A15B]/30 p-8 sm:p-12 lg:p-16 text-center space-y-6 shadow-2xl relative overflow-hidden">
+          <span className="px-3 py-1 bg-[#C6A15B]/20 text-[#C6A15B] font-mono text-xs font-bold uppercase tracking-wider rounded-full inline-block">
+            Start Your Dispatch
+          </span>
 
-          <h2 className="text-display-lg font-bold text-white tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#F6F2E9] tracking-tight">
             Ship Cargo to {countryName} from Pakistan
           </h2>
 
-          <p className="text-body-lg text-slate-300 max-w-xl mx-auto leading-relaxed">
+          <p className="font-sans text-base sm:text-lg text-[#F6F2E9]/80 max-w-xl mx-auto leading-relaxed">
             Get transparent air cargo rates, ocean container schedules, and customs guidance for your export shipment heading to {countryName}.
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href={`/quote?destination=${countrySlug}`} className="w-full sm:w-auto">
-              <Button
-                variant="accent"
-                size="lg"
-                className="w-full sm:w-auto font-bold"
-                rightIcon={<ArrowRight className="w-4 h-4 text-brand-black shrink-0" />}
+              <button
+                type="button"
+                className="w-full sm:w-auto h-13 px-8 bg-[#C6A15B] hover:bg-[#b5924e] text-[#17201B] font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg border border-[#C6A15B] cursor-pointer"
               >
-                Get Quote to {countryName}
-              </Button>
+                <span>Get Quote to {countryName}</span>
+                <ArrowRight className="w-4 h-4 text-[#17201B]" />
+              </button>
             </Link>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-              <Button
-                variant="outline-dark"
-                size="lg"
-                className="w-full sm:w-auto border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 hover:text-emerald-300 font-bold"
-                leftIcon={<MessageSquare className="w-4 h-4 text-emerald-400 shrink-0" />}
+              <button
+                type="button"
+                className="w-full sm:w-auto h-13 px-7 bg-transparent hover:bg-white/10 text-[#F6F2E9] font-mono text-xs font-bold uppercase tracking-wider rounded-lg border border-[#1F8A5B] text-[#1F8A5B] transition-colors flex items-center justify-center gap-2 cursor-pointer"
               >
-                WhatsApp Us
-              </Button>
+                <MessageSquare className="w-4 h-4 text-[#1F8A5B] fill-current" />
+                <span>WhatsApp Us</span>
+              </button>
             </a>
           </div>
         </div>

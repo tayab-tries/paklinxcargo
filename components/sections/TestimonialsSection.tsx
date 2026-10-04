@@ -32,17 +32,22 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
   }
 
   return (
-    <section className="w-full bg-surface py-16 lg:py-24 border-b border-border text-brand-black">
+    <section className="w-full bg-brand-cream py-16 lg:py-24 border-b border-border-strong/60 text-brand-dark">
       <Container>
-        <SectionHeading badge={badge} title={heading} subtitle={description} className="mb-12" />
+        <SectionHeading
+          badge={badge}
+          title={heading}
+          subtitle={description}
+          className="mb-12 lg:mb-16 [&_h2]:text-brand-dark [&_h2]:font-serif [&_p]:text-brand-dark/80"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {items.map((item, idx) => (
             <div
               key={idx}
-              className="bg-surface-subtle rounded-md border border-border p-6 flex flex-col justify-between space-y-4 shadow-xs"
+              className="bg-[#FAF8F3] rounded-lg border border-[#E2DDD5] p-6 sm:p-7 flex flex-col justify-between space-y-5 shadow-sm hover:border-brand-gold/50 hover:shadow-md transition-all duration-300 group"
             >
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {item.rating && (
                   <div className="flex items-center gap-1 text-amber-500">
                     {Array.from({ length: item.rating }).map((_, i) => (
@@ -50,33 +55,33 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
                     ))}
                   </div>
                 )}
-                <p className="text-body-md text-slate-700 italic leading-relaxed">
+                <p className="font-serif italic text-base sm:text-lg text-brand-dark leading-relaxed">
                   &ldquo;{item.quote}&rdquo;
                 </p>
               </div>
 
               {item.image && (
-                <div className="relative aspect-[16/9] rounded-md overflow-hidden bg-slate-100 border border-border mt-2">
+                <div className="relative aspect-[16/9] rounded-md overflow-hidden bg-[#17201B] border border-[#E2DDD5] mt-2 group-hover:border-brand-gold/30 transition-colors">
                   <Image
                     src={item.image}
                     alt={item.caption || item.name || 'Delivery Proof'}
                     fill
                     sizes="(max-width: 768px) 100vw, 400px"
-                    className="object-cover object-center"
+                    className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
                   />
                   {item.caption && (
-                    <div className="absolute bottom-2 left-2 text-[10px] font-mono bg-black/70 text-white px-2 py-0.5 rounded">
+                    <div className="absolute bottom-2 left-2 text-[10px] font-mono bg-[#12372A]/90 backdrop-blur-xs text-brand-cream px-2 py-1 rounded border border-brand-gold/30">
                       {item.caption}
                     </div>
                   )}
                 </div>
               )}
 
-              <div className="pt-3 border-t border-border flex items-center justify-between text-xs font-mono">
-                <span className="font-bold text-brand-black">{item.name}</span>
+              <div className="pt-4 border-t border-[#E2DDD5] flex items-center justify-between text-xs font-mono">
+                <span className="font-bold text-brand-dark tracking-wide">{item.name}</span>
                 {item.location && (
-                  <span className="text-slate-500 flex items-center gap-1">
-                    <MapPin className="w-3 h-3 text-accent" />
+                  <span className="text-slate-600 flex items-center gap-1">
+                    <MapPin className="w-3.5 h-3.5 text-brand-gold shrink-0" />
                     <span>{item.location}</span>
                   </span>
                 )}
@@ -88,3 +93,4 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
     </section>
   );
 };
+

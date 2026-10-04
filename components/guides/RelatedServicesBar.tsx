@@ -19,25 +19,28 @@ export const RelatedServicesBar: React.FC<RelatedServicesBarProps> = ({
   if (related.length === 0) return null;
 
   return (
-    <div className="py-8 border-t border-border space-y-4">
-      <div className="text-xs font-mono font-bold uppercase text-slate-500 tracking-wider">
-        Related Shipping Services
+    <div className="py-8 border-t border-[#17201B]/15 space-y-4">
+      <div className="text-xs font-mono font-bold uppercase text-[#1F8A5B] tracking-widest">
+        RELATED SHIPPING SERVICES
       </div>
 
-      <div className="divide-y divide-border rounded border border-border bg-surface overflow-hidden">
+      <div className="divide-y divide-[#17201B]/15 border-t border-b border-[#17201B]/15">
         {related.map((service) => (
           <Link
             key={service.slug}
             href={`/services/${service.slug}`}
-            className="p-4 flex items-center justify-between hover:bg-surface-subtle transition-colors group"
+            className="py-4 flex items-center justify-between hover:pl-2 transition-all group"
           >
             <div className="flex items-center gap-3">
-              <Package className="w-4 h-4 text-slate-500 group-hover:text-accent transition-colors" />
-              <span className="text-body-sm font-bold text-brand-black group-hover:text-accent transition-colors">
+              <Package className="w-4 h-4 text-[#1F8A5B] shrink-0" />
+              <span className="text-sm sm:text-base font-serif font-bold text-[#17201B] group-hover:text-[#1F8A5B] transition-colors">
                 {service.name}
               </span>
             </div>
-            <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-accent transition-colors" />
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#17201B] group-hover:text-[#1F8A5B]">
+              <span>EXPLORE SERVICE</span>
+              <ArrowRight className="w-4 h-4 text-[#17201B]/40 group-hover:text-[#1F8A5B] group-hover:translate-x-1 transition-transform" />
+            </div>
           </Link>
         ))}
       </div>

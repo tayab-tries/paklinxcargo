@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { siteConfig } from '@/config/site.config';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/api/', '/dev/'],
     },
-    sitemap: 'https://raahiinternational.com/sitemap.xml',
+    sitemap: `${siteConfig.domain}/sitemap.xml`,
   };
 }

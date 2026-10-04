@@ -1,11 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Plane, Ship } from 'lucide-react';
+import { ArrowRight, Plane, Ship, CheckCircle2 } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
 import { IMAGE_SLOTS } from '@/lib/constants/images';
 
 export interface ServiceCardData {
@@ -34,129 +32,179 @@ export const ServicesOverview: React.FC<ServicesOverviewProps> = ({
   seaCargo: propSea,
   blockData,
 }) => {
-  const badge = propBadge || (blockData?.badge as string) || 'Our Services';
-  const title = propHeading || (blockData?.title as string) || 'Air & Sea Cargo Services';
+  const badge = propBadge || (blockData?.badge as string) || 'SERVICES PORTFOLIO';
+  const title = propHeading || (blockData?.title as string) || 'Air & Ocean Freight Services';
   const subtitle =
     propDescription ||
     (blockData?.subtitle as string) ||
-    'Fast air cargo and economical sea cargo with complete door-to-door delivery from Pakistan.';
+    'Direct air cargo flights and economical ocean freight container sailings operating door-to-door from Pakistan.';
 
   // Air Cargo Data
-  const airTitle = propAir?.title || (blockData?.air_cargo_title as string) || 'AIR CARGO';
+  const airTitle = propAir?.title || (blockData?.air_cargo_title as string) || 'Air Freight Express';
   const airDesc =
     propAir?.description ||
     (blockData?.air_cargo_description as string) ||
-    'Air cargo shipping with door-to-door delivery. Fast air dispatches for boxes, gifts, excess baggage, and urgent shipments.';
+    'Rapid air shipping for commercial cargo, personal boxes, excess baggage, and urgent documentation with guaranteed transit schedules.';
   const airImage = propAir?.image || (blockData?.air_cargo_image as string) || IMAGE_SLOTS.serviceAir.src;
-  const airAlt = propAir?.imageAlt || `${airTitle} Delivery Services`;
-  const airCtaLabel = propAir?.cta?.label || 'Explore Air Cargo';
-  const airCtaHref = propAir?.cta?.href || '/cargo-services';
 
   // Sea Cargo Data
-  const seaTitle = propSea?.title || (blockData?.sea_cargo_title as string) || 'SEA CARGO';
+  const seaTitle = propSea?.title || (blockData?.sea_cargo_title as string) || 'Ocean Container Cargo';
   const seaDesc =
     propSea?.description ||
     (blockData?.sea_cargo_description as string) ||
-    'Sea cargo shipping with door-to-door delivery. Economical ocean container shipping for heavy goods and large household shipments.';
+    'Economical full container (FCL) and consolidated parcel (LCL) ocean freight shipping for heavy commercial goods and household moves.';
   const seaImage = propSea?.image || (blockData?.sea_cargo_image as string) || IMAGE_SLOTS.serviceSea.src;
-  const seaAlt = propSea?.imageAlt || `${seaTitle} Delivery Services`;
-  const seaCtaLabel = propSea?.cta?.label || 'Explore Sea Cargo';
-  const seaCtaHref = propSea?.cta?.href || '/cargo-services';
 
   return (
-    <section className="w-full bg-brand-navy py-16 lg:py-24 border-b border-border-dark text-white">
-      <Container>
-        <SectionHeading
-          badge={badge}
-          title={title}
-          subtitle={subtitle}
-          className="mb-12 [&_h2]:text-white [&_p]:text-slate-300"
-          badgeVariant="outline-dark"
-        />
+    <section className="w-full bg-[#FAF8F3] text-[#17201B] py-16 sm:py-24 lg:py-28 relative overflow-hidden border-b border-[#12372A]/10">
+      <Container className="space-y-12 lg:space-y-16">
+        {/* Section Header */}
+        <div className="max-w-3xl space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-white border border-[#12372A]/15 rounded-full shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1F8A5B]" />
+            <span className="text-[11px] font-mono font-bold uppercase tracking-[0.16em] text-[#1F8A5B]">
+              {badge}
+            </span>
+          </div>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#17201B] tracking-tight">
+            {title}
+          </h2>
+          <p className="text-sm sm:text-base text-slate-600 font-sans leading-relaxed">
+            {subtitle}
+          </p>
+        </div>
 
-        {/* Balanced 2-Column Grid: AIR CARGO & SEA CARGO ONLY */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-stretch">
-          {/* Service 1: AIR CARGO */}
-          <div className="bg-brand-black-deep rounded-md border border-border-dark overflow-hidden p-6 lg:p-8 flex flex-col justify-between space-y-6 group hover:border-slate-700 transition-colors shadow-lg">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <Badge variant="accent">Air Shipping</Badge>
-                <Plane className="w-6 h-6 text-accent shrink-0" />
-              </div>
-
-              <div className="space-y-2">
-                <h3 className="text-display-sm font-bold text-white group-hover:text-accent transition-colors">
-                  {airTitle}
-                </h3>
-                <p className="text-body-md text-slate-300 leading-relaxed font-normal">{airDesc}</p>
-              </div>
-
-              {/* Service Photo Anchor */}
-              <div className="relative aspect-[16/9] rounded-md overflow-hidden bg-brand-black border border-border-dark mt-4">
-                <Image
-                  src={airImage}
-                  alt={airAlt}
-                  fill
-                  sizes="(max-width: 768px) 90vw, 600px"
-                  className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 text-xs font-mono text-slate-200 flex items-center gap-2 font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                  <span>Door-to-door delivery included</span>
-                </div>
+        {/* Asymmetrical Editorial Portfolio Rows */}
+        <div className="space-y-8 lg:space-y-12">
+          {/* Row 1: Air Cargo (Large Photo Left, Editorial Copy Right) */}
+          <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 p-6 sm:p-8 lg:p-10 shadow-md grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-6 relative aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-slate-200">
+              <Image
+                src={airImage}
+                alt={airTitle}
+                fill
+                sizes="(max-width: 1024px) 100vw, 600px"
+                className="object-cover object-center hover:scale-103 transition-transform duration-500"
+              />
+              <div className="absolute top-4 left-4">
+                <span className="px-3 py-1 bg-[#12372A] text-[#C6A15B] font-mono text-[10px] uppercase font-bold tracking-wider rounded-full shadow-xs">
+                  PRIORITY AIR MODE
+                </span>
               </div>
             </div>
 
-            <div className="pt-5 border-t border-border-dark flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-400">Fast Air Shipping</span>
-              <Link href={airCtaHref}>
-                <Button variant="accent" size="md" rightIcon={<ArrowRight className="w-4 h-4 text-brand-black" />}>
-                  {airCtaLabel}
-                </Button>
-              </Link>
+            <div className="lg:col-span-6 space-y-6">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#1F8A5B] uppercase tracking-wider">
+                  <Plane className="w-4 h-4" />
+                  <span>Door-to-Door Flight Departures</span>
+                </div>
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#17201B]">
+                  {airTitle}
+                </h3>
+                <p className="text-sm text-slate-600 leading-relaxed font-sans">
+                  {airDesc}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 text-xs font-mono text-slate-700 pt-2 border-t border-slate-100">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0" />
+                  <span>Direct Airport Departures</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0" />
+                  <span>Doorstep Collection</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0" />
+                  <span>Pre-Cleared Customs</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0" />
+                  <span>Destination Delivery</span>
+                </div>
+              </div>
+
+              <div className="pt-2 flex items-center justify-between">
+                <span className="text-xs font-mono text-slate-500">10 – 15 Days Indicative</span>
+                <Link href="/cargo-services">
+                  <Button
+                    variant="primary"
+                    size="md"
+                    className="rounded-full bg-[#1F8A5B] hover:bg-[#12372A] text-white font-medium px-6 py-2 text-xs border-none"
+                    rightIcon={<ArrowRight className="w-4 h-4 text-white" />}
+                  >
+                    Air Cargo Details
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
 
-          {/* Service 2: SEA CARGO */}
-          <div className="bg-brand-black-deep rounded-md border border-border-dark overflow-hidden p-6 lg:p-8 flex flex-col justify-between space-y-6 group hover:border-slate-700 transition-colors shadow-lg">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <Badge variant="outline-dark">Sea Shipping</Badge>
-                <Ship className="w-6 h-6 text-accent shrink-0" />
-              </div>
-
-              <div className="space-y-2">
-                <h3 className="text-display-sm font-bold text-white group-hover:text-accent transition-colors">
+          {/* Row 2: Sea Freight (Editorial Copy Left, Large Photo Right) */}
+          <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 p-6 sm:p-8 lg:p-10 shadow-md grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-6 space-y-6 order-2 lg:order-1">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#1F8A5B] uppercase tracking-wider">
+                  <Ship className="w-4 h-4" />
+                  <span>High-Capacity Ocean Freight</span>
+                </div>
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#17201B]">
                   {seaTitle}
                 </h3>
-                <p className="text-body-md text-slate-300 leading-relaxed font-normal">{seaDesc}</p>
+                <p className="text-sm text-slate-600 leading-relaxed font-sans">
+                  {seaDesc}
+                </p>
               </div>
 
-              {/* Service Photo Anchor */}
-              <div className="relative aspect-[16/9] rounded-md overflow-hidden bg-brand-black border border-border-dark mt-4">
-                <Image
-                  src={seaImage}
-                  alt={seaAlt}
-                  fill
-                  sizes="(max-width: 768px) 90vw, 600px"
-                  className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 text-xs font-mono text-slate-200 flex items-center gap-2 font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                  <span>Door-to-door delivery included</span>
+              <div className="grid grid-cols-2 gap-3 text-xs font-mono text-slate-700 pt-2 border-t border-slate-100">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0" />
+                  <span>FCL & LCL Ocean Freight</span>
                 </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0" />
+                  <span>Port-to-Door Handling</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0" />
+                  <span>Commercial Trade Cargo</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0" />
+                  <span>Economical Rates</span>
+                </div>
+              </div>
+
+              <div className="pt-2 flex items-center justify-between">
+                <span className="text-xs font-mono text-slate-500">1.5 – 2.5 Months Indicative</span>
+                <Link href="/cargo-services">
+                  <Button
+                    variant="primary"
+                    size="md"
+                    className="rounded-full bg-[#12372A] hover:bg-[#1F8A5B] text-white font-medium px-6 py-2 text-xs border-none"
+                    rightIcon={<ArrowRight className="w-4 h-4 text-white" />}
+                  >
+                    Sea Freight Details
+                  </Button>
+                </Link>
               </div>
             </div>
 
-            <div className="pt-5 border-t border-border-dark flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-400">Ocean Container Cargo</span>
-              <Link href={seaCtaHref}>
-                <Button variant="accent" size="md" rightIcon={<ArrowRight className="w-4 h-4 text-brand-black" />}>
-                  {seaCtaLabel}
-                </Button>
-              </Link>
+            <div className="lg:col-span-6 relative aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 order-1 lg:order-2">
+              <Image
+                src={seaImage}
+                alt={seaTitle}
+                fill
+                sizes="(max-width: 1024px) 100vw, 600px"
+                className="object-cover object-center hover:scale-103 transition-transform duration-500"
+              />
+              <div className="absolute top-4 right-4">
+                <span className="px-3 py-1 bg-white/90 backdrop-blur-md text-[#12372A] font-mono text-[10px] uppercase font-bold tracking-wider rounded-full shadow-xs border border-slate-200">
+                  CONTAINER FREIGHT
+                </span>
+              </div>
             </div>
           </div>
         </div>

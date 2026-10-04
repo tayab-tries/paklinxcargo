@@ -25,8 +25,8 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const selectId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
 
     const surfaceStyles = {
-      light: 'bg-surface text-brand-black border-border focus:border-accent focus:ring-accent/30',
-      dark: 'bg-brand-navy text-white border-border-dark focus:border-accent focus:ring-accent/30',
+      light: 'bg-surface text-brand-dark border-border focus:border-brand-emerald focus:ring-brand-emerald/30',
+      dark: 'bg-brand-dark text-brand-cream border-border-dark focus:border-brand-gold focus:ring-brand-gold/30',
     }[variantSurface];
 
     return (

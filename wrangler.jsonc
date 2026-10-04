@@ -1,32 +1,19 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "cargo-app",
+  "name": "paklinx-cargo",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-02-01",
   "compatibility_flags": ["nodejs_compat"],
   "keep_vars": true,
   "routes": [
-    { "pattern": "raahiinternational.com", "custom_domain": true },
-    { "pattern": "www.raahiinternational.com", "custom_domain": true }
+    { "pattern": "paklinxcargo.com", "custom_domain": true },
+    { "pattern": "www.paklinxcargo.com", "custom_domain": true }
   ],
   "vars": {
-    "NEXT_PUBLIC_SITE_URL": "https://raahiinternational.com"
+    "NEXT_PUBLIC_SITE_URL": "https://paklinxcargo.com"
   },
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
-  },
-  "unsafe": {
-    "bindings": [
-      {
-        "name": "RATE_LIMITER",
-        "type": "ratelimit",
-        "namespace_id": "1000",
-        "simple": {
-          "limit": 10,
-          "period": 60
-        }
-      }
-    ]
   }
 }

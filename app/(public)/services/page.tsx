@@ -2,16 +2,22 @@ import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Package, Plane, Ship, Truck, FileText, Building2, Luggage, ArrowRight, ShieldCheck, Search } from 'lucide-react';
+import {
+  Package,
+  Plane,
+  Ship,
+  Truck,
+  FileText,
+  Building2,
+  Luggage,
+  ArrowRight,
+  CheckCircle2,
+} from 'lucide-react';
 import { Container } from '@/components/ui/Container';
-import { SectionHeading } from '@/components/ui/SectionHeading';
-import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
-import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { EditorialHero } from '@/components/ui/EditorialHero';
 import { FinalCtaSection } from '@/components/sections/FinalCtaSection';
 import { getEnabledServices, ServiceConfigItem } from '@/config/services.config';
 import { siteConfig } from '@/config/site.config';
-import { IMAGE_SLOTS } from '@/lib/constants/images';
 import { getSanityServicesList, SanityServiceDocument } from '@/sanity/lib/fetch';
 
 export const metadata: Metadata = {
@@ -39,7 +45,6 @@ export default async function ServicesHubPage() {
     Promise.resolve(getEnabledServices()),
   ]);
 
-  // Combine Sanity data with fallbacks if Sanity records exist
   const services: ServiceConfigItem[] =
     sanityServices.length > 0
       ? sanityServices.map((doc: SanityServiceDocument) => {
@@ -66,7 +71,9 @@ export default async function ServicesHubPage() {
         })
       : fallbackServices;
 
-  const specializedServices = services.filter((s) => s.slug !== 'air-freight' && s.slug !== 'sea-cargo');
+  const specializedServices = services.filter(
+    (s) => s.slug !== 'air-freight' && s.slug !== 'sea-cargo'
+  );
 
   const breadcrumbs = [
     { label: 'Home', url: '/' },
@@ -74,182 +81,245 @@ export default async function ServicesHubPage() {
   ];
 
   return (
-    <div className="w-full bg-background">
-      {/* 1. Services Hero Header */}
-      <section className="relative w-full bg-brand-black text-white py-16 lg:py-24 border-b border-border-dark overflow-hidden">
-        <div className="absolute inset-0 z-0 bg-brand-black-deep">
-          <Image
-            src={IMAGE_SLOTS.heroBackground.src}
-            alt="International Cargo & Freight Services"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center opacity-40"
-          />
-          <div
-            className="absolute inset-0 z-10 pointer-events-none hidden md:block"
-            style={{
-              background: `linear-gradient(
-                90deg,
-                rgba(7,10,15,0.96) 0%,
-                rgba(7,10,15,0.88) 35%,
-                rgba(7,10,15,0.65) 65%,
-                rgba(7,10,15,0.30) 100%
-              )`,
-            }}
-          />
-          <div
-            className="absolute inset-0 z-10 pointer-events-none md:hidden"
-            style={{
-              background: `linear-gradient(
-                180deg,
-                rgba(7,10,15,0.88) 0%,
-                rgba(7,10,15,0.70) 50%,
-                rgba(7,10,15,0.85) 100%
-              )`,
-            }}
-          />
-        </div>
+    <div className="w-full bg-[#FAF8F3] text-[#17201B] font-sans antialiased selection:bg-[#C6A15B]/30">
+      {/* 1. EDITORIAL SERVICES HERO */}
+      <EditorialHero
+        breadcrumbs={breadcrumbs}
+        eyebrow="Global Freight Directory"
+        title="Core Cargo & International Logistics"
+        subtitle="Scheduled air freight, ocean sea cargo, and integrated door-to-door forwarding from Pakistan"
+        description="We structure freight solutions tailored to your cargo parameters—balancing urgency, volume, and budget for dispatches worldwide."
+        primaryCta={{ label: 'Calculate Shipping Quote', href: '/quote' }}
+        secondaryCta={{ label: 'Track Active Shipment', href: '/track' }}
+        imageSrc="/images/hero-freight.jpg"
+        imageAlt="International Cargo Logistics Operations"
+        imageBadgeText="Air & Sea Freight Directory"
+      />
 
-        <Container className="relative z-20">
-          <Breadcrumbs items={breadcrumbs} variantSurface="dark" className="mb-6" />
-
-          <div className="max-w-3xl space-y-6">
-            <Badge variant="outline-dark" size="md" className="text-slate-300 border-border-dark bg-brand-black/60 backdrop-blur-xs">
-              Verified Logistics Portfolio
-            </Badge>
-
-            <h1 className="text-display-xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.05]">
-              Core Cargo & Logistics Services
-            </h1>
-
-            <p className="text-body-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl font-normal">
-              Commercial air cargo forwarding, ocean sea freight, and doorstep collection connecting shippers across Pakistan with destination corridors worldwide.
-            </p>
-
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <Link href="/quote">
-                <Button
-                  variant="accent"
-                  size="lg"
-                  className="w-full sm:w-auto h-[46px]"
-                  rightIcon={<ArrowRight className="w-4 h-4 text-brand-black shrink-0" />}
-                >
-                  Get a Shipping Quote
-                </Button>
-              </Link>
-
-              <Link href="/track">
-                <Button
-                  variant="outline-dark"
-                  size="lg"
-                  className="w-full sm:w-auto h-[46px]"
-                  leftIcon={<Search className="w-4 h-4 text-slate-300 shrink-0" />}
-                >
-                  Track Shipment
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* 2. Core Freight Modes (Balanced 2-Column Grid: AIR CARGO & SEA CARGO EXACT SAME SIZE) */}
-      <section className="w-full bg-brand-navy py-20 lg:py-28 border-b border-border-dark text-white">
+      {/* 2. FEATURED SERVICE — AIR CARGO */}
+      <section className="w-full bg-[#F6F2E9] py-20 lg:py-28 border-b border-[#12372A]/10">
         <Container>
-          <SectionHeading
-            badge="Primary Capabilities"
-            title="Core Commercial Freight Modes"
-            subtitle="Scheduled airline carrier capacity, ocean container shipping, and integrated door-to-door forwarding."
-            className="mb-14 [&_h2]:text-white [&_p]:text-slate-300"
-            badgeVariant="outline-dark"
-          />
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
-            {/* AIR CARGO CARD */}
-            <div className="bg-brand-black-deep rounded-md border border-border-dark overflow-hidden p-8 lg:p-10 flex flex-col justify-between space-y-8 group hover:border-slate-700 transition-colors shadow-2xl">
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <Badge variant="accent">Air Shipping</Badge>
-                  <Plane className="w-6 h-6 text-accent shrink-0" />
-                </div>
-
-                <div className="space-y-3">
-                  <h2 className="text-display-sm font-bold text-white group-hover:text-accent transition-colors">
-                    Air Cargo Services
-                  </h2>
-                  <p className="text-body-md text-slate-300 leading-relaxed">
-                    Scheduled airline carrier allocations optimized for high-value commercial goods, urgent parcels, clothing, and export shipments originating from Pakistan.
-                  </p>
-                </div>
-
-                {/* Service Image Anchor */}
-                <div className="relative aspect-[16/9] rounded-md overflow-hidden bg-brand-black border border-border-dark mt-4">
-                  <Image
-                    src={IMAGE_SLOTS.serviceAir.src}
-                    alt={IMAGE_SLOTS.serviceAir.alt}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 650px"
-                    className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 text-xs font-mono text-slate-300 flex items-center gap-2 font-semibold">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    <span>Airport-to-Airport & Doorstep Delivery</span>
-                  </div>
-                </div>
+          <div className="space-y-12">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#12372A]/15 pb-6">
+              <div className="space-y-2 max-w-2xl">
+                <span className="px-3 py-1 bg-[#1F8A5B]/15 text-[#1F8A5B] font-mono text-xs font-bold uppercase rounded-full inline-block">
+                  Primary Express Mode
+                </span>
+                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#17201B]">
+                  Featured Service — Air Cargo
+                </h2>
               </div>
-
-              <div className="pt-6 border-t border-border-dark flex items-center justify-between">
-                <span className="text-xs font-mono text-slate-400">Min 20 KG • Fast Express</span>
-                <Link href="/cargo-services">
-                  <Button variant="accent" size="md" rightIcon={<ArrowRight className="w-4 h-4 text-brand-black" />}>
-                    Explore Air Freight
-                  </Button>
-                </Link>
+              <div className="font-mono text-xs text-[#1F8A5B] font-bold tracking-wider uppercase">
+                Minimum 20 KG • Indicative Transit 10–15 Days
               </div>
             </div>
 
-            {/* SEA CARGO CARD (EXACT SAME SIZE & STYLE AS AIR CARGO) */}
-            <div className="bg-brand-black-deep rounded-md border border-border-dark overflow-hidden p-8 lg:p-10 flex flex-col justify-between space-y-8 group hover:border-slate-700 transition-colors shadow-2xl">
-              <div className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <Badge variant="outline-dark">Sea Shipping</Badge>
-                  <Ship className="w-6 h-6 text-accent shrink-0" />
-                </div>
-
-                <div className="space-y-3">
-                  <h2 className="text-display-sm font-bold text-white group-hover:text-accent transition-colors">
-                    Sea Cargo Services
-                  </h2>
-                  <p className="text-body-md text-slate-300 leading-relaxed">
-                    Economical ocean container shipping (LCL & FCL) for heavy goods, bulk commercial stock, machinery, and full household relocations departing Karachi ports.
-                  </p>
-                </div>
-
-                {/* Sea Cargo Image Anchor */}
-                <div className="relative aspect-[16/9] rounded-md overflow-hidden bg-brand-black border border-border-dark mt-4">
-                  <Image
-                    src={IMAGE_SLOTS.serviceSea.src}
-                    alt={IMAGE_SLOTS.serviceSea.alt}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 650px"
-                    className="object-cover object-center group-hover:scale-102 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 text-xs font-mono text-slate-300 flex items-center gap-2 font-semibold">
-                    <span className="w-2 h-2 rounded-full bg-blue-400"></span>
-                    <span>Port-to-Port & Doorstep Delivery</span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+              {/* LARGE IMAGE */}
+              <div className="lg:col-span-6 relative">
+                <div className="relative rounded-2xl overflow-hidden border-2 border-[#C6A15B]/30 shadow-2xl bg-[#17201B] group">
+                  <div className="aspect-[16/10] relative w-full overflow-hidden">
+                    <Image
+                      src="/images/service-air.jpg"
+                      alt="International Air Cargo Freight"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover object-center group-hover:scale-103 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#17201B]/80 via-transparent to-transparent pointer-events-none" />
+                  </div>
+                  <div className="p-4 bg-[#17201B] border-t border-[#C6A15B]/20 flex items-center justify-between text-xs font-mono text-[#F6F2E9]/80">
+                    <span className="text-[#C6A15B] font-bold uppercase">Scheduled Airlines</span>
+                    <span>Airport-to-Airport & Doorstep</span>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-border-dark flex items-center justify-between">
-                <span className="text-xs font-mono text-slate-400">Min 70–100 KG • Economical</span>
-                <Link href="/cargo-services">
-                  <Button variant="accent" size="md" rightIcon={<ArrowRight className="w-4 h-4 text-brand-black" />}>
-                    Explore Sea Cargo
-                  </Button>
+              {/* LARGE TYPOGRAPHY & DETAILS */}
+              <div className="lg:col-span-6 space-y-6">
+                <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#12372A] leading-tight">
+                  Fast Air Freight Dispatch for Time-Sensitive Cargo
+                </h3>
+                <p className="font-sans text-base sm:text-lg text-[#17201B]/80 leading-relaxed">
+                  Scheduled airline carrier allocations optimized for high-value commercial goods, urgent parcels, textiles, business samples, and personal luggage originating from Pakistan.
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 pt-2">
+                  <div className="p-4 bg-white rounded-xl border border-[#12372A]/15 space-y-1">
+                    <span className="font-mono text-xs text-[#1F8A5B] uppercase font-bold block">Weight Threshold</span>
+                    <span className="font-mono text-lg font-bold text-[#17201B]">Minimum 20 KG</span>
+                  </div>
+                  <div className="p-4 bg-white rounded-xl border border-[#12372A]/15 space-y-1">
+                    <span className="font-mono text-xs text-[#1F8A5B] uppercase font-bold block">Transit Expectation</span>
+                    <span className="font-mono text-lg font-bold text-[#17201B]">10–15 Days</span>
+                  </div>
+                </div>
+
+                <div className="pt-4 flex flex-wrap items-center gap-4">
+                  <Link href="/cargo-services#part-1-air-cargo">
+                    <button
+                      type="button"
+                      className="h-12 px-6 bg-[#12372A] hover:bg-[#1F8A5B] text-white font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center gap-2 cursor-pointer shadow-md"
+                    >
+                      <span>Explore Air Cargo Rates</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </Link>
+                  <Link href="/quote?service=air-freight">
+                    <span className="font-mono text-xs font-bold text-[#1F8A5B] hover:text-[#12372A] underline cursor-pointer">
+                      Calculate Air Freight →
+                    </span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 3. SEA CARGO EDITORIAL BLOCK */}
+      <section className="w-full bg-white py-20 lg:py-28 border-b border-[#12372A]/10">
+        <Container>
+          <div className="space-y-12">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#12372A]/15 pb-6">
+              <div className="space-y-2 max-w-2xl">
+                <span className="px-3 py-1 bg-[#12372A] text-[#F6F2E9] font-mono text-xs font-bold uppercase rounded-full inline-block">
+                  Economical Ocean Shipping
+                </span>
+                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#17201B]">
+                  Sea Freight Cargo Solutions
+                </h2>
+              </div>
+              <div className="font-mono text-xs text-[#12372A] font-bold tracking-wider uppercase">
+                Minimum 70–100 KG • Indicative Transit 1.5–2.5 Months
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+              {/* DETAILS FIRST ON DESKTOP */}
+              <div className="lg:col-span-6 space-y-6 order-2 lg:order-1">
+                <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#12372A] leading-tight">
+                  High-Volume Ocean Container Shipping (LCL & FCL)
+                </h3>
+                <p className="font-sans text-base sm:text-lg text-[#17201B]/80 leading-relaxed">
+                  For heavy goods, commercial machinery, bulk merchandise, or complete household relocations, ocean sea freight departing Karachi ports provides maximum cost efficiency.
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 pt-2">
+                  <div className="p-4 bg-[#FAF8F3] rounded-xl border border-[#12372A]/15 space-y-1">
+                    <span className="font-mono text-xs text-[#12372A] uppercase font-bold block">Weight Threshold</span>
+                    <span className="font-mono text-lg font-bold text-[#17201B]">70–100 KG Min</span>
+                  </div>
+                  <div className="p-4 bg-[#FAF8F3] rounded-xl border border-[#12372A]/15 space-y-1">
+                    <span className="font-mono text-xs text-[#12372A] uppercase font-bold block">Transit Expectation</span>
+                    <span className="font-mono text-lg font-bold text-[#17201B]">1.5–2.5 Months</span>
+                  </div>
+                </div>
+
+                <p className="font-sans text-xs text-[#17201B]/60 italic">
+                  * Indicative ocean timelines vary depending on port congestion, vessel schedules, and destination customs clearance.
+                </p>
+
+                <div className="pt-2 flex flex-wrap items-center gap-4">
+                  <Link href="/cargo-services#part-2-sea-cargo">
+                    <button
+                      type="button"
+                      className="h-12 px-6 bg-[#C6A15B] hover:bg-[#b5924e] text-[#17201B] font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center gap-2 cursor-pointer shadow-md"
+                    >
+                      <span>Explore Sea Cargo Rates</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </Link>
+                  <Link href="/quote?service=sea-cargo">
+                    <span className="font-mono text-xs font-bold text-[#1F8A5B] hover:text-[#12372A] underline cursor-pointer">
+                      Calculate Sea Cargo →
+                    </span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* SEA IMAGE SECOND ON DESKTOP */}
+              <div className="lg:col-span-6 relative order-1 lg:order-2">
+                <div className="relative rounded-2xl overflow-hidden border-2 border-[#C6A15B]/30 shadow-2xl bg-[#17201B] group">
+                  <div className="aspect-[16/10] relative w-full overflow-hidden">
+                    <Image
+                      src="/images/service-sea.jpg"
+                      alt="Sea Freight Container Shipping"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover object-center group-hover:scale-103 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#17201B]/80 via-transparent to-transparent pointer-events-none" />
+                  </div>
+                  <div className="p-4 bg-[#17201B] border-t border-[#C6A15B]/20 flex items-center justify-between text-xs font-mono text-[#F6F2E9]/80">
+                    <span className="text-[#C6A15B] font-bold uppercase">Karachi Port Departure</span>
+                    <span>LCL & FCL Services</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 4. DOOR-TO-DOOR CAPABILITY STORY */}
+      <section className="w-full bg-[#17201B] text-white py-20 lg:py-28 border-b border-[#12372A]">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-6 relative">
+              <div className="relative rounded-2xl overflow-hidden border-2 border-[#C6A15B]/30 shadow-2xl bg-[#12372A] group">
+                <div className="aspect-[16/10] relative w-full overflow-hidden">
+                  <Image
+                    src="/images/service-door.jpg"
+                    alt="Door-to-door international delivery workflow"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover object-center group-hover:scale-103 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#17201B]/90 via-transparent to-transparent pointer-events-none" />
+                </div>
+                <div className="p-5 bg-[#17201B] border-t border-[#C6A15B]/20 flex justify-between items-center text-xs font-mono">
+                  <span className="text-[#C6A15B] font-bold uppercase">Full Pipeline</span>
+                  <span className="text-white/80">Pakistan Door → Global Destination Door</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 space-y-6">
+              <span className="px-3 py-1 bg-[#C6A15B]/20 text-[#C6A15B] border border-[#C6A15B]/30 font-mono text-xs font-bold uppercase rounded-full inline-block">
+                Full-Service Forwarding
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#F6F2E9] leading-tight">
+                Door-to-Door Delivery Pipeline
+              </h2>
+              <p className="font-sans text-base sm:text-lg text-[#F6F2E9]/80 leading-relaxed">
+                For eligible routes and shipment types, we coordinate origin pickup in Pakistan, protective packaging guidance, export customs declarations, air or ocean transit, destination clearance, and final delivery to the receiver&apos;s door.
+              </p>
+
+              <div className="space-y-3 font-sans text-sm text-[#F6F2E9]/90 pt-2">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#C6A15B] shrink-0" />
+                  <span>Doorstep pickup across major Pakistan hubs</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#C6A15B] shrink-0" />
+                  <span>Managed export customs clearance documentation</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#C6A15B] shrink-0" />
+                  <span>Last-mile carrier delivery integration at destination</span>
+                </div>
+              </div>
+
+              <div className="pt-4">
+                <Link href="/cargo-services#door-to-door">
+                  <button
+                    type="button"
+                    className="h-12 px-6 bg-[#C6A15B] hover:bg-[#b5924e] text-[#17201B] font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center gap-2 cursor-pointer shadow-md"
+                  >
+                    <span>Door-to-Door Service Details</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
                 </Link>
               </div>
             </div>
@@ -257,92 +327,130 @@ export default async function ServicesHubPage() {
         </Container>
       </section>
 
-      {/* 3. Full Service Directory */}
+      {/* 5. SPECIALIZED SERVICES EDITORIAL LIST */}
       {specializedServices.length > 0 && (
-        <section className="w-full bg-surface-subtle py-20 lg:py-28 border-b border-border text-brand-black">
+        <section className="w-full bg-[#FAF8F3] py-20 lg:py-28 border-b border-[#12372A]/10">
           <Container>
-            <SectionHeading
-              badge="Specialized Logistics"
-              title="Commercial Trade & Personal Cargo Solutions"
-              subtitle="End-to-end freight forwarding, customs clearance, excess baggage, and trade shipping services."
-              className="mb-14"
-            />
+            <div className="space-y-12">
+              <div className="max-w-2xl space-y-3">
+                <span className="font-mono text-xs font-bold text-[#1F8A5B] uppercase tracking-widest">
+                  Specialized Solutions
+                </span>
+                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#17201B]">
+                  Tailored Trade & Baggage Offerings
+                </h2>
+                <p className="font-sans text-base text-[#17201B]/75">
+                  Dedicated service specifications for commercial exporters, travelers, and regulatory guidance.
+                </p>
+              </div>
 
-            {/* Clean Structured Directory List with Row Dividers */}
-            <div className="bg-surface rounded-md border border-border divide-y divide-border shadow-xs overflow-hidden">
-              {specializedServices.map((service) => {
-                const IconComponent = iconMap[service.iconName] || Package;
-                const quoteUrl = service.quoteCargoType
-                  ? `/quote?cargo=${service.quoteCargoType}`
-                  : '/quote';
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {specializedServices.map((service) => {
+                  const IconComponent = iconMap[service.iconName] || Package;
 
-                return (
-                  <div
-                    key={service.slug}
-                    className="p-6 lg:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:bg-surface-subtle/80 transition-colors group"
-                  >
-                    <div className="flex items-start gap-4 md:w-1/2">
-                      <div className="p-3 bg-surface-subtle rounded border border-border text-slate-700 shrink-0">
-                        <IconComponent className="w-5 h-5 text-brand-black" />
-                      </div>
-                      <div className="space-y-1">
-                        <h3 className="text-heading-md font-bold text-brand-black group-hover:text-accent transition-colors">
-                          <Link href={`/services/${service.slug}`}>{service.name}</Link>
+                  return (
+                    <div
+                      key={service.slug}
+                      className="p-8 rounded-2xl bg-white border border-[#12372A]/15 space-y-6 flex flex-col justify-between shadow-2xs hover:border-[#1F8A5B]/40 transition-colors group"
+                    >
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <div className="w-10 h-10 rounded-lg bg-[#12372A]/10 flex items-center justify-center text-[#1F8A5B]">
+                            <IconComponent className="w-5 h-5" />
+                          </div>
+                          <span className="font-mono text-[10px] font-bold text-[#12372A] uppercase bg-[#12372A]/10 px-2 py-0.5 rounded">
+                            {service.category}
+                          </span>
+                        </div>
+                        <h3 className="font-serif text-2xl font-bold text-[#17201B] group-hover:text-[#12372A] transition-colors">
+                          {service.name}
                         </h3>
-                        <p className="text-body-sm text-slate-600 leading-relaxed font-normal">
+                        <p className="font-sans text-sm text-[#17201B]/75 leading-relaxed font-normal">
                           {service.shortDescription}
                         </p>
                       </div>
-                    </div>
 
-                    <div className="flex items-center gap-4 md:justify-end md:w-1/2">
-                      <Link
-                        href={`/services/${service.slug}`}
-                        className="text-xs font-mono font-semibold text-brand-black hover:text-accent flex items-center gap-1 transition-colors"
-                      >
-                        <span>Service Specification</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-accent" />
-                      </Link>
-                      <Link href={quoteUrl}>
-                        <Button variant="outline" size="sm">
-                          Quote
-                        </Button>
-                      </Link>
+                      <div className="pt-6 border-t border-[#12372A]/10 flex items-center justify-between">
+                        <Link
+                          href={`/services/${service.slug}`}
+                          className="font-mono text-xs font-bold text-[#12372A] hover:text-[#1F8A5B] underline"
+                        >
+                          View Specification →
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </Container>
         </section>
       )}
 
-      {/* 4. Selection Guidance Callout Section */}
-      <section className="w-full bg-brand-navy py-16 text-white border-b border-border-dark">
+      {/* 6. HOW TO CHOOSE — AIR VS SEA EDITORIAL COMPARISON */}
+      <section className="w-full bg-[#F6F2E9] py-20 lg:py-28 border-b border-[#12372A]/10">
         <Container>
-          <div className="bg-brand-black-deep border border-border-dark p-8 lg:p-12 rounded-md space-y-6 shadow-2xl flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-            <div className="space-y-3 max-w-2xl">
-              <div className="flex items-center gap-2 text-xs font-mono text-accent">
-                <ShieldCheck className="w-4 h-4" />
-                <span>Expert Shipping Consultation</span>
-              </div>
-              <h2 className="text-heading-xl font-bold text-white">Need Assistance Selecting a Shipping Mode?</h2>
-              <p className="text-body-md text-slate-300 leading-relaxed">
-                Air freight is optimal for high-priority urgent cargo, while ocean sea freight is cost-effective for large commercial container loads. Door-to-door shipping provides end-to-end collection and doorstep delivery.
+          <div className="space-y-12">
+            <div className="text-center max-w-2xl mx-auto space-y-3">
+              <span className="px-3 py-1 bg-[#1F8A5B]/15 text-[#1F8A5B] font-mono text-xs font-bold uppercase rounded-full inline-block">
+                Mode Selection Guide
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#17201B]">
+                Air Cargo vs Sea Freight
+              </h2>
+              <p className="font-sans text-base text-[#17201B]/75">
+                Simple operational comparison to select the right transportation mode.
               </p>
             </div>
-            <div className="shrink-0">
-              <Link href="/quote">
-                <Button variant="accent" size="lg" rightIcon={<ArrowRight className="w-4 h-4 text-brand-black" />}>
-                  Request Custom Quote
-                </Button>
-              </Link>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <div className="p-8 rounded-2xl bg-white border border-[#12372A]/15 space-y-6 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <Plane className="w-6 h-6 text-[#1F8A5B]" />
+                  <h3 className="font-serif text-2xl font-bold text-[#12372A]">Air Freight Choice</h3>
+                </div>
+                <ul className="space-y-3 font-sans text-sm text-[#17201B]/80">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0 mt-0.5" />
+                    <span>Speed is priority (10–15 days indicative)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0 mt-0.5" />
+                    <span>Weight is 20 KG or above</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#1F8A5B] shrink-0 mt-0.5" />
+                    <span>High value, urgent textiles, excess baggage</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="p-8 rounded-2xl bg-white border border-[#12372A]/15 space-y-6 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <Ship className="w-6 h-6 text-[#C6A15B]" />
+                  <h3 className="font-serif text-2xl font-bold text-[#12372A]">Sea Freight Choice</h3>
+                </div>
+                <ul className="space-y-3 font-sans text-sm text-[#17201B]/80">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#C6A15B] shrink-0 mt-0.5" />
+                    <span>Budget efficiency is priority (1.5–2.5 months indicative)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#C6A15B] shrink-0 mt-0.5" />
+                    <span>Weight is 70–100 KG or above</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#C6A15B] shrink-0 mt-0.5" />
+                    <span>Bulk commercial stock, machinery, household relocations</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* 5. Final Conversion Panel */}
+      {/* 7. FINAL CONVERSION SECTION */}
       <FinalCtaSection />
     </div>
   );

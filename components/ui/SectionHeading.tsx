@@ -35,11 +35,11 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           </Badge>
         </div>
       )}
-      <h2 className="text-heading-xl font-bold tracking-tight text-current leading-snug">
+      <h2 className="text-[28px] sm:text-[36px] lg:text-[42px] font-serif font-bold tracking-tight text-current leading-[1.15]">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-body-md text-slate-400 font-normal leading-relaxed">
+        <p className="text-body-md text-muted-foreground font-normal leading-relaxed">
           {subtitle}
         </p>
       )}

@@ -58,7 +58,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
     },
     {
       question: 'Do you provide door-to-door delivery?',
-      answer: 'Yes! Both our Air Cargo and Sea Cargo services include complete door-to-door options, picking up from your address in Pakistan and delivering directly to the recipient\'s door at your destination.',
+      answer: "Yes! Both our Air Cargo and Sea Cargo services include complete door-to-door options, picking up from your address in Pakistan and delivering directly to the recipient's door at your destination.",
     },
     {
       question: 'What documents do I need?',
@@ -87,37 +87,37 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
   );
 
   return (
-    <section className="w-full bg-surface py-16 lg:py-24 border-b border-border text-brand-black">
+    <section className="w-full bg-brand-cream py-16 lg:py-24 border-b border-border-strong/60 text-brand-dark">
       <Container size="narrow">
         <SectionHeading
           badge={badge}
           title={title}
           subtitle={subtitle}
-          className="mb-12 text-center mx-auto"
+          className="mb-12 text-center mx-auto [&_h2]:text-brand-dark [&_h2]:font-serif [&_p]:text-brand-dark/80"
           align="center"
         />
 
-        <div className="border-t border-border divide-y divide-border">
+        <div className="border-t border-[#E2DDD5] divide-y divide-[#E2DDD5]">
           {items.map((faq, idx) => {
             const isOpen = openIndex === idx;
 
             return (
-              <div key={idx} className="py-4">
+              <div key={idx} className="py-4 sm:py-5">
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
-                  className="w-full flex items-center justify-between text-left text-heading-sm font-bold text-brand-black hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-xs py-1"
+                  className="w-full flex items-center justify-between text-left font-serif text-base sm:text-lg font-bold text-brand-dark hover:text-brand-emerald transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold rounded-xs py-1"
                   aria-expanded={isOpen}
                 >
-                  <span className="pr-4">{faq.question}</span>
+                  <span className="pr-4 tracking-tight">{faq.question}</span>
                   <ChevronDown
-                    className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 text-brand-black' : ''
+                    className={`w-5 h-5 text-brand-gold shrink-0 transition-transform duration-200 ${
+                      isOpen ? 'rotate-180 text-brand-emerald' : ''
                     }`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="pt-3 pb-2 text-body-md text-slate-600 leading-relaxed max-w-prose animate-in fade-in duration-150 font-normal">
+                  <div className="pt-3 pb-2 font-sans text-sm sm:text-base text-slate-700 leading-relaxed max-w-prose animate-in fade-in duration-150 font-normal">
                     {faq.answer}
                   </div>
                 )}
@@ -126,18 +126,18 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
           })}
         </div>
 
-        <div className="mt-10 p-6 bg-emerald-50 rounded-md border border-emerald-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div className="mt-12 p-6 sm:p-7 bg-[#12372A] rounded-lg border border-brand-gold/30 flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left shadow-xl text-brand-cream">
           <div>
-            <h4 className="text-sm font-bold text-emerald-900">Have a question or need instant rate guidance?</h4>
-            <p className="text-xs text-emerald-700 mt-0.5">Chat with our team directly on WhatsApp for assistance.</p>
+            <h4 className="font-serif text-base sm:text-lg font-bold text-brand-cream">Have a question or need instant rate guidance?</h4>
+            <p className="font-sans text-xs sm:text-sm text-brand-cream/80 mt-1">Chat with our team directly on WhatsApp for assistance.</p>
           </div>
           <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded transition-colors shrink-0"
+            className="inline-flex items-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold rounded-md transition-colors shrink-0 shadow-md"
           >
-            <MessageSquare className="w-4 h-4 text-white" />
+            <MessageSquare className="w-4 h-4 text-white shrink-0" />
             <span>Ask on WhatsApp</span>
           </a>
         </div>
@@ -145,3 +145,4 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
     </section>
   );
 };
+

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" fill="none">
+  <rect width="1200" height="675" fill="#0B0F17"/>
+  <rect width="1200" height="675" fill="url(#grid)" opacity="0.1"/>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#F8FAFC" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <!-- Cargo Container Silhouette -->
+  <rect x="200" y="250" width="800" height="300" rx="8" fill="#0F172A" stroke="#1E293B" stroke-width="4"/>
+  <line x1="400" y1="250" x2="400" y2="550" stroke="#1E293B" stroke-width="4"/>
+  <line x1="600" y1="250" x2="600" y2="550" stroke="#1E293B" stroke-width="4"/>
+  <line x1="800" y1="250" x2="800" y2="550" stroke="#1E293B" stroke-width="4"/>
+  <!-- Route Line Overlay -->
+  <path d="M 150 450 Q 600 150 1050 450" stroke="#F97316" stroke-width="4" stroke-dasharray="8 8" fill="none"/>
+  <circle cx="150" cy="450" r="12" fill="#F97316"/>
+  <circle cx="1050" cy="450" r="12" fill="#F97316"/>
+  <!-- Aircraft Silhouette -->
+  <path d="M 600 160 L 630 190 L 610 190 L 595 210 L 588 210 L 598 190 L 575 190 L 570 200 L 563 200 L 570 185 L 563 170 L 570 170 L 575 180 L 598 180 L 588 160 L 595 160 Z" fill="#F97316"/>
+  <text x="600" y="610" fill="#94A3B8" font-family="monospace" font-size="20" text-anchor="middle" letter-spacing="2">TARGET ASSET SLOT: HERO FREIGHT PHOTOGRAPHY</text>
+</svg>

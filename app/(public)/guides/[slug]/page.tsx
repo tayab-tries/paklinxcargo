@@ -161,7 +161,7 @@ export default async function GuideArticleDetailPage({ params }: GuideArticlePag
       : null;
 
   return (
-    <article className="w-full bg-background text-brand-black">
+    <article className="w-full bg-[#F6F2E9] text-[#17201B]">
       {/* Schema.org Structured Data Injection */}
       <script
         type="application/ld+json"
@@ -178,7 +178,7 @@ export default async function GuideArticleDetailPage({ params }: GuideArticlePag
         />
       )}
 
-      {/* 01 Guide Hero Block (Light) */}
+      {/* 01 Guide Hero Block */}
       <GuideHero
         title={article.title}
         excerpt={article.excerpt}
@@ -191,7 +191,7 @@ export default async function GuideArticleDetailPage({ params }: GuideArticlePag
       />
 
       {/* 02 Article Main Reading Container (Max ~65–72ch) */}
-      <section className="w-full py-12 lg:py-16 bg-background border-b border-border">
+      <section className="w-full py-16 lg:py-24 bg-white border-b border-[#17201B]/15">
         <Container size="narrow">
           {/* Executive Summary Callout */}
           <ArticleSummaryCallout summaryText={article.excerpt} />
@@ -218,7 +218,7 @@ export default async function GuideArticleDetailPage({ params }: GuideArticlePag
         </Container>
       </section>
 
-      {/* 03 High-Impact Quote CTA (Dark Closing Section) */}
+      {/* 03 High-Impact Quote CTA */}
       <ArticleCta />
     </article>
   );

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
+import { Plus_Jakarta_Sans, JetBrains_Mono, Playfair_Display } from 'next/font/google';
 import { draftMode } from 'next/headers';
 import Script from 'next/script';
 import { constructMetadata } from '@/lib/seo/metadata.service';
@@ -19,6 +19,12 @@ const monoFont = JetBrains_Mono({
   display: 'swap',
 });
 
+const serifFont = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-serif',
+  display: 'swap',
+});
+
 export const metadata: Metadata = constructMetadata({
   title: 'International Cargo & Logistics Services',
   description: 'Production-grade international shipping, air freight, sea cargo, and logistics services from Pakistan.',
@@ -34,7 +40,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sansFont.variable} ${monoFont.variable} h-full antialiased`}
+      className={`${sansFont.variable} ${monoFont.variable} ${serifFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground selection:bg-slate-800 selection:text-white">
         {children}

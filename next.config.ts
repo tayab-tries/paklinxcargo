@@ -28,17 +28,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'www.raahiinternational.com',
-          },
-        ],
-        destination: 'https://raahiinternational.com/:path*',
-        permanent: true,
-      },
-      {
         source: '/services/air-freight',
         destination: '/cargo-services',
         permanent: true,

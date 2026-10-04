@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { SanityCargoPricingData } from '@/sanity/lib/fetch';
+import { siteConfig } from '@/config/site.config';
 
 interface AirFreightServiceContentProps {
   phone?: string;
@@ -64,8 +65,8 @@ export const AirFreightServiceContent: React.FC<AirFreightServiceContentProps> =
             </a>
           </li>
           <li>
-            <a href="#why-raahi" className="hover:text-accent-dark hover:underline flex items-center gap-1.5">
-              <ChevronRight className="w-3.5 h-3.5 text-accent-dark shrink-0" /> Why Raahi International
+            <a href="#why-us" className="hover:text-accent-dark hover:underline flex items-center gap-1.5">
+              <ChevronRight className="w-3.5 h-3.5 text-accent-dark shrink-0" /> Why {siteConfig.name}
             </a>
           </li>
           <li>
@@ -270,11 +271,11 @@ export const AirFreightServiceContent: React.FC<AirFreightServiceContentProps> =
         </p>
       </section>
 
-      {/* SECTION: WHY RAAHI INTERNATIONAL */}
-      <section id="why-raahi" className="scroll-mt-28 space-y-6">
+      {/* SECTION: WHY CHOOSE US */}
+      <section id="why-us" className="scroll-mt-28 space-y-6">
         <div className="border-b border-border pb-3">
           <div className="text-xs font-mono text-slate-500 uppercase tracking-wider">Trust & Experience</div>
-          <h2 className="text-heading-xl font-bold text-brand-black">Why Raahi International</h2>
+          <h2 className="text-heading-xl font-bold text-brand-black">Why {siteConfig.name}</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div className="bg-surface border border-border p-5 rounded-md space-y-2">

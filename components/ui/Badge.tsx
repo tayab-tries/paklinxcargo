@@ -21,15 +21,15 @@ export const Badge: React.FC<BadgeProps> = ({
   }[size];
 
   const variantStyles = {
-    accent: 'bg-accent-soft text-brand-black border border-accent/40 font-semibold',
-    primary: 'bg-brand-black text-white border border-transparent',
-    secondary: 'bg-brand-navy text-white border border-border-dark',
-    default: 'bg-brand-navy text-white border border-border-dark',
-    navy: 'bg-brand-navy text-white border border-border-dark',
-    outline: 'bg-transparent text-brand-black border border-border',
-    'outline-dark': 'bg-transparent text-slate-300 border border-border-dark',
-    success: 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/80',
-    warning: 'bg-amber-950/60 text-amber-300 border border-amber-800/80',
+    accent: 'bg-brand-gold-soft text-brand-dark border border-brand-gold/40 font-semibold',
+    primary: 'bg-brand-forest text-brand-cream border border-transparent font-semibold',
+    secondary: 'bg-brand-dark text-brand-cream border border-border-dark',
+    default: 'bg-brand-forest text-brand-cream border border-border-dark',
+    navy: 'bg-brand-forest text-brand-cream border border-border-dark',
+    outline: 'bg-transparent text-brand-dark border border-border',
+    'outline-dark': 'bg-transparent text-brand-cream/80 border border-border-dark',
+    success: 'bg-brand-emerald-soft text-brand-emerald border border-brand-emerald/30 font-semibold',
+    warning: 'bg-amber-50 text-amber-800 border border-amber-200 font-semibold',
   }[variant];
 
   return (

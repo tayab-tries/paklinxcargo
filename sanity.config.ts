@@ -9,9 +9,9 @@ import { apiVersion, dataset, projectId, isSanityConfigured } from './sanity/env
 
 export default defineConfig({
   basePath: '/',
-  name: 'raahi_cargo_studio',
-  title: 'Raahi International CMS Studio',
-  projectId: isSanityConfigured ? projectId : 'vst9vvau',
+  name: 'cargo_cms_studio',
+  title: 'CMS Studio',
+  projectId: isSanityConfigured ? projectId : 'placeholder',
   dataset: dataset || 'production',
   schema,
   plugins: [
@@ -19,15 +19,11 @@ export default defineConfig({
     presentationTool({
       resolve,
       previewUrl: {
-        origin: process.env.NEXT_PUBLIC_SITE_URL || 'https://raahiinternational.com',
+        origin: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
         previewMode: {
           enable: '/api/draft-mode/enable',
         },
       },
-      allowOrigins: [
-        process.env.NEXT_PUBLIC_SITE_URL || 'https://raahiinternational.com',
-        'https://cargo.raahiinternational4.workers.dev',
-      ],
     }),
     visionTool({ defaultApiVersion: apiVersion }),
   ],

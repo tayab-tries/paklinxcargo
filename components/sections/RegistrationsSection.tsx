@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import { ShieldCheck } from 'lucide-react';
+import { Container } from '@/components/ui/Container';
 
 export interface RegistrationItem {
   name: string;
@@ -21,7 +23,7 @@ export const RegistrationsSection: React.FC<RegistrationsSectionProps> = ({
   const heading =
     propHeading ||
     (blockData?.heading as string) ||
-    'WE ARE REGISTERED WITH FBR AND ASSOCIATED WITH';
+    'REGISTERED WITH FBR AND INTERNATIONALLY AFFILIATED';
 
   const defaultItems: RegistrationItem[] = [
     {
@@ -64,42 +66,42 @@ export const RegistrationsSection: React.FC<RegistrationsSectionProps> = ({
   }
 
   return (
-    <section className="w-full bg-brand-navy py-14 lg:py-20 border-b border-border-dark text-white select-none">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="text-center space-y-10 max-w-5xl mx-auto mb-10">
-          <div className="space-y-2.5">
-            <span className="text-xs font-mono font-bold tracking-widest text-accent uppercase block">
-              Official Registrations & Global Affiliations
+    <section className="w-full bg-[#12372A] text-[#F6F2E9] py-14 lg:py-18 border-b border-[#12372A]/10 select-none">
+      <Container className="space-y-8">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-[#1F8A5B]/30 pb-4">
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-[#C6A15B]" />
+            <span className="text-[11px] font-mono font-bold uppercase tracking-[0.16em] text-[#C6A15B]">
+              VERIFIED CREDENTIALS & AFFILIATIONS
             </span>
-            <h2 className="text-heading-xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight uppercase leading-snug">
-              {heading}
-            </h2>
           </div>
+          <span className="text-xs font-mono text-[#F6F2E9]/60">
+            {heading}
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6 items-stretch justify-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 items-center">
           {items.map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl border border-slate-200 p-5 sm:p-6 flex flex-col justify-center items-center text-center min-h-[120px] shadow-lg pointer-events-none transition-none"
+              className="bg-[#17201B] p-4 rounded-xl border border-[#1F8A5B]/20 flex flex-col items-center justify-center text-center space-y-2 group hover:border-[#C6A15B]/50 transition-colors"
             >
-              <div className="relative w-full h-16 sm:h-20 flex items-center justify-center">
+              <div className="relative w-full h-12 flex items-center justify-center">
                 <Image
                   src={item.logo}
-                  alt={item.altText || item.name || 'Registration Logo'}
-                  width={280}
-                  height={80}
-                  priority
-                  className="max-h-14 sm:max-h-16 w-full object-contain"
+                  alt={item.altText || item.name}
+                  width={200}
+                  height={60}
+                  className="max-h-10 w-auto object-contain filter drop-shadow"
                 />
               </div>
-              <span className="text-xs font-bold text-slate-800 mt-2 block font-mono">
+              <span className="text-[10px] font-mono font-bold uppercase text-[#F6F2E9]/80 tracking-wider">
                 {item.name}
               </span>
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

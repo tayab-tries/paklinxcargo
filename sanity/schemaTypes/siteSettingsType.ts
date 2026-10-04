@@ -38,7 +38,7 @@ export const siteSettingsType = defineType({
       name: 'email',
       title: 'Contact Email Address',
       type: 'string',
-      description: 'Official contact email address (e.g. raahiinternational4@gmail.com)',
+      description: 'Official contact email address (e.g. info@paklinxcargo.com)',
       validation: (rule) =>
         rule
           .required()

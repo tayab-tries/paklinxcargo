@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container } from '@/components/ui/Container';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 
 export interface LocationProcessProps {
   cityName: string;
@@ -11,57 +10,64 @@ export const LocationProcess: React.FC<LocationProcessProps> = ({ cityName }) =>
     {
       num: '01',
       title: 'REQUEST',
-      subtitle: 'Quote & Details',
-      description: `Submit cargo weight and destination for shipment dispatch originating in ${cityName}.`,
+      subtitle: 'Quote & Specification',
+      description: `Tell us what you are shipping and your pickup location in ${cityName}.`,
     },
     {
       num: '02',
-      title: 'COLLECTION',
-      subtitle: 'Pickup / Receiving',
-      description: `Cargo pickup or receiving arranged from your address or commercial location in ${cityName}.`,
+      title: 'PICKUP',
+      subtitle: 'Doorstep Collection',
+      description: `Schedule doorstep cargo pickup from your premises across ${cityName}.`,
     },
     {
       num: '03',
-      title: 'HANDLING',
-      subtitle: 'Export Clearance',
-      description: 'Export customs processing, air/sea carrier booking, and tracking assignment.',
+      title: 'EXPORT',
+      subtitle: 'Customs & Preparation',
+      description: `Cargo is prepared for export declaration, weighing, and export packing.`,
     },
     {
       num: '04',
-      title: 'DELIVERY',
-      subtitle: 'Destination Handoff',
-      description: 'International customs clearance and final doorstep delivery at destination.',
+      title: 'TRANSIT',
+      subtitle: 'International Delivery',
+      description: `Shipment moves by selected air freight or ocean sea cargo mode toward its destination.`,
     },
   ];
 
   return (
-    <section className="w-full bg-surface py-20 lg:py-28 border-b border-border text-brand-black">
+    <section className="w-full bg-[#F6F2E9] py-20 lg:py-28 border-b border-[#12372A]/10 text-[#17201B]">
       <Container>
-        <SectionHeading
-          badge="Dispatch Workflow"
-          title={`Origin Cargo Dispatch Process in ${cityName}`}
-          subtitle={`Four operational stages from local pickup in ${cityName} to international destination delivery.`}
-          className="mb-14"
-        />
+        <div className="space-y-12">
+          <div className="max-w-2xl space-y-3">
+            <span className="font-mono text-xs font-bold text-[#1F8A5B] uppercase tracking-widest">
+              Pickup Workflow
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#17201B]">
+              How Pickup Works in {cityName}
+            </h2>
+            <p className="font-sans text-base text-[#17201B]/75">
+              Four operational stages connecting pickup in {cityName} with international delivery.
+            </p>
+          </div>
 
-        <div className="bg-surface-subtle border border-border rounded-md p-8 lg:p-10 shadow-xs">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative divide-y md:divide-y-0 md:divide-x divide-border">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((step, idx) => (
               <div
                 key={step.num}
-                className={`pt-6 md:pt-0 space-y-4 ${idx !== 0 ? 'md:pl-8' : ''}`}
+                className="p-6 bg-white rounded-2xl border border-[#12372A]/15 space-y-4 shadow-2xs hover:border-[#C6A15B]/50 transition-all group"
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-xl font-mono font-bold text-slate-400">{step.num}</span>
-                  <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider">Stage {idx + 1}</span>
+                <div className="flex items-center justify-between border-b border-[#12372A]/10 pb-3">
+                  <span className="font-mono text-3xl font-bold text-[#C6A15B]">{step.num}</span>
+                  <span className="font-mono text-[10px] font-bold text-[#1F8A5B] uppercase tracking-widest">
+                    Stage {idx + 1}
+                  </span>
                 </div>
 
                 <div className="space-y-1">
-                  <h3 className="text-heading-sm font-bold text-brand-black tracking-tight">{step.title}</h3>
-                  <div className="text-xs font-mono font-semibold text-slate-500">{step.subtitle}</div>
+                  <h3 className="font-serif text-lg font-bold text-[#17201B] tracking-tight">{step.title}</h3>
+                  <div className="font-mono text-xs font-semibold text-[#1F8A5B]">{step.subtitle}</div>
                 </div>
 
-                <p className="text-body-sm text-slate-600 leading-relaxed font-normal">
+                <p className="font-sans text-xs sm:text-sm text-[#17201B]/75 leading-relaxed font-normal">
                   {step.description}
                 </p>
               </div>

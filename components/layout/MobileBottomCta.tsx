@@ -29,16 +29,18 @@ export const MobileBottomCta: React.FC<MobileBottomCtaProps> = ({
   const cleanPhone = phone.replace(/\s+/g, '');
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-brand-black-deep/95 backdrop-blur-md border-t border-border-dark p-2 sm:hidden flex items-center justify-around gap-2 shadow-2xl">
+    <div className="fixed bottom-0 left-0 right-0 z-30 bg-brand-dark/95 backdrop-blur-md border-t border-border-dark p-2.5 sm:hidden flex items-center justify-around gap-2 shadow-2xl">
       {/* Call Button */}
-      <a
-        href={`tel:${cleanPhone}`}
-        onClick={trackPhoneClick}
-        className="flex-1 py-2.5 px-3 bg-brand-navy hover:bg-slate-800 border border-border-dark rounded text-center text-xs font-bold text-white flex items-center justify-center gap-1.5 transition-colors"
-      >
-        <Phone className="w-4 h-4 text-accent shrink-0" />
-        <span>{callLabel}</span>
-      </a>
+      {cleanPhone && (
+        <a
+          href={`tel:${cleanPhone}`}
+          onClick={trackPhoneClick}
+          className="flex-1 py-2.5 px-2 bg-brand-forest hover:bg-brand-forest-deep border border-brand-forest-light/60 rounded-xs text-center text-xs font-bold text-brand-cream flex items-center justify-center gap-1.5 transition-colors min-h-[44px]"
+        >
+          <Phone className="w-4 h-4 text-brand-gold shrink-0" />
+          <span>{callLabel}</span>
+        </a>
+      )}
 
       {/* WhatsApp Button */}
       <a
@@ -46,7 +48,7 @@ export const MobileBottomCta: React.FC<MobileBottomCtaProps> = ({
         target="_blank"
         rel="noopener noreferrer"
         onClick={trackWhatsAppClick}
-        className="flex-1 py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 border border-emerald-500/50 rounded text-center text-xs font-bold text-white flex items-center justify-center gap-1.5 transition-colors"
+        className="flex-1 py-2.5 px-2 bg-brand-emerald hover:bg-brand-emerald-hover border border-emerald-400/40 rounded-xs text-center text-xs font-bold text-white flex items-center justify-center gap-1.5 transition-colors min-h-[44px]"
       >
         <MessageSquare className="w-4 h-4 text-white shrink-0 fill-current" />
         <span>{whatsappLabel}</span>
@@ -55,9 +57,9 @@ export const MobileBottomCta: React.FC<MobileBottomCtaProps> = ({
       {/* Get Quote Button */}
       <Link
         href="/quote"
-        className="flex-1 py-2.5 px-3 bg-accent hover:bg-accent-hover rounded text-center text-xs font-bold text-brand-black flex items-center justify-center gap-1.5 transition-colors"
+        className="flex-1 py-2.5 px-2 bg-brand-gold hover:bg-brand-gold-hover rounded-xs text-center text-xs font-bold text-brand-dark flex items-center justify-center gap-1.5 transition-colors min-h-[44px]"
       >
-        <Calculator className="w-4 h-4 text-brand-black shrink-0" />
+        <Calculator className="w-4 h-4 text-brand-dark shrink-0" />
         <span>{quoteLabel}</span>
       </Link>
     </div>

@@ -28,8 +28,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const inputId = id || (label ? label.toLowerCase().replace(/\s+/g, '-') : undefined);
 
     const surfaceStyles = {
-      light: 'bg-surface text-brand-black border-border placeholder:text-slate-400 focus:border-accent focus:ring-accent/30',
-      dark: 'bg-brand-navy text-white border-border-dark placeholder:text-slate-500 focus:border-accent focus:ring-accent/30',
+      light: 'bg-surface text-brand-dark border-border placeholder:text-slate-400 focus:border-brand-emerald focus:ring-brand-emerald/30',
+      dark: 'bg-brand-dark text-brand-cream border-border-dark placeholder:text-slate-400 focus:border-brand-gold focus:ring-brand-gold/30',
     }[variantSurface];
 
     return (

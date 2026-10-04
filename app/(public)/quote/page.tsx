@@ -1,7 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { Container } from '@/components/ui/Container';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 import { QuoteFormController } from '@/components/quote/QuoteFormController';
 import { getPublishedStaticLocations } from '@/lib/locations/location-content';
@@ -15,7 +14,7 @@ export const metadata: Metadata = {
   description:
     'Request a custom quotation for air freight, ocean sea cargo, door-to-door shipping, or commercial freight originating in Pakistan.',
   robots: {
-    index: false,
+    index: true,
     follow: true,
   },
   alternates: {
@@ -71,16 +70,28 @@ export default async function PublicQuotePage({ searchParams }: QuotePageProps) 
   ];
 
   return (
-    <div className="w-full bg-background py-12 lg:py-16 text-brand-black">
+    <div className="w-full bg-background py-10 lg:py-16 text-brand-black">
       <Container>
-        {/* Header & Breadcrumbs */}
-        <div className="space-y-4 max-w-3xl mb-10">
+        {/* Compact Premium Editorial Hero */}
+        <div className="max-w-3xl mb-8 lg:mb-12 space-y-4">
           <Breadcrumbs items={breadcrumbs} />
-          <SectionHeading
-            badge="Export Rate Request"
-            title="Request a Shipping Quote"
-            subtitle="Complete the three-step quotation form below. Our operations team will evaluate your cargo specifications and issue an official quote."
-          />
+
+          <div className="space-y-2 pt-2">
+            <div className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-accent" />
+              <span>REQUEST A CARGO QUOTE</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-brand-black leading-tight">
+              Tell us what you&apos;re shipping.
+            </h1>
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed pt-1">
+              Provide your origin city in Pakistan, destination, cargo specifications, and contact info. Our operations team will review your shipment and issue a custom quotation.
+            </p>
+          </div>
+
+          <div className="p-3.5 bg-surface-subtle border border-border rounded-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono text-slate-600">
+            <span>Not sure about exact weight, packing, or shipping mode? You can also speak directly with our team.</span>
+          </div>
         </div>
 
         {/* 65/35 Quote Form Controller */}

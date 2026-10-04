@@ -28,12 +28,12 @@ export const mainNavigation: NavItem[] = [
     children: [
       {
         title: 'Air Cargo',
-        href: '/services/air-freight',
+        href: '/cargo-services#part-1-air-cargo',
         description: 'Air cargo shipping with door-to-door delivery.',
       },
       {
         title: 'Sea Cargo',
-        href: '/services/sea-cargo',
+        href: '/cargo-services#part-2-sea-cargo',
         description: 'Sea cargo shipping with door-to-door delivery.',
       },
       {
@@ -59,7 +59,7 @@ export const mainNavigation: NavItem[] = [
       { title: 'United Arab Emirates', href: '/destinations/uae' },
       { title: 'United States', href: '/destinations/usa' },
       { title: 'Canada', href: '/destinations/canada' },
-      { title: 'Saudi Arabia', href: '/destinations/ksa' },
+      { title: 'Saudi Arabia', href: '/destinations/saudi-arabia' },
     ],
   },
   {
@@ -69,13 +69,13 @@ export const mainNavigation: NavItem[] = [
     viewAllHref: '/locations',
     viewAllLabel: 'View all locations',
     children: [
-      { title: 'Lahore Hub', href: '/locations/international-cargo-services-in-lahore' },
-      { title: 'Karachi Hub', href: '/locations/international-cargo-services-in-karachi' },
-      { title: 'Islamabad Hub', href: '/locations/international-cargo-services-in-islamabad' },
-      { title: 'Rawalpindi Hub', href: '/locations/international-cargo-services-in-rawalpindi' },
-      { title: 'Multan Hub', href: '/locations/international-cargo-services-in-multan' },
-      { title: 'Faisalabad Hub', href: '/locations/international-cargo-services-in-faisalabad' },
-      { title: 'Peshawar Hub', href: '/locations/international-cargo-services-in-peshawar' },
+      { title: 'Lahore Hub', href: '/locations/lahore' },
+      { title: 'Karachi Hub', href: '/locations/karachi' },
+      { title: 'Islamabad Hub', href: '/locations/islamabad' },
+      { title: 'Rawalpindi Hub', href: '/locations/rawalpindi' },
+      { title: 'Multan Hub', href: '/locations/multan' },
+      { title: 'Faisalabad Hub', href: '/locations/faisalabad' },
+      { title: 'Peshawar Hub', href: '/locations/peshawar' },
     ],
   },
   {
@@ -129,19 +129,19 @@ export const footerNavigation: FooterNavGroup[] = [
       { label: 'Cargo to UAE', href: '/destinations/uae' },
       { label: 'Cargo to USA', href: '/destinations/usa' },
       { label: 'Cargo to Canada', href: '/destinations/canada' },
-      { label: 'Cargo to KSA', href: '/destinations/ksa' },
+      { label: 'Cargo to KSA', href: '/destinations/saudi-arabia' },
     ],
   },
   {
     title: 'Origin Locations',
     items: [
-      { label: 'Lahore Hub', href: '/locations/international-cargo-services-in-lahore' },
-      { label: 'Karachi Hub', href: '/locations/international-cargo-services-in-karachi' },
-      { label: 'Islamabad Hub', href: '/locations/international-cargo-services-in-islamabad' },
-      { label: 'Rawalpindi Hub', href: '/locations/international-cargo-services-in-rawalpindi' },
-      { label: 'Multan Hub', href: '/locations/international-cargo-services-in-multan' },
-      { label: 'Faisalabad Hub', href: '/locations/international-cargo-services-in-faisalabad' },
-      { label: 'Peshawar Hub', href: '/locations/international-cargo-services-in-peshawar' },
+      { label: 'Lahore Hub', href: '/locations/lahore' },
+      { label: 'Karachi Hub', href: '/locations/karachi' },
+      { label: 'Islamabad Hub', href: '/locations/islamabad' },
+      { label: 'Rawalpindi Hub', href: '/locations/rawalpindi' },
+      { label: 'Multan Hub', href: '/locations/multan' },
+      { label: 'Faisalabad Hub', href: '/locations/faisalabad' },
+      { label: 'Peshawar Hub', href: '/locations/peshawar' },
     ],
   },
   {

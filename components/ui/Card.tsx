@@ -13,17 +13,17 @@ export const Card: React.FC<CardProps> = ({
   className,
   ...props
 }) => {
-  const baseStyles = 'rounded-md transition-all duration-200 overflow-hidden';
+  const baseStyles = 'rounded-md transition-all duration-300 overflow-hidden';
 
   const variantStyles = {
-    light: 'bg-surface text-brand-black border border-border shadow-xs',
-    dark: 'bg-brand-black text-white border border-border-dark shadow-md',
-    navy: 'bg-brand-navy text-white border border-border-dark shadow-md',
+    light: 'bg-surface text-brand-dark border border-border shadow-xs',
+    dark: 'bg-brand-dark text-brand-cream border border-border-dark shadow-sm',
+    navy: 'bg-brand-forest text-brand-cream border border-brand-forest-light shadow-sm',
     ghost: 'bg-transparent text-current border border-transparent',
   }[variant];
 
   const hoverStyles = hoverable
-    ? 'hover:-translate-y-0.5 hover:shadow-md hover:border-accent/40'
+    ? 'hover:-translate-y-0.5 hover:shadow-md hover:border-brand-gold/50'
     : '';
 
   return (

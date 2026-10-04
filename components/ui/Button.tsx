@@ -45,33 +45,33 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => {
     // Base structural styles & focus visible outline
     const baseStyles =
-      'inline-flex items-center justify-center font-semibold rounded-md transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent disabled:opacity-50 disabled:cursor-not-allowed select-none active:translate-y-0 min-h-[44px] min-w-[44px]';
+      'inline-flex items-center justify-center font-semibold rounded-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-brand-emerald disabled:opacity-50 disabled:cursor-not-allowed select-none active:translate-y-0.5 min-h-[44px] min-w-[44px] tracking-wide';
 
     // Size styles (Handles normal labeled buttons vs explicit icon-only mode)
     const sizeStyles = {
-      sm: isIconOnly ? 'p-2 h-9 w-9 min-h-[36px] min-w-[36px]' : 'text-xs px-3.5 py-2 h-9 gap-1.5 min-h-[36px]',
+      sm: isIconOnly ? 'p-2 h-9 w-9 min-h-[36px] min-w-[36px]' : 'text-xs px-4 py-2 h-9 gap-1.5 min-h-[36px]',
       md: isIconOnly ? 'p-2.5 h-11 w-11' : 'text-sm px-5 py-2.5 h-11 gap-2',
       lg: isIconOnly ? 'p-3.5 h-12 w-12' : 'text-base px-6 py-3.5 h-12 gap-2.5',
     }[size];
 
-    // Authoritative Variant Styles (Composed AFTER caller className so required variant text color wins!)
+    // Authoritative Variant Styles
     const variantStyles = {
-      // Light Surface Primary: Brand Black Fill + White Text
-      primary: 'bg-brand-black text-white hover:bg-slate-800 border border-transparent shadow-xs',
-      // High-Conversion Accent CTA: Electric Cyan Fill + Brand Black Text (11.8:1 WCAG AAA)
-      accent: 'bg-accent text-brand-black hover:bg-accent-hover font-bold border border-transparent shadow-xs',
-      // Secondary: Navy Fill + White Text
-      secondary: 'bg-brand-navy text-white hover:bg-brand-navy-light border border-border-dark shadow-xs',
-      // Light Outline: Surface Fill + Brand Black Text (18.2:1 WCAG AAA)
-      outline: 'bg-surface text-brand-black font-semibold border border-border hover:bg-surface-muted hover:border-border-strong hover:text-brand-black',
-      // Dark Outline: Navy Surface + White Text (18.5:1 WCAG AAA)
-      'outline-dark': 'bg-brand-navy/80 text-white font-semibold border border-border-dark hover:bg-brand-navy hover:text-white',
-      // Light Ghost: Transparent + Brand Black Text
-      ghost: 'bg-transparent text-brand-black font-semibold hover:bg-surface-muted hover:text-brand-black',
-      // Dark Ghost: Transparent + White Text
-      'ghost-dark': 'bg-transparent text-white font-semibold hover:bg-brand-navy-light hover:text-white',
+      // Primary: Forest Green Fill + Warm Cream Text
+      primary: 'bg-brand-forest text-brand-cream hover:bg-brand-forest-deep border border-transparent shadow-sm',
+      // High-Conversion Accent CTA: Muted Gold Fill + Near Black Text
+      accent: 'bg-brand-gold text-brand-dark hover:bg-brand-gold-hover font-bold border border-transparent shadow-sm',
+      // Secondary: Near Black Fill + Warm Cream Text
+      secondary: 'bg-brand-dark text-brand-cream hover:bg-brand-dark-subtle border border-border-dark shadow-sm',
+      // Light Outline: Surface Fill + Near Black Text
+      outline: 'bg-surface text-brand-dark font-semibold border border-border hover:bg-brand-cream-soft hover:border-brand-gold hover:text-brand-dark',
+      // Dark Outline: Forest Navy Surface + Warm Cream Text
+      'outline-dark': 'bg-brand-forest/90 text-brand-cream font-semibold border border-brand-forest-light hover:bg-brand-forest hover:text-white',
+      // Light Ghost: Transparent + Near Black Text
+      ghost: 'bg-transparent text-brand-dark font-semibold hover:bg-brand-cream-muted/50 hover:text-brand-dark',
+      // Dark Ghost: Transparent + Warm Cream Text
+      'ghost-dark': 'bg-transparent text-brand-cream font-semibold hover:bg-white/10 hover:text-white',
       // Destructive Action: Red Fill + White Text
-      destructive: 'bg-danger text-white hover:bg-red-700 font-bold border border-transparent shadow-xs',
+      destructive: 'bg-danger text-white hover:bg-red-700 font-bold border border-transparent shadow-sm',
     }[variant];
 
     return (

@@ -13,39 +13,39 @@ export interface ArticleBodyProps {
 const portableTextComponents: PortableTextComponents = {
   block: {
     h1: ({ children }) => (
-      <h1 className="text-display-sm sm:text-3xl font-extrabold text-brand-black pt-6 pb-2 border-b border-border tracking-tight my-4">
+      <h1 className="text-2xl sm:text-3xl font-serif font-bold text-[#17201B] pt-8 pb-3 border-b border-[#17201B]/15 tracking-tight mt-8 mb-4">
         {children}
       </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="text-heading-xl font-bold text-brand-black pt-8 pb-2 border-b border-border tracking-tight my-4">
+      <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#17201B] pt-8 pb-3 border-b border-[#17201B]/15 tracking-tight mt-8 mb-4">
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-heading-lg font-bold text-brand-black pt-6 pb-2 tracking-tight my-3">
+      <h3 className="text-lg font-serif font-bold text-[#17201B] pt-6 pb-2 tracking-tight mt-6 mb-3">
         {children}
       </h3>
     ),
     normal: ({ children }) => (
-      <p className="text-body-lg text-slate-700 leading-[1.75] font-normal my-4">
+      <p className="text-sm sm:text-base text-[#17201B]/85 leading-[1.8] font-normal my-5">
         {children}
       </p>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-accent pl-4 italic text-slate-700 bg-surface-subtle p-4 rounded-r my-6 font-medium">
+      <blockquote className="border-l-4 border-[#C6A15B] pl-5 italic text-[#17201B]/90 bg-[#F6F2E9] p-5 my-8 font-serif text-base">
         {children}
       </blockquote>
     ),
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="space-y-2.5 my-4 pl-4 list-disc text-body-md text-slate-700 font-normal">
+      <ul className="space-y-3 my-6 pl-5 list-disc text-sm sm:text-base text-[#17201B]/85 font-normal">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="space-y-2.5 my-4 pl-4 list-decimal text-body-md text-slate-700 font-normal">
+      <ol className="space-y-3 my-6 pl-5 list-decimal text-sm sm:text-base text-[#17201B]/85 font-normal">
         {children}
       </ol>
     ),
@@ -55,10 +55,10 @@ const portableTextComponents: PortableTextComponents = {
     number: ({ children }) => <li className="leading-relaxed">{children}</li>,
   },
   marks: {
-    strong: ({ children }) => <strong className="font-semibold text-brand-black">{children}</strong>,
+    strong: ({ children }) => <strong className="font-bold text-[#17201B]">{children}</strong>,
     em: ({ children }) => <em className="italic">{children}</em>,
     code: ({ children }) => (
-      <code className="bg-surface-subtle px-1.5 py-0.5 rounded text-sm font-mono text-slate-800">
+      <code className="bg-[#F6F2E9] px-2 py-0.5 text-xs font-mono text-[#17201B] border border-[#17201B]/10">
         {children}
       </code>
     ),
@@ -70,7 +70,7 @@ const portableTextComponents: PortableTextComponents = {
           href={href}
           target={isExternal ? '_blank' : undefined}
           rel={isExternal ? 'noopener noreferrer' : undefined}
-          className="text-accent-dark font-semibold underline underline-offset-2 hover:text-brand-black transition-colors"
+          className="text-[#1F8A5B] font-bold underline underline-offset-4 hover:text-[#12372A] transition-colors"
         >
           {children}
         </Link>
@@ -82,12 +82,12 @@ const portableTextComponents: PortableTextComponents = {
       const imgUrl = value?.asset?.url || value?.url;
       if (!imgUrl) return null;
       return (
-        <figure className="my-8 space-y-2">
-          <div className="relative aspect-[16/9] w-full rounded-md overflow-hidden bg-surface-subtle border border-border">
+        <figure className="my-10 space-y-3">
+          <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#F6F2E9] border border-[#17201B]/15">
             <Image src={imgUrl} alt={value.alt || 'Article graphic'} fill className="object-cover" />
           </div>
           {value.caption && (
-            <figcaption className="text-center text-xs font-mono text-slate-500">
+            <figcaption className="text-center text-xs font-mono text-[#17201B]/60">
               {value.caption}
             </figcaption>
           )}
@@ -100,7 +100,7 @@ const portableTextComponents: PortableTextComponents = {
 export const ArticleBody: React.FC<ArticleBodyProps> = ({ body, contentMarkdown }) => {
   if (Array.isArray(body) && body.length > 0) {
     return (
-      <div className="prose max-w-prose text-brand-black leading-relaxed font-normal space-y-6">
+      <div className="prose max-w-prose mx-auto text-[#17201B] leading-relaxed font-normal space-y-6">
         <PortableText value={body} components={portableTextComponents} />
       </div>
     );
@@ -109,8 +109,17 @@ export const ArticleBody: React.FC<ArticleBodyProps> = ({ body, contentMarkdown 
   if (!contentMarkdown) return null;
 
   return (
-    <div className="prose max-w-prose text-brand-black leading-relaxed font-normal space-y-6">
-      <ReactMarkdown rehypePlugins={[rehypeSanitize]}>
+    <div className="prose max-w-prose mx-auto text-[#17201B] leading-relaxed font-normal space-y-5 text-sm sm:text-base [&_h1]:text-2xl [&_h1]:sm:text-3xl [&_h1]:font-serif [&_h1]:font-bold [&_h1]:border-b [&_h1]:border-[#17201B]/15 [&_h1]:pb-3 [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-xl [&_h2]:sm:text-2xl [&_h2]:font-serif [&_h2]:font-bold [&_h2]:border-b [&_h2]:border-[#17201B]/15 [&_h2]:pb-3 [&_h2]:mt-8 [&_h2]:mb-4 [&_h3]:text-lg [&_h3]:font-serif [&_h3]:font-bold [&_h3]:mt-6 [&_h3]:mb-3 [&_p]:text-[#17201B]/85 [&_p]:leading-[1.8] [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-3 [&_ul]:my-6 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-3 [&_ol]:my-6 [&_li]:text-[#17201B]/85 [&_strong]:font-bold [&_strong]:text-[#17201B] [&_blockquote]:border-l-4 [&_blockquote]:border-[#C6A15B] [&_blockquote]:pl-5 [&_blockquote]:italic [&_blockquote]:bg-[#F6F2E9] [&_blockquote]:p-5 [&_blockquote]:my-8 [&_table]:w-full [&_table]:border-collapse [&_table]:my-8 [&_th]:bg-[#12372A] [&_th]:text-white [&_th]:p-3.5 [&_th]:text-left [&_th]:text-xs [&_th]:font-mono [&_th]:uppercase [&_th]:tracking-wider [&_td]:p-3.5 [&_td]:border [&_td]:border-[#17201B]/15 [&_td]:text-xs [&_td]:sm:text-sm">
+      <ReactMarkdown
+        rehypePlugins={[rehypeSanitize]}
+        components={{
+          h1: ({ children }) => (
+            <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#17201B] pt-8 pb-3 border-b border-[#17201B]/15 tracking-tight mt-8 mb-4">
+              {children}
+            </h2>
+          ),
+        }}
+      >
         {contentMarkdown}
       </ReactMarkdown>
     </div>

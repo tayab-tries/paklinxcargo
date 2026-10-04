@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, MessageSquare } from 'lucide-react';
+import { ArrowRight, MessageSquare, ShieldCheck } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { buildWhatsappUrl } from '@/lib/utils/whatsapp';
@@ -33,25 +33,25 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({
     propEyebrow ||
     (blockData?.eyebrow as string) ||
     (blockData?.badge as string) ||
-    'Door-to-Door Delivery';
+    'DOOR-TO-DOOR CARGO SHIPPING';
 
   const headline =
     propHeading ||
     (blockData?.headline as string) ||
     (blockData?.title as string) ||
-    'Ready to send cargo from Pakistan?';
+    'Ready to move cargo from Pakistan?';
 
   const supportingCopy =
     propDescription ||
     (blockData?.supporting_copy as string) ||
     (blockData?.subtitle as string) ||
-    'Get an instant quote online or message us on WhatsApp to discuss your cargo shipping requirements.';
+    'Get an instant shipping quote online or connect directly with our operations team via WhatsApp.';
 
   const primaryCtaLabel =
     propPrimary?.label ||
     (blockData?.primary_cta_label as string) ||
     (blockData?.button_text as string) ||
-    'GET A QUOTE';
+    'REQUEST CARGO QUOTE';
 
   const primaryCtaHref =
     propPrimary?.href ||
@@ -62,7 +62,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({
   const secondaryCtaLabel =
     propSecondary?.label ||
     (blockData?.secondary_cta_label as string) ||
-    'WHATSAPP US';
+    'WHATSAPP OPERATOR';
 
   let rawSecondaryHref =
     propSecondary?.href ||
@@ -78,26 +78,43 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({
   const isWhatsapp = rawSecondaryHref.includes('wa.me') || rawSecondaryHref.includes('whatsapp');
 
   return (
-    <section className="w-full bg-brand-navy py-16 lg:py-24 border-b border-border-dark text-white text-center">
-      <Container size="narrow">
-        <div className="bg-brand-black-deep rounded-md border border-border-dark p-8 lg:p-12 space-y-6 shadow-2xl">
-          <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">{eyebrow}</div>
+    <section className="w-full bg-[#F6F2E9] py-20 lg:py-28 text-[#17201B] relative overflow-hidden border-b border-[#12372A]/10">
+      <Container size="narrow" className="relative z-10">
+        <div className="bg-[#12372A] text-[#F6F2E9] rounded-2xl border border-[#C6A15B]/30 p-8 sm:p-12 lg:p-16 space-y-6 sm:space-y-8 shadow-2xl relative overflow-hidden text-center">
+          {/* Subtle Ambient Radial Lighting */}
+          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top,rgba(198,161,91,0.18),transparent_70%)]" />
 
-          <h2 className="text-display-lg font-bold text-white tracking-tight">{headline}</h2>
+          {/* Eyebrow Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#1F8A5B]/30 backdrop-blur-md border border-[#C6A15B]/40 rounded-full">
+            <ShieldCheck className="w-4 h-4 text-[#C6A15B]" />
+            <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-[0.16em] text-[#C6A15B]">
+              {eyebrow}
+            </span>
+          </div>
 
-          <p className="text-body-lg text-slate-300 max-w-xl mx-auto leading-relaxed">{supportingCopy}</p>
+          {/* Headline */}
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight max-w-2xl mx-auto leading-tight">
+            {headline}
+          </h2>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+          {/* Supporting Copy */}
+          <p className="font-sans text-base sm:text-lg text-[#F6F2E9]/85 max-w-xl mx-auto leading-relaxed font-normal">
+            {supportingCopy}
+          </p>
+
+          {/* CTAs */}
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href={primaryCtaHref} className="w-full sm:w-auto">
               <Button
                 variant="accent"
                 size="lg"
-                className="w-full sm:w-auto min-w-[200px] h-[48px] text-base font-bold"
-                rightIcon={<ArrowRight className="w-4 h-4 text-brand-black" />}
+                className="w-full sm:w-auto h-13 px-8 text-xs font-mono font-bold uppercase tracking-wider bg-[#1F8A5B] hover:bg-white hover:text-[#12372A] text-white border border-[#C6A15B]/50 shadow-lg"
+                rightIcon={<ArrowRight className="w-4 h-4 text-white shrink-0" />}
               >
                 {primaryCtaLabel}
               </Button>
             </Link>
+
             <a
               href={rawSecondaryHref}
               target={isWhatsapp ? '_blank' : '_self'}
@@ -107,8 +124,8 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({
               <Button
                 variant="outline-dark"
                 size="lg"
-                className="w-full sm:w-auto min-w-[180px] h-[48px] border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10 hover:text-emerald-300 font-bold"
-                leftIcon={<MessageSquare className="w-4 h-4 text-emerald-400 shrink-0" />}
+                className="w-full sm:w-auto h-13 px-7 text-xs font-mono font-bold uppercase tracking-wider border-[#F6F2E9]/40 text-[#F6F2E9] hover:bg-white/10 hover:text-white"
+                leftIcon={<MessageSquare className="w-4 h-4 text-[#C6A15B] shrink-0" />}
               >
                 {secondaryCtaLabel}
               </Button>

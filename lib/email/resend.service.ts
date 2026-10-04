@@ -35,7 +35,7 @@ export async function sendAdminQuoteNotification(
   payload: QuoteEmailPayload
 ): Promise<{ success: boolean; errorMetadata?: PiiSafeEmailErrorMetadata }> {
   const apiKey = process.env.RESEND_API_KEY;
-  const adminEmailRecipient = siteConfig.contact?.emailQuotes || siteConfig.contact?.emailInfo || process.env.ADMIN_EMAIL || 'quotes@raahiinternational.com';
+  const adminEmailRecipient = siteConfig.contact?.emailQuotes || siteConfig.contact?.emailInfo || process.env.ADMIN_EMAIL || 'quotes@paklinxcargo.com';
 
   if (!apiKey) {
     // Non-blocking fallback when RESEND_API_KEY is not configured
@@ -51,6 +51,8 @@ export async function sendAdminQuoteNotification(
     };
   }
 
+  const cleanDomain = siteConfig.domain.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -59,7 +61,7 @@ export async function sendAdminQuoteNotification(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: `Quote Alerts <no-reply@${siteConfig.domain}>`,
+        from: `Quote Alerts <no-reply@${cleanDomain}>`,
         to: [adminEmailRecipient],
         subject: `New Lead: Quote Reference ${payload.quoteReference} (${payload.originCity} to ${payload.destinationCountry})`,
         html: `
@@ -133,6 +135,8 @@ export async function sendCustomerQuoteConfirmation(
     };
   }
 
+  const cleanDomain = siteConfig.domain.replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -141,7 +145,7 @@ export async function sendCustomerQuoteConfirmation(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: `${siteConfig.name} <no-reply@${siteConfig.domain}>`,
+        from: `${siteConfig.name} <no-reply@${cleanDomain}>`,
         to: [payload.senderEmail],
         subject: `Quote Request Received: Reference ${payload.quoteReference}`,
         html: `

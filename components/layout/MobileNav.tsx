@@ -64,7 +64,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ brandName: propBrand, phon
 
     return createPortal(
       <div
-        className="fixed inset-0 z-50 bg-brand-black flex flex-col justify-between overflow-y-auto animate-in fade-in duration-150"
+        className="fixed inset-0 z-50 bg-brand-dark flex flex-col justify-between overflow-y-auto animate-in fade-in duration-200"
         style={{ width: '100vw', height: '100dvh', top: 0, left: 0, right: 0, bottom: 0 }}
         role="dialog"
         aria-modal="true"
@@ -74,7 +74,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ brandName: propBrand, phon
         <div className="flex items-center justify-between p-6 border-b border-border-dark shrink-0">
           <Link href="/" onClick={closeMenu} className="flex items-center">
             <Image
-              src="/images/brand/logo-white.svg"
+              src="/images/brand/logo.png"
               alt={`${brandName} Logo`}
               width={180}
               height={104}
@@ -85,14 +85,14 @@ export const MobileNav: React.FC<MobileNavProps> = ({ brandName: propBrand, phon
           <button
             onClick={closeMenu}
             aria-label="Close mobile navigation menu"
-            className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 rounded-md text-slate-300 hover:text-white bg-brand-navy hover:bg-brand-navy-light transition-colors focus:outline-none focus:ring-2 focus:ring-accent"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 rounded-sm text-brand-cream hover:text-white bg-brand-forest hover:bg-brand-forest-deep transition-colors focus:outline-none focus:ring-2 focus:ring-brand-gold"
           >
-            <X className="w-6 h-6 text-white" />
+            <X className="w-6 h-6 text-brand-cream" />
           </button>
         </div>
 
         {/* Full-Screen Drawer Body (Scrollable Navigation Links) */}
-        <div className="px-6 py-8 space-y-3 overflow-y-auto flex-1">
+        <div className="px-6 py-8 space-y-2 overflow-y-auto flex-1">
           {navConfig.map((item) => {
             const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
 
@@ -101,27 +101,27 @@ export const MobileNav: React.FC<MobileNavProps> = ({ brandName: propBrand, phon
                 key={item.href}
                 href={item.href}
                 onClick={closeMenu}
-                className={`px-5 py-4 text-lg font-semibold rounded-md min-h-[52px] flex items-center justify-between transition-colors ${
+                className={`px-5 py-4 text-base font-semibold rounded-xs min-h-[52px] flex items-center justify-between transition-colors ${
                   isActive
-                    ? 'text-accent bg-brand-navy font-bold border border-border-dark'
-                    : 'text-slate-100 hover:text-white hover:bg-brand-navy-light/40 border border-transparent'
+                    ? 'text-brand-gold bg-brand-forest/50 font-bold border-l-2 border-brand-gold'
+                    : 'text-brand-cream/90 hover:text-white hover:bg-white/5 border-l-2 border-transparent'
                 }`}
               >
                 <span>{item.label}</span>
-                <ArrowRight className="w-5 h-5 text-slate-400" />
+                <ArrowRight className="w-4 h-4 text-brand-gold/70" />
               </Link>
             );
           })}
         </div>
 
         {/* Full-Screen Drawer Footer Actions */}
-        <div className="p-6 border-t border-border-dark space-y-3 shrink-0 bg-brand-navy/30">
+        <div className="p-6 border-t border-border-dark space-y-3 shrink-0 bg-brand-forest-deep/60">
           <Link href={primaryCta.href} onClick={closeMenu} className="block w-full">
             <Button
               variant="accent"
               size="lg"
               className="w-full min-h-[48px] text-base font-bold"
-              rightIcon={<ArrowRight className="w-5 h-5 text-brand-black" />}
+              rightIcon={<ArrowRight className="w-5 h-5 text-brand-dark" />}
             >
               {primaryCta.label}
             </Button>
@@ -136,7 +136,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ brandName: propBrand, phon
             <Button
               variant="outline-dark"
               size="lg"
-              className="w-full min-h-[48px] text-base font-bold border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/10"
+              className="w-full min-h-[48px] text-base font-bold border-brand-emerald/60 text-emerald-400 hover:bg-brand-emerald/10"
               leftIcon={<MessageSquare className="w-5 h-5 text-emerald-400 shrink-0 fill-current" />}
             >
               WHATSAPP US
@@ -147,18 +147,20 @@ export const MobileNav: React.FC<MobileNavProps> = ({ brandName: propBrand, phon
               variant="outline-dark"
               size="lg"
               className="w-full min-h-[48px] text-base font-semibold"
-              leftIcon={<Search className="w-5 h-5 text-accent" />}
+              leftIcon={<Search className="w-5 h-5 text-brand-gold" />}
             >
               Track Shipment
             </Button>
           </Link>
 
-          <div className="pt-2 flex items-center justify-center gap-2 text-sm font-mono text-slate-300">
-            <Phone className="w-4 h-4 text-accent shrink-0" />
-            <a href={`tel:${phone.replace(/\s+/g, '')}`} className="hover:text-white transition-colors">
-              {phone}
-            </a>
-          </div>
+          {phone && (
+            <div className="pt-2 flex items-center justify-center gap-2 text-xs font-mono text-brand-cream-muted">
+              <Phone className="w-3.5 h-3.5 text-brand-gold shrink-0" />
+              <a href={`tel:${phone.replace(/\s+/g, '')}`} className="hover:text-white transition-colors">
+                {phone}
+              </a>
+            </div>
+          )}
         </div>
       </div>,
       document.body
@@ -172,9 +174,9 @@ export const MobileNav: React.FC<MobileNavProps> = ({ brandName: propBrand, phon
         onClick={() => setIsOpen(true)}
         aria-label="Open mobile navigation menu"
         aria-expanded={isOpen}
-        className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 rounded-md bg-brand-navy hover:bg-brand-navy-light text-white focus:outline-none focus:ring-2 focus:ring-accent transition-colors"
+        className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 rounded-sm bg-brand-forest hover:bg-brand-forest-deep text-brand-cream focus:outline-none focus:ring-2 focus:ring-brand-gold transition-colors"
       >
-        <Menu className="w-6 h-6 text-white" />
+        <Menu className="w-6 h-6 text-brand-cream" />
       </button>
 
       {/* Render Mobile Drawer via Portal */}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#0F172A"/>
+  <rect width="800" height="600" fill="url(#grid-sea)" opacity="0.1"/>
+  <defs>
+    <pattern id="grid-sea" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#F8FAFC" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <!-- Ship Hull Contour -->
+  <path d="M 200 350 L 600 350 L 550 420 L 250 420 Z" fill="#F97316"/>
+  <rect x="300" y="270" width="200" height="80" fill="#1E293B" stroke="#F97316" stroke-width="2"/>
+  <text x="400" y="480" fill="#94A3B8" font-family="monospace" font-size="16" text-anchor="middle" letter-spacing="2">SEA CARGO ASSET SLOT</text>
+</svg>

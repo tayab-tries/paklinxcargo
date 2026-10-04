@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#0B0F17"/>
+  <rect width="800" height="600" fill="url(#grid-pk)" opacity="0.1"/>
+  <defs>
+    <pattern id="grid-pk" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#F8FAFC" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <circle cx="400" cy="300" r="100" fill="#0F172A" stroke="#F97316" stroke-width="3"/>
+  <circle cx="400" cy="300" r="12" fill="#F97316"/>
+  <text x="400" y="460" fill="#94A3B8" font-family="monospace" font-size="16" text-anchor="middle" letter-spacing="2">PAKISTAN FREIGHT HUB SLOT</text>
+</svg>

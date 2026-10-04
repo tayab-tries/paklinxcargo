@@ -171,7 +171,7 @@ export const QuoteFormController: React.FC<QuoteFormControllerProps> = ({
         return;
       }
 
-      setQuoteReference(data.data.quoteReference);
+      setQuoteReference(data.quoteReference || data.data?.quoteReference || '');
       setIsSubmitted(true);
       trackQuoteLead();
       scrollAndFocusTop();
@@ -189,36 +189,63 @@ export const QuoteFormController: React.FC<QuoteFormControllerProps> = ({
   return (
     <div ref={formContainerRef} className="w-full space-y-8" id="quote-form-container">
       {/* STEP PROGRESS BAR */}
-      <div className="bg-surface p-4 rounded-md border border-border flex items-center justify-between shadow-2xs">
-        <div className="flex items-center gap-3 text-xs font-mono">
-          <span
-            className={`px-2.5 py-1 rounded font-bold transition-colors ${
-              step === 1 ? 'bg-accent text-brand-black' : 'bg-surface-subtle text-slate-600'
-            }`}
-          >
-            Step 1: Route & Type
-          </span>
-          <span className="text-slate-400">→</span>
-          <span
-            className={`px-2.5 py-1 rounded font-bold transition-colors ${
-              step === 2 ? 'bg-accent text-brand-black' : 'bg-surface-subtle text-slate-600'
-            }`}
-          >
-            Step 2: Cargo Specs
-          </span>
-          <span className="text-slate-400">→</span>
-          <span
-            className={`px-2.5 py-1 rounded font-bold transition-colors ${
-              step === 3 ? 'bg-accent text-brand-black' : 'bg-surface-subtle text-slate-600'
-            }`}
-          >
-            Step 3: Contact Info
-          </span>
+      <div className="bg-surface p-4 sm:p-5 rounded-md border border-border space-y-3 shadow-2xs">
+        {/* Mobile Compact Progress Header */}
+        <div className="flex sm:hidden items-center justify-between text-xs font-mono">
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 rounded bg-accent text-brand-black font-bold">
+              0{step} / 03
+            </span>
+            <span className="font-semibold text-brand-black">
+              {step === 1 ? 'Route & Cargo' : step === 2 ? 'Cargo Specs' : 'Contact Info'}
+            </span>
+          </div>
+          <span className="text-[11px] text-slate-500 font-medium">Step {step} of 3</span>
         </div>
 
-        <div className="hidden md:flex items-center gap-1.5 text-xs font-mono text-emerald-600 font-semibold">
-          <ShieldCheck className="w-4 h-4 text-emerald-600" />
-          <span>No Payment Required</span>
+        {/* Desktop Step Bar */}
+        <div className="hidden sm:flex items-center justify-between text-xs font-mono">
+          <div className="flex items-center gap-3">
+            <div
+              className={`flex items-center gap-2 px-3 py-1.5 rounded transition-colors ${
+                step === 1 ? 'bg-accent text-brand-black font-bold' : 'bg-surface-subtle text-slate-600 font-medium'
+              }`}
+            >
+              <span>01</span>
+              <span>Route & Cargo</span>
+            </div>
+            <span className="text-slate-300">→</span>
+            <div
+              className={`flex items-center gap-2 px-3 py-1.5 rounded transition-colors ${
+                step === 2 ? 'bg-accent text-brand-black font-bold' : 'bg-surface-subtle text-slate-600 font-medium'
+              }`}
+            >
+              <span>02</span>
+              <span>Cargo Specs</span>
+            </div>
+            <span className="text-slate-300">→</span>
+            <div
+              className={`flex items-center gap-2 px-3 py-1.5 rounded transition-colors ${
+                step === 3 ? 'bg-accent text-brand-black font-bold' : 'bg-surface-subtle text-slate-600 font-medium'
+              }`}
+            >
+              <span>03</span>
+              <span>Contact Info</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1.5 text-xs font-mono text-emerald-700 font-semibold">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span>No Payment Required</span>
+          </div>
+        </div>
+
+        {/* Visual Progress Bar Line */}
+        <div className="w-full bg-border-subtle h-1.5 rounded-full overflow-hidden">
+          <div
+            className="bg-accent h-full transition-all duration-300 ease-in-out"
+            style={{ width: step === 1 ? '33.33%' : step === 2 ? '66.66%' : '100%' }}
+          />
         </div>
       </div>
 

@@ -20,9 +20,9 @@ export const TextLink: React.FC<TextLinkProps> = ({
   ...props
 }) => {
   const variantStyles = {
-    accent: 'text-accent hover:underline font-semibold',
-    primary: 'text-brand-black hover:text-accent font-semibold',
-    muted: 'text-slate-400 hover:text-white font-normal',
+    accent: 'text-brand-emerald hover:text-brand-emerald-hover font-semibold underline underline-offset-4 decoration-brand-emerald/40 hover:decoration-brand-emerald',
+    primary: 'text-brand-dark hover:text-brand-emerald font-semibold',
+    muted: 'text-muted-foreground hover:text-brand-dark font-normal',
   }[variant];
 
   if (external || href.startsWith('http')) {

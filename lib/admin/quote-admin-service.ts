@@ -132,3 +132,134 @@ export async function getAdminQuoteById(id: string): Promise<AdminQuoteRecord | 
   const quotes = await getAdminQuotes();
   return quotes.find((q) => q.id === id) || null;
 }
+
+export async function updateQuoteStatus(
+  id: string,
+  status: AdminQuoteRecord['status']
+): Promise<{ success: boolean; error?: string }> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    return { success: true }; // Mock success mode when DB unconfigured
+  }
+
+  try {
+    const supabase = createClient(supabaseUrl, serviceRoleKey);
+    const { error } = await supabase
+      .from('quotes')
+      .update({ status })
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error updating quote status in Supabase:', error.message);
+      return { success: false, error: error.message };
+    }
+
+    return { success: true };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'Unknown update error';
+    return { success: false, error: msg };
+  }
+}
+
+export async function updateQuoteInternalNotes(
+  id: string,
+  internalNotes: string
+): Promise<{ success: boolean; error?: string }> {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+  if (!supabaseUrl || !serviceRoleKey) {
+    return { success: true }; // Mock success mode when DB unconfigured
+  }
+
+  try {
+    const supabase = createClient(supabaseUrl, serviceRoleKey);
+    const { error } = await supabase
+      .from('quotes')
+      .update({ internal_notes: internalNotes })
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error updating internal notes in Supabase:', error.message);
+      return { success: false, error: error.message };
+    }
+
+    return { success: true };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : 'Unknown update error';
+    return { success: false, error: msg };
+  }
+}
+
+export async function retryQuoteNotifications(
+  id: string
+): Promise<{ success: boolean; error?: string; adminStatus?: string; customerStatus?: string }> {
+  const quote = await getAdminQuoteById(id);
+  if (!quote) {
+    return { success: false, error: 'Quote record not found.' };
+  }
+
+  const {
+    sendAdminQuoteNotification,
+    sendCustomerQuoteConfirmation,
+  } = await import('@/lib/email/resend.service');
+
+  const emailPayload = {
+    quoteReference: quote.quote_reference,
+    senderName: quote.sender_name,
+    senderPhone: quote.sender_phone,
+    senderEmail: quote.sender_email,
+    contactPreference: quote.contact_preference,
+    originCity: quote.origin_city,
+    destinationCountry: quote.destination_country,
+    destinationCity: quote.destination_city,
+    cargoType: quote.cargo_type,
+    estimatedWeightKg: quote.estimated_weight_kg,
+    packageCount: quote.package_count,
+    lengthCm: quote.length_cm,
+    widthCm: quote.width_cm,
+    heightCm: quote.height_cm,
+    cargoDescription: quote.cargo_description,
+    additionalNotes: quote.additional_notes,
+  };
+
+  const adminResult = await sendAdminQuoteNotification(emailPayload);
+  const customerResult = quote.sender_email
+    ? await sendCustomerQuoteConfirmation(emailPayload)
+    : { success: true };
+
+  const adminStatus = adminResult.success ? 'sent' : 'failed';
+  const customerStatus = quote.sender_email
+    ? customerResult.success
+      ? 'sent'
+      : 'failed'
+    : 'skipped';
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+  if (supabaseUrl && serviceRoleKey) {
+    try {
+      const supabase = createClient(supabaseUrl, serviceRoleKey);
+      await supabase
+        .from('quotes')
+        .update({
+          admin_notification_status: adminStatus,
+          customer_notification_status: customerStatus,
+          email_attempt_count: (quote.email_attempt_count || 0) + 1,
+          email_error_metadata: adminResult.errorMetadata || customerResult.errorMetadata || {},
+        })
+        .eq('id', id);
+    } catch (err) {
+      console.error('Error updating notification status in Supabase:', err);
+    }
+  }
+
+  return {
+    success: true,
+    adminStatus,
+    customerStatus,
+  };
+}

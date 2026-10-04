@@ -8,6 +8,7 @@ export function getOrganizationJsonLd() {
     name: siteConfig.name,
     legalName: siteConfig.legalName || siteConfig.name,
     url: siteConfig.domain,
+    logo: `${siteConfig.domain}/images/brand/logo.png`,
     description: siteConfig.defaultSeo.defaultDescription,
     telephone: siteConfig.contact?.phonePrimary || undefined,
     email: siteConfig.contact?.emailInfo || undefined,
@@ -17,6 +18,15 @@ export function getOrganizationJsonLd() {
       streetAddress: siteConfig.verifiedOffices?.[0]?.address,
       addressCountry: 'PK',
     } : undefined,
+  };
+}
+
+export function getWebSiteJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteConfig.name,
+    url: siteConfig.domain,
   };
 }
 
